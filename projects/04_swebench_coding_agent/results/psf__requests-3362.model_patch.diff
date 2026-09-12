@@ -1,0 +1,10 @@
+diff --git a/requests/models.py b/requests/models.py
+index 8b1b0a1..b0a1b0a 100644
+--- a/requests/models.py
++++ b/requests/models.py
+@@ -107,7 +107,7 @@ class Request(RequestHooksMixin):
+         if isinstance(hook, collections.Callable):
+             self.hooks[event].append(hook)
+         elif hasattr(hook, '__iter__'):
+-            self.hooks[event].extend(h for h in hook if isinstance(h, collections.Callable))
++            self.hooks[event].extend(h for h in hook if callable(h))
