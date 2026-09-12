@@ -1,0 +1,3271 @@
+{
+  "dataset": "hotpotqa/hotpot_qa",
+  "config": "distractor",
+  "split": "validation",
+  "sample_size_requested": 50,
+  "sample_size_completed": 50,
+  "seed": 42,
+  "embed_model": "nomic-embed-text",
+  "chat_model": "qwen2.5:7b-instruct",
+  "hop1_k": 4,
+  "hop2_k": 4,
+  "retrieval_strategy": "2-hop dense retrieval: hop1 embeds the raw question and takes top-k1 sentences by cosine similarity; hop2 embeds question+hop1-sentence-text (to carry forward whatever bridge entity/fact hop1 surfaced) and takes top-k2 additional sentences not already selected. hop1+hop2 sentences are the exact set fed into the answer-generation prompt.",
+  "metrics": {
+    "answer_exact_match": 0.2,
+    "answer_f1": 0.4364406283153911,
+    "retrieval_recall_of_gold_facts": 0.8356666666666667,
+    "claim_vs_gold_precision": 0.81,
+    "claim_vs_gold_recall": 0.4063333333333333,
+    "claim_vs_gold_f1": 0.5226666666666666,
+    "claim_vs_fed_precision": 0.95,
+    "claim_vs_fed_recall": 0.135,
+    "pct_examples_with_fabricated_citation": 0.06,
+    "avg_fabricated_citations_per_example": 0.06
+  },
+  "wall_clock_seconds": 116.2,
+  "examples": [
+    {
+      "qid": "5add1d575542992c1e3a2540",
+      "question": "What nationality was Oliver Reed's character in the film Royal Flash?",
+      "gold_answer": "Prussian",
+      "model_answer": "English",
+      "answer_em": false,
+      "answer_f1": 0.0,
+      "gold_facts": [
+        [
+          "Otto von Bismarck",
+          0
+        ],
+        [
+          "Royal Flash (film)",
+          0
+        ],
+        [
+          "Royal Flash (film)",
+          2
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Harry Flashman",
+          0
+        ],
+        [
+          "Harry Flashman",
+          2
+        ],
+        [
+          "Ivan Dragomiloff",
+          1
+        ],
+        [
+          "Lion of the Desert",
+          0
+        ],
+        [
+          "Oliver Reed",
+          0
+        ],
+        [
+          "Royal Flash",
+          2
+        ],
+        [
+          "Royal Flash (film)",
+          0
+        ],
+        [
+          "Royal Flash (film)",
+          2
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Oliver Reed",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.667,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ac55ea55542993e66e82377",
+      "question": "Pacific Mozart Ensemble performed which German composer's Der Lindberghflug in 2002?",
+      "gold_answer": "Kurt Julian Weill",
+      "model_answer": "Kurt Weill's Der Lindberghflug",
+      "answer_em": false,
+      "answer_f1": 0.286,
+      "gold_facts": [
+        [
+          "Kurt Weill",
+          0
+        ],
+        [
+          "Pacific Mozart Ensemble",
+          8
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Der Widersp\u00e4nstigen Z\u00e4hmung",
+          1
+        ],
+        [
+          "Kurt Weill",
+          0
+        ],
+        [
+          "Kurt Weill",
+          1
+        ],
+        [
+          "Martin Boykan",
+          4
+        ],
+        [
+          "Pacific Mozart Ensemble",
+          8
+        ],
+        [
+          "Portland Youth Philharmonic",
+          1
+        ],
+        [
+          "The Flight Across the Ocean",
+          0
+        ],
+        [
+          "The Flight Across the Ocean",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Pacific Mozart Ensemble",
+          8
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ac3a76e554299741d48a2be",
+      "question": "Who released the song \"With or Without You\" first, Jai McDowall or U2?",
+      "gold_answer": "U2",
+      "model_answer": "U2 released the song 'With or Without You' first.",
+      "answer_em": false,
+      "answer_f1": 0.222,
+      "gold_facts": [
+        [
+          "Believe (Jai McDowall album)",
+          0
+        ],
+        [
+          "Believe (Jai McDowall album)",
+          1
+        ],
+        [
+          "Believe (Jai McDowall album)",
+          2
+        ],
+        [
+          "With or Without You",
+          0
+        ],
+        [
+          "With or Without You",
+          1
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Believe (Jai McDowall album)",
+          0
+        ],
+        [
+          "Believe (Jai McDowall album)",
+          2
+        ],
+        [
+          "Heartbeat (The Fray song)",
+          1
+        ],
+        [
+          "The Fly (song)",
+          0
+        ],
+        [
+          "The Fly (song)",
+          2
+        ],
+        [
+          "The Fly (song)",
+          3
+        ],
+        [
+          "U218 Singles",
+          0
+        ],
+        [
+          "With or Without You",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "With or Without You",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.6,
+      "claim_vs_gold_f1": 0.333,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a7133565542994082a3e65c",
+      "question": "What Kentucky county has a population of 60,316 and features the Lake Louisvilla neighborhood?",
+      "gold_answer": "Oldham County",
+      "model_answer": "Oldham County, Kentucky",
+      "answer_em": false,
+      "answer_f1": 0.8,
+      "gold_facts": [
+        [
+          "Lake Louisvilla, Louisville",
+          0
+        ],
+        [
+          "Lake Louisvilla, Louisville",
+          1
+        ],
+        [
+          "Oldham County, Kentucky",
+          0
+        ],
+        [
+          "Oldham County, Kentucky",
+          1
+        ],
+        [
+          "Oldham County, Kentucky",
+          4
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Casey County, Kentucky",
+          0
+        ],
+        [
+          "Casey County, Kentucky",
+          3
+        ],
+        [
+          "Casey County, Kentucky",
+          4
+        ],
+        [
+          "Casey County, Kentucky",
+          6
+        ],
+        [
+          "Lake Louisvilla, Louisville",
+          0
+        ],
+        [
+          "Lake Louisvilla, Louisville",
+          1
+        ],
+        [
+          "Lake Louisvilla, Louisville",
+          2
+        ],
+        [
+          "Oldham County, Kentucky",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Lake Louisvilla, Louisville",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.6,
+      "claim_vs_gold_f1": 0.333,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ac1a4745542991316484b82",
+      "question": "Para Hills West, South Australia lies within a city with what estimated population?",
+      "gold_answer": "138,535",
+      "model_answer": "Para Hills West, South Australia lies within the City of Salisbury, but the estimated population of the City of Salisbury is not provided in the given context.",
+      "answer_em": false,
+      "answer_f1": 0.0,
+      "gold_facts": [
+        [
+          "City of Salisbury",
+          1
+        ],
+        [
+          "Para Hills West, South Australia",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "City of Salisbury",
+          0
+        ],
+        [
+          "City of Salisbury",
+          3
+        ],
+        [
+          "Electoral district of Florey",
+          2
+        ],
+        [
+          "Gulfview Heights, South Australia",
+          1
+        ],
+        [
+          "Para Hills Knights SC",
+          0
+        ],
+        [
+          "Para Hills Knights SC",
+          2
+        ],
+        [
+          "Para Hills West, South Australia",
+          0
+        ],
+        [
+          "Para Hills, South Australia",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Para Hills West, South Australia",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5adc597d55429947ff17392f",
+      "question": "In what year was the narrator of \"Blackadder's Christmas Carol\" born?",
+      "gold_answer": "1959",
+      "model_answer": "1953",
+      "answer_em": false,
+      "answer_f1": 0.0,
+      "gold_facts": [
+        [
+          "Blackadder's Christmas Carol",
+          1
+        ],
+        [
+          "Hugh Laurie",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "A Christmas Carol",
+          0
+        ],
+        [
+          "A Christmas Carol",
+          1
+        ],
+        [
+          "A Christmas Carol (1999 film)",
+          0
+        ],
+        [
+          "Blackadder's Christmas Carol",
+          0
+        ],
+        [
+          "Blackadder's Christmas Carol",
+          1
+        ],
+        [
+          "I Heard the Bells on Christmas Day",
+          0
+        ],
+        [
+          "The Chimes",
+          0
+        ],
+        [
+          "The Muppet Christmas Carol",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Blackadder's Christmas Carol",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ac55e835542993e66e82375",
+      "question": "Thomas Fitch defended John Henry Holliday when he was accused of killing men during the gunfight at the o.k. corral, when was that?",
+      "gold_answer": "October 25, 1881",
+      "model_answer": "The information provided does not specify the year when Thomas Fitch defended John Henry 'Doc' Holliday. However, based on the context, the Gunfight at the O.K. Corral took place on October 26, 1881.",
+      "answer_em": false,
+      "answer_f1": 0.129,
+      "gold_facts": [
+        [
+          "Doc Holliday",
+          0
+        ],
+        [
+          "Thomas Fitch (politician)",
+          2
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Doc Holliday",
+          0
+        ],
+        [
+          "Gunfight at the O.K. Corral",
+          0
+        ],
+        [
+          "Gunfight at the O.K. Corral",
+          2
+        ],
+        [
+          "Morgan Earp",
+          0
+        ],
+        [
+          "O.K. Corral hearing and aftermath",
+          0
+        ],
+        [
+          "O.K. Corral hearing and aftermath",
+          1
+        ],
+        [
+          "Thomas Fitch (politician)",
+          2
+        ],
+        [
+          "Virgil Earp",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Thomas Fitch (politician)",
+          2
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a8d9e0f554299441c6ba015",
+      "question": "The actor that played Gutthi on Comedy nights with Kapil Show also starred in what 2016 Punjabi film directed by Smeep Kang?",
+      "gold_answer": "Vaisakhi List",
+      "model_answer": "Sunil Grover starred in Vaisakhi List, a 2016 Punjabi film directed by Smeep Kang.",
+      "answer_em": false,
+      "answer_f1": 0.267,
+      "gold_facts": [
+        [
+          "Sunil Grover",
+          0
+        ],
+        [
+          "Vaisakhi List",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Bhaji in Problem",
+          0
+        ],
+        [
+          "Kapil Sharma (comedian)",
+          0
+        ],
+        [
+          "Lock (film)",
+          0
+        ],
+        [
+          "Lucky Di Unlucky Story",
+          0
+        ],
+        [
+          "Smeep Kang",
+          0
+        ],
+        [
+          "Smeep Kang",
+          2
+        ],
+        [
+          "Sunil Grover",
+          0
+        ],
+        [
+          "Vaisakhi List",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Vaisakhi List",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae70ed7554299572ea546a1",
+      "question": "Victor Varnada directed Twisted Fortune, which starred which brother of Eddie Murphy?",
+      "gold_answer": "Charlie Murphy",
+      "model_answer": "Charlie Murphy",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "Charlie Murphy",
+          2
+        ],
+        [
+          "Twisted Fortune",
+          0
+        ],
+        [
+          "Twisted Fortune",
+          2
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Charlie Murphy",
+          0
+        ],
+        [
+          "Charlie Murphy",
+          2
+        ],
+        [
+          "Eddie Murphy Raw",
+          1
+        ],
+        [
+          "Life (1999 film)",
+          1
+        ],
+        [
+          "Life (1999 film)",
+          2
+        ],
+        [
+          "The PJs",
+          2
+        ],
+        [
+          "Twisted Fortune",
+          0
+        ],
+        [
+          "Twisted Fortune",
+          2
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Twisted Fortune",
+          2
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.5,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a74a8fa55429929fddd8497",
+      "question": "After his curacy at the village that is a suburb of Scunthorpe, who was Industrial Chaplain to the Bishop of Lincoln?",
+      "gold_answer": "Dudman",
+      "model_answer": "Bill Dudman",
+      "answer_em": false,
+      "answer_f1": 0.667,
+      "gold_facts": [
+        [
+          "Bill Dudman",
+          0
+        ],
+        [
+          "Bill Dudman",
+          2
+        ],
+        [
+          "Frodingham, Lincolnshire",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Alfred Hurley",
+          7
+        ],
+        [
+          "Bill Dudman",
+          2
+        ],
+        [
+          "Ernest Holmes (priest)",
+          1
+        ],
+        [
+          "John Gathercole",
+          1
+        ],
+        [
+          "John Gathercole",
+          2
+        ],
+        [
+          "Philip Huggins",
+          2
+        ],
+        [
+          "Randolph Wise",
+          2
+        ],
+        [
+          "William Everingham",
+          2
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Bill Dudman",
+          2
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.333,
+      "claim_vs_gold_f1": 0.5,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a7cb94f554299683c1c6353",
+      "question": "What is the first two words of the fifth studio album of Joseph Edgar Foreman?",
+      "gold_answer": "The Hungry",
+      "model_answer": "Sail On",
+      "answer_em": false,
+      "answer_f1": 0.0,
+      "gold_facts": [
+        [
+          "Afroman",
+          0
+        ],
+        [
+          "Afroman",
+          1
+        ],
+        [
+          "The Hungry Hustlerz: Starvation Is Motivation",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Afroman",
+          0
+        ],
+        [
+          "Como Ama una Mujer",
+          0
+        ],
+        [
+          "Como Ama una Mujer",
+          2
+        ],
+        [
+          "Como Ama una Mujer",
+          3
+        ],
+        [
+          "Como Ama una Mujer",
+          4
+        ],
+        [
+          "Sail On: The 30th Anniversary Collection",
+          2
+        ],
+        [
+          "The Hungry Hustlerz: Starvation Is Motivation",
+          0
+        ],
+        [
+          "Zaireeka",
+          4
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Sail On: The 30th Anniversary Collection",
+          2
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.667,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ab874ba5542990e739ec904",
+      "question": "The Twelfth United States Army Group commander was the first chairman of what?",
+      "gold_answer": "Joint Chiefs of Staff",
+      "model_answer": "Omar Bradley was the first chairman of the Joint Chiefs of Staff.",
+      "answer_em": false,
+      "answer_f1": 0.571,
+      "gold_facts": [
+        [
+          "Omar Bradley",
+          1
+        ],
+        [
+          "Twelfth United States Army Group",
+          2
+        ]
+      ],
+      "fed_facts": [
+        [
+          "10th Armored Division (United States)",
+          1
+        ],
+        [
+          "Omar Bradley",
+          1
+        ],
+        [
+          "Operation Quicksilver (deception plan)",
+          3
+        ],
+        [
+          "Operation Quicksilver (deception plan)",
+          4
+        ],
+        [
+          "Sixth United States Army Group",
+          0
+        ],
+        [
+          "Sixth United States Army Group",
+          2
+        ],
+        [
+          "Twelfth United States Army Group",
+          0
+        ],
+        [
+          "Twelfth United States Army Group",
+          2
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Omar Bradley",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae3a8985542992f92d82329",
+      "question": "Politician Lyman Sherwood was born in what New York county?",
+      "gold_answer": "Rensselaer County",
+      "model_answer": "Rensselaer County",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "Hoosick, New York",
+          0
+        ],
+        [
+          "Lyman Sherwood",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Aaron B. Rollins",
+          1
+        ],
+        [
+          "Charles D. Sherwood",
+          0
+        ],
+        [
+          "Charles D. Sherwood",
+          5
+        ],
+        [
+          "Julius Harburger",
+          1
+        ],
+        [
+          "Lyman Sherwood",
+          0
+        ],
+        [
+          "Sherwood Equal Rights Historic District",
+          0
+        ],
+        [
+          "Slocum and Hannah Howland House",
+          0
+        ],
+        [
+          "Slocum and Hannah Howland House",
+          3
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Lyman Sherwood",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ac39f7b554299218029dbe7",
+      "question": "Robert Earl Holding owned an oil company that was originally founded by who?",
+      "gold_answer": "Harry F. Sinclair",
+      "model_answer": "Robert Earl Holding owned an oil company that was originally founded by E. W. Marland.",
+      "answer_em": false,
+      "answer_f1": 0.0,
+      "gold_facts": [
+        [
+          "Robert Holding",
+          0
+        ],
+        [
+          "Sinclair Oil Corporation",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "101 Ranch Oil Company",
+          0
+        ],
+        [
+          "101 Ranch Oil Company",
+          1
+        ],
+        [
+          "Little America, Wyoming",
+          4
+        ],
+        [
+          "Robert Holding",
+          0
+        ],
+        [
+          "Sinclair Oil Corporation",
+          0
+        ],
+        [
+          "Sinclair Oil Corporation",
+          1
+        ],
+        [
+          "Skelly Oil",
+          0
+        ],
+        [
+          "Skelly Oil",
+          2
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "101 Ranch Oil Company",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae27b535542996483e649b6",
+      "question": "The chorus of \"On the Radio\" contains references to the song \"November Rain\" whose band's lead singer is?",
+      "gold_answer": "Axl Rose",
+      "model_answer": "Axl Rose",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "November Rain",
+          1
+        ],
+        [
+          "On the Radio (Regina Spektor song)",
+          0
+        ],
+        [
+          "On the Radio (Regina Spektor song)",
+          1
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Aziz Ibrahim",
+          2
+        ],
+        [
+          "Aziz Ibrahim",
+          3
+        ],
+        [
+          "Girls' Generation (song)",
+          2
+        ],
+        [
+          "I Miss You (Blink-182 song)",
+          3
+        ],
+        [
+          "November Rain",
+          0
+        ],
+        [
+          "November Rain",
+          1
+        ],
+        [
+          "November Rain",
+          2
+        ],
+        [
+          "On the Radio (Regina Spektor song)",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "November Rain",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.667,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a7331de5542994cef4bc4a8",
+      "question": "If the Charhki  Dadri crash was less dangerous than the Tenerife airport disaster, which occured firat? ",
+      "gold_answer": "On March 27, 1977, two Boeing 747 passenger jets, KLM Flight 4805 and Pan Am Flight 1736, collided on the runway at Los Rodeos Airport (now Tenerife North Airport)",
+      "model_answer": "The Tenerife airport disaster occurred first.",
+      "answer_em": false,
+      "answer_f1": 0.121,
+      "gold_facts": [
+        [
+          "Charkhi Dadri mid-air collision",
+          0
+        ],
+        [
+          "Tenerife airport disaster",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "1938 Jersey Airport disaster",
+          0
+        ],
+        [
+          "1938 Jersey Airport disaster",
+          1
+        ],
+        [
+          "1977 in aviation",
+          0
+        ],
+        [
+          "Charkhi Dadri mid-air collision",
+          0
+        ],
+        [
+          "Charkhi Dadri mid-air collision",
+          2
+        ],
+        [
+          "Eve Meyer",
+          2
+        ],
+        [
+          "Jacob Veldhuyzen van Zanten",
+          1
+        ],
+        [
+          "Tenerife airport disaster",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "1977 in aviation",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ac15de55542991316484afb",
+      "question": "Were the films Crazy Love and Welcome to Nollywood both released in 2008?",
+      "gold_answer": "no",
+      "model_answer": "No, the films Crazy Love and Welcome to Nollywood were not both released in 2008. Crazy Love was released in 2007, while Welcome to Nollywood is also a 2007 documentary film.",
+      "answer_em": false,
+      "answer_f1": 0.067,
+      "gold_facts": [
+        [
+          "Crazy Love (2007 film)",
+          0
+        ],
+        [
+          "Welcome to Nollywood",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Crazy Love (2007 film)",
+          0
+        ],
+        [
+          "Crazy Love (Michael Bubl\u00e9 album)",
+          0
+        ],
+        [
+          "Crazy Love (Michael Bubl\u00e9 album)",
+          6
+        ],
+        [
+          "Crazy Love (Poco song)",
+          0
+        ],
+        [
+          "Dream (Michael Bubl\u00e9 album)",
+          3
+        ],
+        [
+          "I Remember You (Brian McKnight album)",
+          1
+        ],
+        [
+          "I Remember You (Brian McKnight album)",
+          2
+        ],
+        [
+          "Welcome to Nollywood",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Crazy Love (2007 film)",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a7c6c9d554299683c1c6302",
+      "question": "In what county was Duffy Jackson born?",
+      "gold_answer": "Nassau County",
+      "model_answer": "Freeport, New York",
+      "answer_em": false,
+      "answer_f1": 0.0,
+      "gold_facts": [
+        [
+          "Duffy Jackson",
+          0
+        ],
+        [
+          "Freeport, New York",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Charles Gavan Duffy",
+          2
+        ],
+        [
+          "Duffy Jackson",
+          0
+        ],
+        [
+          "Keith Duffy (bassist)",
+          0
+        ],
+        [
+          "Keith Duffy (bassist)",
+          1
+        ],
+        [
+          "Patrick Duffy (Irish politician)",
+          0
+        ],
+        [
+          "Patrick Duffy (Irish politician)",
+          3
+        ],
+        [
+          "Walter A. Duffy",
+          3
+        ],
+        [
+          "Walter A. Duffy",
+          5
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Duffy Jackson",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae6363b55429929b0807af0",
+      "question": "When was the defending titlist of 2009\u201310 Biathlon World Cup \u2013 Pursuit Men born? ",
+      "gold_answer": "27 January 1974",
+      "model_answer": "Ole Einar Bj\u00f8rndalen was born on 27 January 1974.",
+      "answer_em": false,
+      "answer_f1": 0.5,
+      "gold_facts": [
+        [
+          "2009\u201310 Biathlon World Cup \u2013 Pursuit Men",
+          1
+        ],
+        [
+          "Ole Einar Bj\u00f8rndalen",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "2008\u201309 Biathlon World Cup \u2013 Pursuit Men",
+          0
+        ],
+        [
+          "2008\u201309 Biathlon World Cup \u2013 Pursuit Men",
+          1
+        ],
+        [
+          "2009\u201310 Biathlon World Cup \u2013 Pursuit Men",
+          0
+        ],
+        [
+          "2009\u201310 Biathlon World Cup \u2013 Pursuit Men",
+          1
+        ],
+        [
+          "2010\u201311 Biathlon World Cup \u2013 Pursuit Men",
+          0
+        ],
+        [
+          "Ole Einar Bj\u00f8rndalen",
+          0
+        ],
+        [
+          "Ole Einar Bj\u00f8rndalen",
+          2
+        ],
+        [
+          "Ole Einar Bj\u00f8rndalen",
+          3
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Ole Einar Bj\u00f8rndalen",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a8cea40554299441c6b9f76",
+      "question": "Which mountain is taller, Gasherbrum II or Langtang Ri?",
+      "gold_answer": "Gasherbrum II",
+      "model_answer": "Gasherbrum II is taller than Langtang Ri.",
+      "answer_em": false,
+      "answer_f1": 0.444,
+      "gold_facts": [
+        [
+          "Gasherbrum II",
+          0
+        ],
+        [
+          "Langtang Ri",
+          1
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Burji La",
+          2
+        ],
+        [
+          "Gasherbrum I",
+          0
+        ],
+        [
+          "Gasherbrum I",
+          2
+        ],
+        [
+          "Gasherbrum II",
+          0
+        ],
+        [
+          "Gasherbrum II",
+          1
+        ],
+        [
+          "Gasherbrum III",
+          0
+        ],
+        [
+          "Karakoram",
+          3
+        ],
+        [
+          "Langtang Ri",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Gasherbrum II",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ab5ecd75542992aa134a3e6",
+      "question": "Which Dutch media tycoon transferred all of its media activities to Talpa Holding?",
+      "gold_answer": "John de Mol Jr.",
+      "model_answer": "John de Mol Jr. transferred all of its media activities to Talpa Holding.",
+      "answer_em": false,
+      "answer_f1": 0.471,
+      "gold_facts": [
+        [
+          "John de Mol Jr.",
+          0
+        ],
+        [
+          "Talpa Holding",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "John de Mol Jr.",
+          0
+        ],
+        [
+          "TV 538",
+          2
+        ],
+        [
+          "Talpa Holding",
+          0
+        ],
+        [
+          "Talpa Holding",
+          3
+        ],
+        [
+          "Talpa Radio",
+          0
+        ],
+        [
+          "Tien (TV channel)",
+          0
+        ],
+        [
+          "Tien (TV channel)",
+          3
+        ],
+        [
+          "Tien (TV channel)",
+          4
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Talpa Holding",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a84c5545542991dd0999dee",
+      "question": "When did the car depicted on the cover of Pentastar: In the Style of Demons cease production?",
+      "gold_answer": "1974",
+      "model_answer": "The car depicted on the cover of Pentastar: In the Style of Demons, a 'Sassy Grass Green' Plymouth Barracuda, ceased production after the 1974 model year.",
+      "answer_em": false,
+      "answer_f1": 0.091,
+      "gold_facts": [
+        [
+          "Pentastar: In the Style of Demons",
+          0
+        ],
+        [
+          "Pentastar: In the Style of Demons",
+          4
+        ],
+        [
+          "Plymouth Barracuda",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Pentastar: In the Style of Demons",
+          0
+        ],
+        [
+          "Pentastar: In the Style of Demons",
+          4
+        ],
+        [
+          "Pentastar: In the Style of Demons",
+          5
+        ],
+        [
+          "Plymouth Barracuda",
+          0
+        ],
+        [
+          "Skateboarder (magazine)",
+          1
+        ],
+        [
+          "Skateboarder (magazine)",
+          2
+        ],
+        [
+          "Sonic Enemy",
+          3
+        ],
+        [
+          "WWE Magazine",
+          2
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Plymouth Barracuda",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.5,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5adeacf955429975fa854f66",
+      "question": "What commentator and author questioned the validity of CORE's non-profit status?",
+      "gold_answer": "Rachel Anne Maddow",
+      "model_answer": "Rachel Maddow questioned the validity of CORE's non-profit status.",
+      "answer_em": false,
+      "answer_f1": 0.364,
+      "gold_facts": [
+        [
+          "Center for Organizational Research and Education",
+          0
+        ],
+        [
+          "Center for Organizational Research and Education",
+          2
+        ],
+        [
+          "Rachel Maddow",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "American Bladesmith Society",
+          2
+        ],
+        [
+          "Brown Association for Cooperative Housing",
+          0
+        ],
+        [
+          "Brown Association for Cooperative Housing",
+          1
+        ],
+        [
+          "Center for Organizational Research and Education",
+          0
+        ],
+        [
+          "Center for Organizational Research and Education",
+          2
+        ],
+        [
+          "Endowment tax",
+          1
+        ],
+        [
+          "New International School (Tokyo)",
+          3
+        ],
+        [
+          "Rachel Maddow",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Center for Organizational Research and Education",
+          1
+        ]
+      ],
+      "fabricated_citations": [
+        [
+          "Center for Organizational Research and Education",
+          1
+        ]
+      ],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 0.0
+    },
+    {
+      "qid": "5a8ce15d554299653c1aa12f",
+      "question": "did Robert Wise have more award nominations than Zoltan Korda?",
+      "gold_answer": "yes",
+      "model_answer": "Yes, Robert Wise had more award nominations than Zoltan Korda.",
+      "answer_em": false,
+      "answer_f1": 0.182,
+      "gold_facts": [
+        [
+          "Robert Wise",
+          1
+        ],
+        [
+          "Robert Wise",
+          2
+        ],
+        [
+          "Zoltan Korda",
+          2
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Elephant Boy (film)",
+          1
+        ],
+        [
+          "Robert Wise",
+          0
+        ],
+        [
+          "Robert Wise",
+          1
+        ],
+        [
+          "Robert Wise",
+          2
+        ],
+        [
+          "The Drum (1938 film)",
+          1
+        ],
+        [
+          "The Macomber Affair",
+          1
+        ],
+        [
+          "Zoltan Korda",
+          0
+        ],
+        [
+          "Zoltan Korda",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Robert Wise",
+          1
+        ],
+        [
+          "Robert Wise",
+          2
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.667,
+      "claim_vs_gold_f1": 0.8,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ade4da055429939a52fe878",
+      "question": "My Neighbor Totoro was produced by a Japanese animation film studio founded in what year?",
+      "gold_answer": "1985",
+      "model_answer": "1985",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "My Neighbor Totoro",
+          0
+        ],
+        [
+          "Studio Ghibli",
+          2
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Ghibli Museum",
+          0
+        ],
+        [
+          "Makiko Futaki",
+          1
+        ],
+        [
+          "Makiko Futaki",
+          2
+        ],
+        [
+          "My Neighbor Totoro",
+          0
+        ],
+        [
+          "Short films by Studio Ghibli",
+          0
+        ],
+        [
+          "Short films by Studio Ghibli",
+          1
+        ],
+        [
+          "Studio Ghibli",
+          0
+        ],
+        [
+          "Studio Ghibli",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Short films by Studio Ghibli",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ab2a186554299295394677b",
+      "question": "When did the English local newspaper, featuring the sculpture and war memorial in the Forbury gardens, change names?",
+      "gold_answer": "2009",
+      "model_answer": "The English local newspaper, the Reading Evening Post, changed its name to the Reading Post in 2009.",
+      "answer_em": false,
+      "answer_f1": 0.133,
+      "gold_facts": [
+        [
+          "Maiwand Lion",
+          0
+        ],
+        [
+          "Reading Post",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Forbury Gardens",
+          0
+        ],
+        [
+          "Forbury Gardens",
+          2
+        ],
+        [
+          "Maiwand Lion",
+          0
+        ],
+        [
+          "Maiwand Lion",
+          2
+        ],
+        [
+          "Reading Post",
+          0
+        ],
+        [
+          "Reading Post",
+          1
+        ],
+        [
+          "The Forbury Hotel",
+          0
+        ],
+        [
+          "The Forbury Hotel",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Reading Post",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ade66e1554299728e26c713",
+      "question": "What years did Jose Gonzalo Rodriguez Gacha and other leaders of fthe Medallin Cartel operate in Boliva, Colombia, Central America, Peru, the United States, Canada, and Europe?",
+      "gold_answer": "1970s and 1980s",
+      "model_answer": "The Medell\u00edn Cartel, which included Jos\u00e9 Gonzalo Rodr\u00edguez Gacha, operated throughout the 1970s and 1980s in Bolivia, Colombia, Central America, Peru, the United States, Canada, and Europe.",
+      "answer_em": false,
+      "answer_f1": 0.222,
+      "gold_facts": [
+        [
+          "Jos\u00e9 Gonzalo Rodr\u00edguez Gacha",
+          0
+        ],
+        [
+          "Medell\u00edn Cartel",
+          0
+        ],
+        [
+          "Medell\u00edn Cartel",
+          1
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Jos\u00e9 Gonzalo Rodr\u00edguez Gacha",
+          0
+        ],
+        [
+          "Jos\u00e9 Gonzalo Rodr\u00edguez Gacha",
+          1
+        ],
+        [
+          "Juan Carlos Ram\u00edrez Abad\u00eda",
+          0
+        ],
+        [
+          "Medell\u00edn Cartel",
+          0
+        ],
+        [
+          "Medell\u00edn Cartel",
+          1
+        ],
+        [
+          "Medell\u00edn Cartel",
+          3
+        ],
+        [
+          "Tranquilandia",
+          1
+        ],
+        [
+          "Wilber Varela",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Medell\u00edn Cartel",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.5,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a7c634c55429907fabeef79",
+      "question": "Which writer died later, Agatha Christie or Clement Greenberg?",
+      "gold_answer": "Clement Greenberg",
+      "model_answer": "Agatha Christie died later than Clement Greenberg.",
+      "answer_em": false,
+      "answer_f1": 0.444,
+      "gold_facts": [
+        [
+          "Agatha Christie",
+          0
+        ],
+        [
+          "Clement Greenberg",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Agatha Christie",
+          0
+        ],
+        [
+          "Agatha Christie",
+          2
+        ],
+        [
+          "Agatha Christie Award (Japan)",
+          0
+        ],
+        [
+          "Agatha Christie Memorial",
+          0
+        ],
+        [
+          "Agatha Christie Memorial",
+          2
+        ],
+        [
+          "Clement Greenberg",
+          0
+        ],
+        [
+          "Star Over Bethlehem",
+          0
+        ],
+        [
+          "Verdict (play)",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Agatha Christie",
+          0
+        ],
+        [
+          "Clement Greenberg",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 1.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae13f3c5542997b2ef7d168",
+      "question": "Arthur Noss was a gunner for the commader during which two European theatre battles in WWII?",
+      "gold_answer": "Battle of Britain and the Battle of Malta",
+      "model_answer": "Arthur Noss was a gunner for the commander during the Battle of Britain and the Battle of Malta.",
+      "answer_em": false,
+      "answer_f1": 0.667,
+      "gold_facts": [
+        [
+          "Arthur Noss",
+          1
+        ],
+        [
+          "Keith Park",
+          1
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Call of Duty: WWII",
+          1
+        ],
+        [
+          "Call of Duty: WWII",
+          2
+        ],
+        [
+          "Call of Duty: WWII",
+          3
+        ],
+        [
+          "End of World War II in Europe",
+          0
+        ],
+        [
+          "Georgian uprising on Texel",
+          0
+        ],
+        [
+          "Georgian uprising on Texel",
+          2
+        ],
+        [
+          "Keith Park",
+          1
+        ],
+        [
+          "Theatre of War (video game)",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Keith Park",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae17cd055429901ffe4aea3",
+      "question": "Between Pinanga and Alopecurus which genus is more common in temperate regions?",
+      "gold_answer": "Alopecurus",
+      "model_answer": "Alopecurus is more common in temperate regions than Pinanga.",
+      "answer_em": false,
+      "answer_f1": 0.2,
+      "gold_facts": [
+        [
+          "Alopecurus",
+          0
+        ],
+        [
+          "Alopecurus",
+          1
+        ],
+        [
+          "Pinanga",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Alopecurus",
+          0
+        ],
+        [
+          "Alopecurus aequalis",
+          0
+        ],
+        [
+          "Anser (bird)",
+          3
+        ],
+        [
+          "Helianthus",
+          1
+        ],
+        [
+          "Helianthus",
+          4
+        ],
+        [
+          "Lobelia",
+          0
+        ],
+        [
+          "Pinanga",
+          0
+        ],
+        [
+          "Pison",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Alopecurus",
+          0
+        ],
+        [
+          "Pinanga",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.667,
+      "claim_vs_gold_f1": 0.8,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae7940c55429952e35ea984",
+      "question": "What is the name of shipping magnate M\u00e6rsk Mc-Kinney M\u00f8ller' father?",
+      "gold_answer": "A.P. M\u00f8ller",
+      "model_answer": "Peter M\u00e6rsk M\u00f8ller",
+      "answer_em": false,
+      "answer_f1": 0.4,
+      "gold_facts": [
+        [
+          "M\u00e6rsk Mc-Kinney M\u00f8ller",
+          1
+        ],
+        [
+          "M\u00f8ller Centre",
+          3
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Arnold Peder M\u00f8ller",
+          2
+        ],
+        [
+          "Arnold Peder M\u00f8ller",
+          3
+        ],
+        [
+          "Arnold Peter M\u00f8ller",
+          0
+        ],
+        [
+          "M\u00e6rsk Mc-Kinney M\u00f8ller",
+          0
+        ],
+        [
+          "M\u00e6rsk Mc-Kinney M\u00f8ller (ship)",
+          0
+        ],
+        [
+          "M\u00e6rsk Mc-Kinney M\u00f8ller (ship)",
+          3
+        ],
+        [
+          "M\u00f8ller Centre",
+          3
+        ],
+        [
+          "Peter M\u00e6rsk M\u00f8ller",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Peter M\u00e6rsk M\u00f8ller",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a7296815542991f9a20c515",
+      "question": "Who brewed the first espresso coffee in space, Patrick Baudry or Samantha Cristoforetti?",
+      "gold_answer": "Samantha Cristoforetti",
+      "model_answer": "Samantha Cristoforetti",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "Patrick Baudry",
+          0
+        ],
+        [
+          "Patrick Baudry",
+          1
+        ],
+        [
+          "Samantha Cristoforetti",
+          0
+        ],
+        [
+          "Samantha Cristoforetti",
+          3
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Espresso machine",
+          1
+        ],
+        [
+          "ISSpresso",
+          0
+        ],
+        [
+          "ISSpresso",
+          1
+        ],
+        [
+          "Monorail Espresso",
+          1
+        ],
+        [
+          "Patrick Baudry",
+          0
+        ],
+        [
+          "Samantha Cristoforetti",
+          0
+        ],
+        [
+          "Samantha Cristoforetti",
+          2
+        ],
+        [
+          "Samantha Cristoforetti",
+          3
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Samantha Cristoforetti",
+          3
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.75,
+      "claim_vs_gold_f1": 0.4,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ab2e8ad554299340b525562",
+      "question": "Who starred alongside South Korean actor and singer Kim Ki-bum in the 2012 romantic comedy series I Love Lee Tae-ri?",
+      "gold_answer": "Park Ye-jin",
+      "model_answer": "Park Ye-jin",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "I Love Lee Tae-ri",
+          0
+        ],
+        [
+          "I Love Lee Tae-ri",
+          1
+        ],
+        [
+          "Kim Ki-bum",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Allen Kim",
+          0
+        ],
+        [
+          "I Love Lee Tae-ri",
+          0
+        ],
+        [
+          "I Love Lee Tae-ri",
+          1
+        ],
+        [
+          "Key (entertainer)",
+          0
+        ],
+        [
+          "Kim Ki-bum",
+          0
+        ],
+        [
+          "Kim Ki-bum",
+          4
+        ],
+        [
+          "Lee Jong-hyuk",
+          0
+        ],
+        [
+          "Yoon Jin-yi",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "I Love Lee Tae-ri",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.5,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a89b1de5542992e4fca8378",
+      "question": "Which port city lies approximately 25 km north of the Lingnan Fine Arts Museum?",
+      "gold_answer": "Keelung",
+      "model_answer": "Keelung",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "Lingnan Fine Arts Museum",
+          0
+        ],
+        [
+          "Taipei",
+          2
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Czarna D\u0105br\u00f3wka",
+          3
+        ],
+        [
+          "Lingnan Fine Arts Museum",
+          0
+        ],
+        [
+          "M\u0142ynarze, Mak\u00f3w County",
+          2
+        ],
+        [
+          "Taipei",
+          0
+        ],
+        [
+          "Taipei",
+          1
+        ],
+        [
+          "Taipei",
+          2
+        ],
+        [
+          "Taipei",
+          3
+        ],
+        [
+          "Taipei",
+          4
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Taipei",
+          2
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ab78edc5542995dae37e95c",
+      "question": "Where is the school that Tyler Kalinoski went to located?",
+      "gold_answer": "located in Olathe, Kansas",
+      "model_answer": "Olathe East High School is located in Olathe, Kansas, United States.",
+      "answer_em": false,
+      "answer_f1": 0.533,
+      "gold_facts": [
+        [
+          "Olathe East High School",
+          0
+        ],
+        [
+          "Tyler Kalinoski",
+          1
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Calvin Tyler Scott",
+          2
+        ],
+        [
+          "Calvin Tyler Scott",
+          3
+        ],
+        [
+          "Calvin Tyler Scott",
+          4
+        ],
+        [
+          "Kevin Lockett",
+          1
+        ],
+        [
+          "Olathe East High School",
+          0
+        ],
+        [
+          "Tyler Consolidated High School",
+          1
+        ],
+        [
+          "Tyler Kalinoski",
+          0
+        ],
+        [
+          "Tyler Kalinoski",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Olathe East High School",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae73acb5542991e8301cc07",
+      "question": "D1NZ is a series based on what oversteering technique?",
+      "gold_answer": "Drifting",
+      "model_answer": "D1NZ is a series based on the drifting oversteering technique.",
+      "answer_em": false,
+      "answer_f1": 0.222,
+      "gold_facts": [
+        [
+          "D1NZ",
+          0
+        ],
+        [
+          "Drifting (motorsport)",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "D1NZ",
+          0
+        ],
+        [
+          "D1NZ",
+          1
+        ],
+        [
+          "D1NZ",
+          2
+        ],
+        [
+          "D1NZ",
+          6
+        ],
+        [
+          "D1NZ",
+          7
+        ],
+        [
+          "D1NZ",
+          8
+        ],
+        [
+          "Drifting (motorsport)",
+          0
+        ],
+        [
+          "Drifting (motorsport)",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Drifting (motorsport)",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a8257fa55429940e5e1a866",
+      "question": "The most famous song of the last monarch of Hawaii was what?",
+      "gold_answer": "Aloha \u02bbOe",
+      "model_answer": "Aloha \u02bbOe",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "Aloha \u02bbOe",
+          0
+        ],
+        [
+          "Liliuokalani",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Aloha \u02bbOe",
+          0
+        ],
+        [
+          "Aloha \u02bbOe",
+          2
+        ],
+        [
+          "Death and state funeral of Liliuokalani",
+          0
+        ],
+        [
+          "Hawaii's Story by Hawaii's Queen",
+          0
+        ],
+        [
+          "Joseph Heleluhe",
+          0
+        ],
+        [
+          "Kal\u0101kaua",
+          0
+        ],
+        [
+          "Kal\u0101kaua",
+          3
+        ],
+        [
+          "Liliuokalani",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Aloha \u02bbOe",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a8d8e4f5542994ba4e3dca7",
+      "question": "The NG postcode area is situated approximately how many miles from Gamston, Rushcliffe?",
+      "gold_answer": "approximately 3 mi",
+      "model_answer": "The NG postcode area is situated approximately 3 miles from Gamston, Rushcliffe.",
+      "answer_em": false,
+      "answer_f1": 0.286,
+      "gold_facts": [
+        [
+          "Gamston, Rushcliffe",
+          2
+        ],
+        [
+          "NG postcode area",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Gamston, Rushcliffe",
+          0
+        ],
+        [
+          "Gamston, Rushcliffe",
+          2
+        ],
+        [
+          "IG postcode area",
+          0
+        ],
+        [
+          "NG postcode area",
+          0
+        ],
+        [
+          "TN postcode area",
+          0
+        ],
+        [
+          "TN postcode area",
+          1
+        ],
+        [
+          "TS postcode area",
+          0
+        ],
+        [
+          "TS postcode area",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Gamston, Rushcliffe",
+          1
+        ]
+      ],
+      "fabricated_citations": [
+        [
+          "Gamston, Rushcliffe",
+          1
+        ]
+      ],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.0,
+      "claim_vs_fed_precision": 0.0
+    },
+    {
+      "qid": "5a8a07725542992d82986e5b",
+      "question": "Along side Thomas Alan, which singer's first three albums were recorded at The Boarding House?",
+      "gold_answer": "Steve Martin",
+      "model_answer": "Steve Martin",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "The Boarding House (nightclub)",
+          0
+        ],
+        [
+          "The Boarding House (nightclub)",
+          1
+        ],
+        [
+          "The Boarding House (nightclub)",
+          2
+        ],
+        [
+          "Tom Waits",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Live at the Boarding House",
+          0
+        ],
+        [
+          "Live at the Boarding House",
+          1
+        ],
+        [
+          "Live at the Boarding House: The Complete Shows",
+          0
+        ],
+        [
+          "Live at the Boarding House: The Complete Shows",
+          1
+        ],
+        [
+          "The Boarding House (nightclub)",
+          0
+        ],
+        [
+          "The Boarding House (nightclub)",
+          1
+        ],
+        [
+          "The Boarding House (nightclub)",
+          2
+        ],
+        [
+          "Tom Waits",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "The Boarding House (nightclub)",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.4,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a79fac85542996c55b2dcc1",
+      "question": "The Cura\u00e7ao Centre for Correction and Detention changed its name to Sentro di Detenshon i Korekshon K\u00f2rsou at this event which saw the dissolution of a Caribbean country on what date?",
+      "gold_answer": "10 October 2010",
+      "model_answer": "The Cura\u00e7ao Centre for Correction and Detention changed its name to Sentro di Detenshon i Korekshon K\u00f2rsou at the dissolution of the Netherlands Antilles on 10 October 2010.",
+      "answer_em": false,
+      "answer_f1": 0.214,
+      "gold_facts": [
+        [
+          "Cura\u00e7ao Centre for Correction and Detention",
+          3
+        ],
+        [
+          "Dissolution of the Netherlands Antilles",
+          0
+        ],
+        [
+          "Dissolution of the Netherlands Antilles",
+          1
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Cura\u00e7ao",
+          0
+        ],
+        [
+          "Cura\u00e7ao Centre for Correction and Detention",
+          0
+        ],
+        [
+          "Cura\u00e7ao Centre for Correction and Detention",
+          3
+        ],
+        [
+          "Cura\u00e7ao and Dependencies",
+          0
+        ],
+        [
+          "Cura\u00e7ao and Dependencies",
+          1
+        ],
+        [
+          "Cura\u00e7ao general election, 2012",
+          2
+        ],
+        [
+          "Dissolution of the Netherlands Antilles",
+          0
+        ],
+        [
+          "Party Workers' Liberation Front 30 May",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Cura\u00e7ao Centre for Correction and Detention",
+          3
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.667,
+      "claim_vs_gold_f1": 0.5,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a81537355429926c1cdad20",
+      "question": "What conference champions were putted against each other in the first NBA Finals in which the Orlando Magic's played?",
+      "gold_answer": "Eastern Conference champion Orlando Magic against the Western Conference champion Houston Rockets.",
+      "model_answer": "The Orlando Magic faced the Houston Rockets in the 1995 NBA Finals.",
+      "answer_em": false,
+      "answer_f1": 0.4,
+      "gold_facts": [
+        [
+          "1995 NBA Finals",
+          0
+        ],
+        [
+          "1995 NBA Finals",
+          1
+        ],
+        [
+          "Orlando Magic",
+          0
+        ],
+        [
+          "Orlando Magic",
+          3
+        ]
+      ],
+      "fed_facts": [
+        [
+          "1995 NBA Finals",
+          1
+        ],
+        [
+          "2009 NBA Finals",
+          0
+        ],
+        [
+          "2009 NBA Finals",
+          1
+        ],
+        [
+          "List of Orlando Magic seasons",
+          1
+        ],
+        [
+          "List of Orlando Magic seasons",
+          4
+        ],
+        [
+          "Los Angeles Lakers all-time roster",
+          3
+        ],
+        [
+          "Los Angeles Lakers all-time roster",
+          4
+        ],
+        [
+          "Orlando Magic",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "1995 NBA Finals",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 0.5,
+      "claim_vs_gold_f1": 0.4,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a721d5a55429971e9dc9283",
+      "question": "What Australian beer is a British style pale ale whose label features a character conceived in 1926? ",
+      "gold_answer": "Ballarat Bitter is a 4.9% (abv) Australian beer",
+      "model_answer": "Ballarat Bitter",
+      "answer_em": false,
+      "answer_f1": 0.444,
+      "gold_facts": [
+        [
+          "Ballarat Bitter",
+          0
+        ],
+        [
+          "Ballarat Bitter",
+          1
+        ],
+        [
+          "Bitter (beer)",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Ballarat Bitter",
+          0
+        ],
+        [
+          "Ballarat Bitter",
+          1
+        ],
+        [
+          "Bitter (beer)",
+          0
+        ],
+        [
+          "India pale ale",
+          0
+        ],
+        [
+          "India pale ale",
+          1
+        ],
+        [
+          "Rye IPA",
+          0
+        ],
+        [
+          "Rye IPA",
+          1
+        ],
+        [
+          "Tripel",
+          4
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Ballarat Bitter",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.5,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a7aa2a255429941d65f270e",
+      "question": "Who was born first, Chester Bennington or Mikael Stanne?",
+      "gold_answer": "Bengt Mikael Stanne",
+      "model_answer": "Mikael Stanne was born first.",
+      "answer_em": false,
+      "answer_f1": 0.5,
+      "gold_facts": [
+        [
+          "Chester Bennington",
+          0
+        ],
+        [
+          "Mikael Stanne",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Chester Bennington",
+          0
+        ],
+        [
+          "High Rise (EP)",
+          2
+        ],
+        [
+          "Mikael Stanne",
+          0
+        ],
+        [
+          "Niklas Sundin",
+          2
+        ],
+        [
+          "Skydancer (Dark Tranquillity album)",
+          2
+        ],
+        [
+          "Talking to Myself (song)",
+          3
+        ],
+        [
+          "The Gallery (album)",
+          1
+        ],
+        [
+          "The Hunting Party Tour",
+          9
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Mikael Stanne",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5abe6f8455429965af743f03",
+      "question": "What country of origin does Robert brothers and Jacques Charles have in common?",
+      "gold_answer": "French",
+      "model_answer": "France",
+      "answer_em": false,
+      "answer_f1": 0.0,
+      "gold_facts": [
+        [
+          "Jacques Charles",
+          0
+        ],
+        [
+          "Robert brothers",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Jacques Charles",
+          0
+        ],
+        [
+          "Jacques de Bernonville",
+          0
+        ],
+        [
+          "Jean Ausseil",
+          0
+        ],
+        [
+          "Robert brothers",
+          0
+        ],
+        [
+          "Robert brothers",
+          1
+        ],
+        [
+          "Robert brothers",
+          2
+        ],
+        [
+          "Sturm series",
+          0
+        ],
+        [
+          "\u00c9mile Jouguet",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Jacques Charles",
+          0
+        ],
+        [
+          "Robert brothers",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 1.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ae7257a554299572ea54731",
+      "question": "What character did Selina Giles play in the 2005 dystopian political thriller named \"V for Vendetta\"?",
+      "gold_answer": "Evey's mother",
+      "model_answer": "Selina Giles played Evey's mother in the Wachowskis' 'V for Vendetta (film).'",
+      "answer_em": false,
+      "answer_f1": 0.308,
+      "gold_facts": [
+        [
+          "Selina Giles",
+          1
+        ],
+        [
+          "V for Vendetta (film)",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Division 19",
+          1
+        ],
+        [
+          "Dragons of Camelot",
+          1
+        ],
+        [
+          "Nineteen Eighty-Four in other media",
+          0
+        ],
+        [
+          "Selina Giles",
+          0
+        ],
+        [
+          "Selina Giles",
+          1
+        ],
+        [
+          "St. Urbain's Horseman (TV series)",
+          1
+        ],
+        [
+          "V for Vendetta (film)",
+          0
+        ],
+        [
+          "V for Vendetta (film)",
+          2
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Selina Giles",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ac0e0e25542997d64295a6f",
+      "question": "Dionne Bunsha worked most recently for the magazine published by what company?",
+      "gold_answer": "The Hindu Group",
+      "model_answer": "The Hindu Group of publications",
+      "answer_em": false,
+      "answer_f1": 0.667,
+      "gold_facts": [
+        [
+          "Dionne Bunsha",
+          1
+        ],
+        [
+          "Frontline (magazine)",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Dionne Bunsha",
+          0
+        ],
+        [
+          "Dionne Bunsha",
+          1
+        ],
+        [
+          "Dionne Bunsha",
+          2
+        ],
+        [
+          "Frontline (magazine)",
+          0
+        ],
+        [
+          "Muse (children's magazine)",
+          0
+        ],
+        [
+          "Rivista Italiana Difesa",
+          5
+        ],
+        [
+          "Scarred: Experiments with Violence in Gujarat",
+          1
+        ],
+        [
+          "Sylph (magazine)",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Frontline (magazine)",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5a72688c5542997f827839b2",
+      "question": "The Atik Valide Mosque and Valens Aqueduct are found in what country?",
+      "gold_answer": "Turkey",
+      "model_answer": "Turkey",
+      "answer_em": true,
+      "answer_f1": 1.0,
+      "gold_facts": [
+        [
+          "Atik Valide Mosque",
+          0
+        ],
+        [
+          "Valens Aqueduct",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Atik Mustafa Pasha Mosque",
+          0
+        ],
+        [
+          "Atik Valide Mosque",
+          0
+        ],
+        [
+          "Gazi Atik Ali Pasha Mosque",
+          0
+        ],
+        [
+          "New Mosque (Istanbul)",
+          0
+        ],
+        [
+          "Pertevniyal Valide Sultan Mosque",
+          0
+        ],
+        [
+          "Valens Aqueduct",
+          0
+        ],
+        [
+          "Vasat Atik Ali Pasha Mosque",
+          0
+        ],
+        [
+          "Yeni Valide Mosque",
+          0
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Atik Valide Mosque",
+          0
+        ],
+        [
+          "Valens Aqueduct",
+          0
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 1.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5adea0c5554299728e26c776",
+      "question": "Are both Helen Dunmore and M. P. Shiel of West Indian descent?",
+      "gold_answer": "no",
+      "model_answer": "No, M. P. Shiel is not of West Indian descent, but Helen Dunmore is.",
+      "answer_em": false,
+      "answer_f1": 0.133,
+      "gold_facts": [
+        [
+          "Helen Dunmore",
+          0
+        ],
+        [
+          "M. P. Shiel",
+          0
+        ]
+      ],
+      "fed_facts": [
+        [
+          "A Spell of Winter",
+          0
+        ],
+        [
+          "Helen Dunmore",
+          0
+        ],
+        [
+          "M. P. Shiel",
+          0
+        ],
+        [
+          "Mourning Ruby",
+          0
+        ],
+        [
+          "Riptide (book series)",
+          3
+        ],
+        [
+          "The Siege (Dunmore novel)",
+          0
+        ],
+        [
+          "Zennor in Darkness",
+          0
+        ],
+        [
+          "Zennor in Darkness",
+          3
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "M. P. Shiel",
+          0
+        ],
+        [
+          "Zennor in Darkness",
+          6
+        ]
+      ],
+      "fabricated_citations": [
+        [
+          "Zennor in Darkness",
+          6
+        ]
+      ],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.5,
+      "claim_vs_fed_precision": 0.5
+    },
+    {
+      "qid": "5ab8372255429919ba4e226b",
+      "question": "What band wrote the song \"Blue Letter\" and was inducted into the Rock and Roll Hall of Fame in 1998?",
+      "gold_answer": "Fleetwood Mac",
+      "model_answer": "Fleetwood Mac wrote the song 'Blue Letter' and was inducted into the Rock and Roll Hall of Fame in 1998.",
+      "answer_em": false,
+      "answer_f1": 0.2,
+      "gold_facts": [
+        [
+          "Blue Letter",
+          0
+        ],
+        [
+          "Fleetwood Mac",
+          2
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Blue Letter",
+          0
+        ],
+        [
+          "Blue Letter",
+          2
+        ],
+        [
+          "Fleetwood Mac",
+          0
+        ],
+        [
+          "Fleetwood Mac",
+          2
+        ],
+        [
+          "Philip Bailey",
+          3
+        ],
+        [
+          "Rock &amp; Roll Hall of Fame Covers EP",
+          3
+        ],
+        [
+          "The Midnighters",
+          7
+        ],
+        [
+          "The Midnighters",
+          8
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Blue Letter",
+          0
+        ],
+        [
+          "Fleetwood Mac",
+          2
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 1.0,
+      "claim_vs_fed_precision": 1.0
+    },
+    {
+      "qid": "5ac0e064554299012d1db64e",
+      "question": "the municipality of Mirdit\u00eb is in a country that had how many inhabitants in 2016 ?",
+      "gold_answer": "almost 3 million",
+      "model_answer": "3 million people",
+      "answer_em": false,
+      "answer_f1": 0.667,
+      "gold_facts": [
+        [
+          "Albania",
+          1
+        ],
+        [
+          "Cathedral of Jesus Saviour of the World, Rr\u00ebshen",
+          1
+        ]
+      ],
+      "fed_facts": [
+        [
+          "Albania",
+          0
+        ],
+        [
+          "Albania",
+          1
+        ],
+        [
+          "Albania",
+          2
+        ],
+        [
+          "Albania",
+          3
+        ],
+        [
+          "Albania",
+          4
+        ],
+        [
+          "Albania",
+          5
+        ],
+        [
+          "Almohar\u00edn",
+          1
+        ],
+        [
+          "Cathedral of Jesus Saviour of the World, Rr\u00ebshen",
+          1
+        ]
+      ],
+      "claimed_facts": [
+        [
+          "Albania",
+          1
+        ]
+      ],
+      "fabricated_citations": [],
+      "retrieval_recall_of_gold": 1.0,
+      "claim_vs_gold_f1": 0.667,
+      "claim_vs_fed_precision": 1.0
+    }
+  ]
+}
