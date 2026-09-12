@@ -1,0 +1,2722 @@
+{
+  "dataset": {
+    "source": "huggingface fever/fever (revision refs/convert/parquet), config default, split validation",
+    "note": "the parquet 'validation' split's row count/schema matches FEVER's official labelled_dev (19,998 claims, flattened one-row-per-evidence-sentence)",
+    "sampling": {
+      "method": "label-stratified random sample, fixed seed, claims with evidence preferred for SUPPORTS/REFUTES",
+      "seed": 42,
+      "n_per_label_requested": 20,
+      "n_claims_sampled": 60,
+      "label_counts": {
+        "SUPPORTS": 20,
+        "REFUTES": 20,
+        "NOT ENOUGH INFO": 20
+      }
+    }
+  },
+  "wiki_pages": {
+    "source": "live Wikipedia (en.wikipedia.org MediaWiki API, action=query&prop=extracts&exintro=1)",
+    "note": "FEVER's own wiki-pages.zip snapshot was tried first (fsspec random-access zip over HTTP range requests) but measured sandbox bandwidth to fever.ai (~150KB/s) made scanning it infeasible; see README.",
+    "target_titles": 79,
+    "pages_fetched": 77,
+    "pool_sentences": 436
+  },
+  "models": {
+    "chat_model": "qwen2.5:7b-instruct",
+    "embed_model": "nomic-embed-text"
+  },
+  "retrieval": {
+    "top_k": 5
+  },
+  "scoring": {
+    "n_claims": 60,
+    "accuracy": 0.38333333333333336,
+    "correct": 23,
+    "per_label_accuracy": {
+      "SUPPORTS": 0.25,
+      "REFUTES": 0.05,
+      "NOT ENOUGH INFO": 0.85
+    },
+    "confusion_matrix": {
+      "SUPPORTS": {
+        "SUPPORTS": 5,
+        "REFUTES": 0,
+        "NOT ENOUGH INFO": 15,
+        "PARSE_ERROR": 0
+      },
+      "REFUTES": {
+        "SUPPORTS": 1,
+        "REFUTES": 1,
+        "NOT ENOUGH INFO": 18,
+        "PARSE_ERROR": 0
+      },
+      "NOT ENOUGH INFO": {
+        "SUPPORTS": 2,
+        "REFUTES": 1,
+        "NOT ENOUGH INFO": 17,
+        "PARSE_ERROR": 0
+      }
+    },
+    "evidence_title_recall": 0.5740740740740741,
+    "evidence_title_recall_eligible_claims": 54,
+    "evidence_title_recall_note": "fraction of claims (with gold evidence) for which at least one retrieved sentence's Wikipedia title matched a gold evidence title; exact gold sentence-ID matching is not meaningful since evidence text comes from current Wikipedia, not FEVER's 2017 snapshot"
+  },
+  "elapsed_seconds": 466.8,
+  "per_claim": [
+    {
+      "id": 1093,
+      "claim": "Henry Cavill is part of the DC Extended Universe.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Henry_Cavill"
+      ],
+      "retrieved": [
+        {
+          "title": "Annabelle_-LRB-doll-RRB-",
+          "sent_id": 3,
+          "text": "A character based on the Warrens' story is one of the antagonists that appear in the fictional Conjuring Universe.",
+          "score": 0.6236
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 4,
+          "text": "Having expressed an interest in comics and science fiction, Vadim was hired to direct Barbarella after producer Dino De Laurentiis purchased the film rights to the comic series.",
+          "score": 0.5629
+        },
+        {
+          "title": "Bermuda_Triangle",
+          "sent_id": 0,
+          "text": "The Bermuda Triangle, also known as the Devil's Triangle, is a loosely defined region in the North Atlantic Ocean, roughly bounded by Florida, Bermuda, and Puerto Rico.",
+          "score": 0.551
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 23,
+          "text": "Bulgaria is a member state of the European Union, including the Schengen Area and the eurozone, NATO, and various regional suborganizations such as the Bucharest Nine.",
+          "score": 0.5498
+        },
+        {
+          "title": "Chumlee",
+          "sent_id": 2,
+          "text": "Chumlee is often portrayed on the show as the comic foil, but he often appraises items in his areas of expertise, including pinball machines, sports memorabilia, sneakers, toys, and video games.",
+          "score": 0.5448
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about Henry Cavill's involvement in the DC Extended Universe."
+    },
+    {
+      "id": 1369,
+      "claim": "Gotham premiered on Fox.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Gotham_-LRB-TV_series-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 3,
+          "text": "It aired on The WB from March 10, 1997, to May 22, 2001, and later on UPN from October 2, 2001, to May 20, 2003.",
+          "score": 0.628
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 1,
+          "text": "The series premiered on ABC on January 31, 1988, immediately after the network's broadcast of Super Bowl XXII, and ended on May 12, 1993.",
+          "score": 0.6142
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 0,
+          "text": "Buffy the Vampire Slayer is an American supernatural horror drama television series created by Joss Whedon.",
+          "score": 0.6137
+        },
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 7,
+          "text": "The Raven was released in the United Kingdom on March 9, 2012, and in the United States on April 27, 2012, by Relativity Media.",
+          "score": 0.5989
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 13,
+          "text": "Although lower than successful shows on the \"big four\" networks (ABC, CBS, NBC and Fox), these ratings were a success for the relatively new and smaller WB Television Network.",
+          "score": 0.5702
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: None of the provided evidence mentions the premiere of Gotham on Fox."
+    },
+    {
+      "id": 6462,
+      "claim": "Emperor Norton is not immortalized by authors from different countries.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Emperor_Norton",
+        "Morris_-LRB-cartoonist-RRB-",
+        "Neil_Gaiman",
+        "Rene\u0301_Goscinny",
+        "Robert_Louis_Stevenson",
+        "Selma_Lagerlo\u0308f"
+      ],
+      "retrieved": [
+        {
+          "title": "Robert_Louis_Stevenson",
+          "sent_id": 9,
+          "text": "In 2018 he was ranked just behind Charles Dickens as the 26th-most-translated author in the world.",
+          "score": 0.609
+        },
+        {
+          "title": "Neil_Gaiman",
+          "sent_id": 0,
+          "text": "Neil Richard MacKinnon Gaiman (; born Neil Richard Gaiman; 10 November 1960) is an English author of short fiction, novels, comic books, audio theatre, and screenplays.",
+          "score": 0.5924
+        },
+        {
+          "title": "Robert_Louis_Stevenson",
+          "sent_id": 1,
+          "text": "He is best known for the novels Treasure Island (1883), Strange Case of Dr Jekyll and Mr Hyde (1886), and Kidnapped (1886) and for the poetry collection A Child's Garden of Verses (1885).",
+          "score": 0.5847
+        },
+        {
+          "title": "Morris_-LRB-cartoonist-RRB-",
+          "sent_id": 2,
+          "text": "It was a best-selling series for more than 50 years, published internationally and translated into 23 languages.",
+          "score": 0.5675
+        },
+        {
+          "title": "Robert_Louis_Stevenson",
+          "sent_id": 6,
+          "text": "In 1890 he settled in Samoa, where, alarmed at increasing European and American influence in the South Sea islands, his writing turned from romance and adventure fiction toward a darker realism.",
+          "score": 0.5656
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence provided does not mention Emperor Norton or his immortality in literature from different countries."
+    },
+    {
+      "id": 8905,
+      "claim": "The Raven (2012 film) was released in a sovereign country in western Europe in March of 2012.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "SUPPORTS",
+      "correct": true,
+      "gold_titles": [
+        "Republic_of_Ireland",
+        "The_Raven_-LRB-2012_film-RRB-",
+        "United_Kingdom"
+      ],
+      "retrieved": [
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 7,
+          "text": "The Raven was released in the United Kingdom on March 9, 2012, and in the United States on April 27, 2012, by Relativity Media.",
+          "score": 0.8445
+        },
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 0,
+          "text": "The Raven is a 2012 American crime thriller film directed by James McTeigue, produced by Marc D.",
+          "score": 0.7837
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 8,
+          "text": "The film was particularly popular in the United Kingdom, where it was the year's second-highest-grossing film.",
+          "score": 0.6674
+        },
+        {
+          "title": "Brindavanam_-LRB-2010_film-RRB-",
+          "sent_id": 11,
+          "text": "The film released on 14 October 2010 and was a critical and commercial success.",
+          "score": 0.6645
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 0,
+          "text": "Ireland (Irish: \u00c9ire [\u02c8e\u02d0\u027e\u02b2\u0259] ), also known as the Republic of Ireland (Poblacht na h\u00c9ireann), is a country in Northwestern Europe.",
+          "score": 0.6635
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: SUPPORTS\nREASON: The evidence states that The Raven (2012 film) was released in the United Kingdom, a sovereign country in western Europe, in March 2012."
+    },
+    {
+      "id": 13226,
+      "claim": "Color of Night soared at the box office.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Color_of_Night"
+      ],
+      "retrieved": [
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 15,
+          "text": "The film became a commercial success at the box office, collecting a distributor's share of \u20b948.5 crore.",
+          "score": 0.6427
+        },
+        {
+          "title": "The_Block_-LRB-album-RRB-",
+          "sent_id": 2,
+          "text": "It sold 95,000 copies in its first week of release and debuted at number one on the U.S.",
+          "score": 0.6101
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 8,
+          "text": "The film was particularly popular in the United Kingdom, where it was the year's second-highest-grossing film.",
+          "score": 0.6005
+        },
+        {
+          "title": "Brindavanam_-LRB-2010_film-RRB-",
+          "sent_id": 11,
+          "text": "The film released on 14 October 2010 and was a critical and commercial success.",
+          "score": 0.5984
+        },
+        {
+          "title": "Blank_Space",
+          "sent_id": 6,
+          "text": "In the United States, it spent seven weeks atop the Billboard Hot 100 and was certified eight times platinum by the Recording Industry Association of America (RIAA).",
+          "score": 0.5695
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention \"Color of Night\" at all, providing no information to support or refute the claim."
+    },
+    {
+      "id": 18197,
+      "claim": "Johnny Van Zant became the lead vocalist for Lynyrd Skynyrd in concerts.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Johnny_Van_Zant"
+      ],
+      "retrieved": [
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 15,
+          "text": "Alongside his solo career, Lambert has performed with Queen in several worldwide tours from 2012.",
+          "score": 0.6142
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 6,
+          "text": "He is also known for replacing Paul Rodgers for a reunion project known as Queen + Adam Lambert, which features the remaining members of rock band Queen.",
+          "score": 0.6075
+        },
+        {
+          "title": "Blank_Space",
+          "sent_id": 13,
+          "text": "The song was covered by several rock musicians.",
+          "score": 0.5897
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 1,
+          "text": "He is known for his dynamic vocal performances that combine his theatrical training with modern and classic genres.",
+          "score": 0.5868
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 2,
+          "text": "Lambert rose to fame in 2009 after finishing as runner-up on the eighth season of American Idol.",
+          "score": 0.5845
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence provided does not mention Johnny Van Zant, Lynyrd Skynyrd, or any information related to the claim about the lead vocalist position."
+    },
+    {
+      "id": 25115,
+      "claim": "Barbarella was directed by George Lucas.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Barbarella_-LRB-film-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 0,
+          "text": "Barbarella (later marketed as Barbarella: Queen of the Galaxy) is a 1968 English-language science fiction film directed by Roger Vadim, based on the French comic series by Jean-Claude Forest.",
+          "score": 0.7601
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 9,
+          "text": "Contemporary film critics praised Barbarella's visuals and cinematography but found its storyline weak after the first few scenes.",
+          "score": 0.7053
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 4,
+          "text": "Having expressed an interest in comics and science fiction, Vadim was hired to direct Barbarella after producer Dino De Laurentiis purchased the film rights to the comic series.",
+          "score": 0.6983
+        },
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 3,
+          "text": "Johnson landed his largest project when he wrote and directed the space opera Star Wars: The Last Jedi (2017), which grossed over $1 billion.",
+          "score": 0.56
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 7,
+          "text": "The film began shooting immediately following the completion of another De Laurentiis comic adaptation, Danger: Diabolik, with both films sharing several cast and crew members.",
+          "score": 0.5413
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence states that Barbarella was directed by Roger Vadim, not George Lucas."
+    },
+    {
+      "id": 25748,
+      "claim": "Adam Lambert's album premiered at number one on the U.S. Billboard 200 in 2009.",
+      "gold_label": "REFUTES",
+      "predicted_label": "SUPPORTS",
+      "correct": false,
+      "gold_titles": [
+        "Adam_Lambert"
+      ],
+      "retrieved": [
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 2,
+          "text": "Lambert rose to fame in 2009 after finishing as runner-up on the eighth season of American Idol.",
+          "score": 0.7961
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 8,
+          "text": "The album premiered at number one on the U.S.",
+          "score": 0.7675
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 10,
+          "text": "In 2015, Lambert released his third album The Original High, which debuted at number three on the U.S.",
+          "score": 0.7501
+        },
+        {
+          "title": "The_Block_-LRB-album-RRB-",
+          "sent_id": 8,
+          "text": "The single was the album's most successful single in Europe and Canada, peaking at number 31 and reaching the number-one position on the CHUM Chart in Toronto on February 21, 2009, after twelve weeks on the chart.",
+          "score": 0.7355
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 0,
+          "text": "Adam Mitchel Lambert (born January 29, 1982) is an American singer, songwriter and actor.",
+          "score": 0.7349
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: SUPPORTS\nREASON: The evidence directly states that Adam Lambert's album premiered at number one on the U.S. Billboard 200 in 2009."
+    },
+    {
+      "id": 26830,
+      "claim": "The Republic of Macedonia is in Europe.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "SUPPORTS",
+      "correct": true,
+      "gold_titles": [
+        "Albania",
+        "Bulgaria",
+        "Greece",
+        "Kosovo",
+        "Republic_of_Macedonia",
+        "Serbia"
+      ],
+      "retrieved": [
+        {
+          "title": "Bulgaria",
+          "sent_id": 0,
+          "text": "Bulgaria, officially the Republic of Bulgaria, is a country in Southeastern Europe.",
+          "score": 0.8362
+        },
+        {
+          "title": "Albania",
+          "sent_id": 0,
+          "text": "Albania, officially the Republic of Albania, is a country in Southeast Europe.",
+          "score": 0.8168
+        },
+        {
+          "title": "Albania",
+          "sent_id": 1,
+          "text": "It is located in the Balkans, on the Adriatic and Ionian Seas within the Mediterranean Sea, and shares land borders with Montenegro to the northwest, Kosovo to the northeast, North Macedonia to the east and Greece to the south.",
+          "score": 0.7785
+        },
+        {
+          "title": "Serbia",
+          "sent_id": 1,
+          "text": "Located in the Balkans, it is bordered by Hungary to the north, Romania to the northeast, Bulgaria to the southeast, North Macedonia to the south, Croatia to the northwest, Bosnia and Herzegovina to the west, and Montenegro to the southwest.",
+          "score": 0.7709
+        },
+        {
+          "title": "Serbia",
+          "sent_id": 0,
+          "text": "Serbia, officially the Republic of Serbia, is a landlocked country in Southeastern and Central Europe.",
+          "score": 0.7699
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: SUPPORTS\nREASON: The evidence mentions North Macedonia (also referred to as Serbia) being located in the Balkans and bordered by other European countries, indicating its geographical location in Europe."
+    },
+    {
+      "id": 27233,
+      "claim": "The Greek language is spoken by less than 13.2 million people.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Greek_language"
+      ],
+      "retrieved": [
+        {
+          "title": "Serbia",
+          "sent_id": 3,
+          "text": "Serbia has about 6.5 million inhabitants, excluding Kosovo.",
+          "score": 0.6335
+        },
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 3,
+          "text": "Saint Petersburg is the fourth-most populous city in Europe, the most populous city on the Baltic Sea, and the world's northernmost city of more than 1 million residents.",
+          "score": 0.6057
+        },
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 2,
+          "text": "The city had a population of 5,601,911 residents as of 2021, with more than 6.4 million people living in the metropolitan area.",
+          "score": 0.5979
+        },
+        {
+          "title": "Albania",
+          "sent_id": 1,
+          "text": "It is located in the Balkans, on the Adriatic and Ionian Seas within the Mediterranean Sea, and shares land borders with Montenegro to the northwest, Kosovo to the northeast, North Macedonia to the east and Greece to the south.",
+          "score": 0.5831
+        },
+        {
+          "title": "Ares",
+          "sent_id": 0,
+          "text": "Ares (; Ancient Greek: \u1f0c\u03c1\u03b7\u03c2, \u00c1r\u0113s [\u00e1r\u025b\u02d0s]) is the Greek god of war and courage.",
+          "score": 0.5783
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about the number of people speaking the Greek language."
+    },
+    {
+      "id": 34162,
+      "claim": "Annabelle is at The Warrens' Occult Museum.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Annabelle_-LRB-doll-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "Annabelle_-LRB-doll-RRB-",
+          "sent_id": 0,
+          "text": "Annabelle is a Raggedy Ann doll that is claimed to be haunted.",
+          "score": 0.7122
+        },
+        {
+          "title": "Annabelle_-LRB-doll-RRB-",
+          "sent_id": 1,
+          "text": "According to paranormal investigators Ed and Lorraine Warren, the doll frightened its owner, so it was moved to their (now closed) museum in Connecticut during the 1970s.",
+          "score": 0.6794
+        },
+        {
+          "title": "Annabelle_-LRB-doll-RRB-",
+          "sent_id": 3,
+          "text": "A character based on the Warrens' story is one of the antagonists that appear in the fictional Conjuring Universe.",
+          "score": 0.6112
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 7,
+          "text": "Like previous Slayers, she is aided by a Watcher, part of the Watcher's Council based in England, who guides, teaches and trains her.",
+          "score": 0.577
+        },
+        {
+          "title": "Chumlee",
+          "sent_id": 0,
+          "text": "Austin Lee Russell (born September 8, 1982), better known by his nickname \u201cChumlee\u201d, is an American businessman and reality television personality, best known for his appearances on the History Channel television show Pawn Stars, which depicts day-to-day business at the Gold and Silver Pawn Shop in Las Vegas where he works.",
+          "score": 0.5588
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about the location of Annabelle at The Warrens' Occult Museum."
+    },
+    {
+      "id": 44327,
+      "claim": "Emma Watson was born.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Emma_Watson"
+      ],
+      "retrieved": [
+        {
+          "title": "Robert_Louis_Stevenson",
+          "sent_id": 2,
+          "text": "Born and educated in Edinburgh, Stevenson suffered from serious bronchial trouble for much of his life but managed to write prolifically and travel widely despite his poor health.",
+          "score": 0.5804
+        },
+        {
+          "title": "Neil_Gaiman",
+          "sent_id": 0,
+          "text": "Neil Richard MacKinnon Gaiman (; born Neil Richard Gaiman; 10 November 1960) is an English author of short fiction, novels, comic books, audio theatre, and screenplays.",
+          "score": 0.5787
+        },
+        {
+          "title": "A_United_Kingdom",
+          "sent_id": 0,
+          "text": "A United Kingdom is a 2016 biographical romantic drama film directed by Amma Asante and written by Guy Hibbert, based on the true-life romance of Seretse Khama, heir to the throne of the Bangwato Tribe in Serowe \u2013 one of many tribes found in then Bechuanaland Protectorate \u2013 with his wife Ruth Williams Khama.",
+          "score": 0.57
+        },
+        {
+          "title": "Robert_Louis_Stevenson",
+          "sent_id": 0,
+          "text": "Robert Louis Stevenson (born Robert Lewis Balfour Stevenson; 13 November 1850 \u2013 3 December 1894) was a Scottish novelist, essayist, poet and travel writer.",
+          "score": 0.5656
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 4,
+          "text": "The series follows Buffy Summers (Sarah Michelle Gellar), the latest in a succession of young women known as \"Vampire Slayers\".",
+          "score": 0.5635
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The provided evidence does not mention Emma Watson or any information about her birth."
+    },
+    {
+      "id": 45581,
+      "claim": "Food Network is available.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Food_Network"
+      ],
+      "retrieved": [
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 3,
+          "text": "It aired on The WB from March 10, 1997, to May 22, 2001, and later on UPN from October 2, 2001, to May 20, 2003.",
+          "score": 0.5787
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 13,
+          "text": "Although lower than successful shows on the \"big four\" networks (ABC, CBS, NBC and Fox), these ratings were a success for the relatively new and smaller WB Television Network.",
+          "score": 0.5626
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 21,
+          "text": "A developed country, its advanced, high-income economy is part of the European single market and is largely based on services, followed by manufacturing, mining, and agriculture.",
+          "score": 0.5361
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 21,
+          "text": "Ireland's economy is advanced, with one of Europe's major financial hubs being centred on Dublin.",
+          "score": 0.5346
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 4,
+          "text": "The show earned a spot in the Nielsen Top 30 during its first four seasons.",
+          "score": 0.5342
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about the availability of the Food Network."
+    },
+    {
+      "id": 45829,
+      "claim": "Stomp the Yard stars Amber Heard.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Stomp_the_Yard"
+      ],
+      "retrieved": [
+        {
+          "title": "Stomp_the_Yard",
+          "sent_id": 0,
+          "text": "Stomp the Yard is a 2007 American dance drama film produced by Rainforest Films and released through Sony Pictures' Screen Gems division on January 12, 2007.",
+          "score": 0.7388
+        },
+        {
+          "title": "Stomp_the_Yard",
+          "sent_id": 1,
+          "text": "Directed by Sylvain White, Stomp the Yard centers on DJ Williams, a college student at a fictional historically black university who pledges to join a fictional Greek-letter fraternity.",
+          "score": 0.7158
+        },
+        {
+          "title": "Stomp_the_Yard",
+          "sent_id": 7,
+          "text": "Stomp the Yard was filmed in Atlanta, Georgia, on the campuses of Morris Brown College, Georgia Institute of Technology, Morehouse College, and Clark Atlanta University, and in the MAK Historic District of Decatur, Georgia.",
+          "score": 0.6863
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 0,
+          "text": "Adam Mitchel Lambert (born January 29, 1982) is an American singer, songwriter and actor.",
+          "score": 0.521
+        },
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 5,
+          "text": "The film stars John Cusack, Alice Eve, Brendan Gleeson and Luke Evans.",
+          "score": 0.5166
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention Amber Heard or her involvement in the film Stomp the Yard."
+    },
+    {
+      "id": 59410,
+      "claim": "Manchester by the Sea is distributed by Paramount Studios",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Manchester_by_the_Sea_-LRB-film-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "Neil_Gaiman",
+          "sent_id": 5,
+          "text": "The Ocean at the End of the Lane was voted Book of the Year in the British National Book Awards, and it was adapted into an acclaimed stage play at the Royal National Theatre in London.",
+          "score": 0.5794
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 15,
+          "text": "The film became a commercial success at the box office, collecting a distributor's share of \u20b948.5 crore.",
+          "score": 0.5704
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 14,
+          "text": "It was released on 1,550 screens worldwide with 1200 prints.",
+          "score": 0.5629
+        },
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 7,
+          "text": "The Raven was released in the United Kingdom on March 9, 2012, and in the United States on April 27, 2012, by Relativity Media.",
+          "score": 0.5537
+        },
+        {
+          "title": "Stomp_the_Yard",
+          "sent_id": 0,
+          "text": "Stomp the Yard is a 2007 American dance drama film produced by Rainforest Films and released through Sony Pictures' Screen Gems division on January 12, 2007.",
+          "score": 0.5534
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about the distribution of the film \"Manchester by the Sea\" or its association with Paramount Studios."
+    },
+    {
+      "id": 63056,
+      "claim": "Helmand Province is the location of Lashkargah.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Helmand_Province",
+        "Lashkargah"
+      ],
+      "retrieved": [
+        {
+          "title": "Bulgaria",
+          "sent_id": 0,
+          "text": "Bulgaria, officially the Republic of Bulgaria, is a country in Southeastern Europe.",
+          "score": 0.5741
+        },
+        {
+          "title": "Albania",
+          "sent_id": 0,
+          "text": "Albania, officially the Republic of Albania, is a country in Southeast Europe.",
+          "score": 0.5661
+        },
+        {
+          "title": "Albania",
+          "sent_id": 1,
+          "text": "It is located in the Balkans, on the Adriatic and Ionian Seas within the Mediterranean Sea, and shares land borders with Montenegro to the northwest, Kosovo to the northeast, North Macedonia to the east and Greece to the south.",
+          "score": 0.5652
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 1,
+          "text": "It is situated on the eastern portion of the Balkans directly south of the Danube river and west of the Black Sea.",
+          "score": 0.5589
+        },
+        {
+          "title": "Serbia",
+          "sent_id": 1,
+          "text": "Located in the Balkans, it is bordered by Hungary to the north, Romania to the northeast, Bulgaria to the southeast, North Macedonia to the south, Croatia to the northwest, Bosnia and Herzegovina to the west, and Montenegro to the southwest.",
+          "score": 0.5547
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence provided does not mention Helmand Province or Lashkargah, making it impossible to determine if the claim is supported or refuted."
+    },
+    {
+      "id": 64622,
+      "claim": "TakePart is a division of an American film production company.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Participant_Media",
+        "TakePart"
+      ],
+      "retrieved": [
+        {
+          "title": "TakePart",
+          "sent_id": 0,
+          "text": "TakePart was a website operated by Participant Media, a motion picture studio that focuses on issues of social justice.",
+          "score": 0.8227
+        },
+        {
+          "title": "TakePart",
+          "sent_id": 1,
+          "text": "TakePart was founded in 2008 to promote Participant Media's films as well as make viewers aware of the social advocacy efforts of Participant's outreach partners.",
+          "score": 0.814
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 15,
+          "text": "The film became a commercial success at the box office, collecting a distributor's share of \u20b948.5 crore.",
+          "score": 0.6033
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 7,
+          "text": "The cinematography and editing were handled by K.",
+          "score": 0.5832
+        },
+        {
+          "title": "Stomp_the_Yard",
+          "sent_id": 0,
+          "text": "Stomp the Yard is a 2007 American dance drama film produced by Rainforest Films and released through Sony Pictures' Screen Gems division on January 12, 2007.",
+          "score": 0.5776
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence mentions that TakePart was operated by Participant Media, a film production company, but does not explicitly state that TakePart is a division of Participant Media."
+    },
+    {
+      "id": 68412,
+      "claim": "Shawn Carlson is a language arts educator.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Shawn_Carlson"
+      ],
+      "retrieved": [
+        {
+          "title": "Shawn_Carlson",
+          "sent_id": 0,
+          "text": "Shawn Carlson (born 1960) is an American physicist, science writer, and a STEM educator.",
+          "score": 0.8062
+        },
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 0,
+          "text": "Rian Craig Johnson (born December 17, 1973) is an American filmmaker.",
+          "score": 0.5964
+        },
+        {
+          "title": "Bonn",
+          "sent_id": 16,
+          "text": "In Bonn the B\u00f6nnsch Platt, a dialect of the Ripuarian language is spoken by all generations, especially during carnival.",
+          "score": 0.5331
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 1,
+          "text": "He is known for his dynamic vocal performances that combine his theatrical training with modern and classic genres.",
+          "score": 0.5236
+        },
+        {
+          "title": "Stephen_Moyer",
+          "sent_id": 0,
+          "text": "Stephen John Emery (born 11 October 1969), known professionally as Stephen Moyer, is an English actor and film director.",
+          "score": 0.5227
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about Shawn Carlson being a language arts educator."
+    },
+    {
+      "id": 72426,
+      "claim": "DodgeBall: A True Underdog Story is a 2004 American television series.",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [],
+      "retrieved": [
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 3,
+          "text": "It aired on The WB from March 10, 1997, to May 22, 2001, and later on UPN from October 2, 2001, to May 20, 2003.",
+          "score": 0.6559
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 1,
+          "text": "The series premiered on ABC on January 31, 1988, immediately after the network's broadcast of Super Bowl XXII, and ended on May 12, 1993.",
+          "score": 0.6391
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 0,
+          "text": "The Wonder Years is an American coming-of-age comedy-drama television series created by Neal Marlens and Carol Black.",
+          "score": 0.6141
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 17,
+          "text": "Buffy was part of a wave of television series from the late 1990s and early 2000s that featured strong female characters, alongside Charmed, Xena: Warrior Princess, La Femme Nikita, Dark Angel, and Alias.",
+          "score": 0.6025
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 7,
+          "text": "In addition, at age 13, Fred Savage became the youngest actor ever nominated as Outstanding Lead Actor for a Comedy Series at the 41st Primetime Emmy Awards.",
+          "score": 0.6016
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about DodgeBall: A True Underdog Story, its genre, or its release year."
+    },
+    {
+      "id": 73102,
+      "claim": "Alex Jones is exclusively a game show host.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Alex_Jones_-LRB-radio_host-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "Chumlee",
+          "sent_id": 0,
+          "text": "Austin Lee Russell (born September 8, 1982), better known by his nickname \u201cChumlee\u201d, is an American businessman and reality television personality, best known for his appearances on the History Channel television show Pawn Stars, which depicts day-to-day business at the Gold and Silver Pawn Shop in Las Vegas where he works.",
+          "score": 0.6216
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 0,
+          "text": "Adam Mitchel Lambert (born January 29, 1982) is an American singer, songwriter and actor.",
+          "score": 0.578
+        },
+        {
+          "title": "The_Monster_-LRB-song-RRB-",
+          "sent_id": 1,
+          "text": "The song was written by Bebe Rexha, Eminem, Rihanna, Aalias, Jon Bellion, Maki Athanasiou, and Frequency, with the latter also handling production.",
+          "score": 0.563
+        },
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 6,
+          "text": "He created the murder mystery series Poker Face for Peacock starring Natasha Lyonne.",
+          "score": 0.5602
+        },
+        {
+          "title": "The_Monster_-LRB-song-RRB-",
+          "sent_id": 0,
+          "text": "\"The Monster\" is a song by American rapper Eminem from his album The Marshall Mathers LP 2 (2013) featuring a guest appearance from Barbadian singer Rihanna.",
+          "score": 0.559
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about Alex Jones or his profession as a game show host."
+    },
+    {
+      "id": 73412,
+      "claim": "Marco Polo was an Asia.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Marco_Polo"
+      ],
+      "retrieved": [
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 6,
+          "text": "In Russia, Saint Petersburg is historically and culturally associated with the birth of the Russian Empire and Russia's entry into modern history as a European great power.",
+          "score": 0.6
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 6,
+          "text": "In the 6th to 3rd century BC, the region was a battleground for ancient Thracians, Persians, Celts, and Macedonians; stability came when the Roman Empire conquered the region in AD 45.",
+          "score": 0.5923
+        },
+        {
+          "title": "Albania",
+          "sent_id": 1,
+          "text": "It is located in the Balkans, on the Adriatic and Ionian Seas within the Mediterranean Sea, and shares land borders with Montenegro to the northwest, Kosovo to the northeast, North Macedonia to the east and Greece to the south.",
+          "score": 0.5845
+        },
+        {
+          "title": "Albania",
+          "sent_id": 0,
+          "text": "Albania, officially the Republic of Albania, is a country in Southeast Europe.",
+          "score": 0.5803
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 0,
+          "text": "Bulgaria, officially the Republic of Bulgaria, is a country in Southeastern Europe.",
+          "score": 0.5782
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention Marco Polo or provide any information about his origin or where he was from."
+    },
+    {
+      "id": 73974,
+      "claim": "In states still using the electric chair to execute people, the prisoner is denied the choice of lethal injection as an alternative method.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Electric_chair"
+      ],
+      "retrieved": [
+        {
+          "title": "Ares",
+          "sent_id": 8,
+          "text": "Still further away from Greece, the Scythians were said to ritually kill one in a hundred prisoners of war as an offering to their equivalent of Ares.",
+          "score": 0.5666
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 18,
+          "text": "The ruling Communist Party gave up its monopoly on power after the revolutions of 1989 and allowed multiparty elections.",
+          "score": 0.5475
+        },
+        {
+          "title": "Borax",
+          "sent_id": 6,
+          "text": "In chemical laboratories it is used as a buffering agent.",
+          "score": 0.5431
+        },
+        {
+          "title": "Bermuda_Triangle",
+          "sent_id": 0,
+          "text": "The Bermuda Triangle, also known as the Devil's Triangle, is a loosely defined region in the North Atlantic Ocean, roughly bounded by Florida, Bermuda, and Puerto Rico.",
+          "score": 0.5376
+        },
+        {
+          "title": "Ares",
+          "sent_id": 9,
+          "text": "The later belief that ancient Spartans had offered human sacrifice to Ares may owe more to mythical prehistory, misunderstandings, and reputation than to reality.",
+          "score": 0.5307
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: None of the provided evidence discusses the electric chair, lethal injection, or the methods of execution in any state."
+    },
+    {
+      "id": 78080,
+      "claim": "Chumlee is the stage name of Tom Brady.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Chumlee"
+      ],
+      "retrieved": [
+        {
+          "title": "Chumlee",
+          "sent_id": 0,
+          "text": "Austin Lee Russell (born September 8, 1982), better known by his nickname \u201cChumlee\u201d, is an American businessman and reality television personality, best known for his appearances on the History Channel television show Pawn Stars, which depicts day-to-day business at the Gold and Silver Pawn Shop in Las Vegas where he works.",
+          "score": 0.6691
+        },
+        {
+          "title": "Chumlee",
+          "sent_id": 2,
+          "text": "Chumlee is often portrayed on the show as the comic foil, but he often appraises items in his areas of expertise, including pinball machines, sports memorabilia, sneakers, toys, and video games.",
+          "score": 0.6526
+        },
+        {
+          "title": "Chumlee",
+          "sent_id": 1,
+          "text": "Chumlee went to work at the pawn shop five years before filming the first season, having been a childhood friend of Corey Harrison whose father and grandfather founded the shop.",
+          "score": 0.6123
+        },
+        {
+          "title": "Morris_-LRB-cartoonist-RRB-",
+          "sent_id": 4,
+          "text": "Morris's pen name is an Anglicized version of Maurice.",
+          "score": 0.5603
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 6,
+          "text": "The legislature, the Oireachtas, consists of a lower house, D\u00e1il \u00c9ireann; an upper house, Seanad \u00c9ireann; and an elected president (Uachtar\u00e1n) who serves as the largely ceremonial head of state, but with some important powers and duties.",
+          "score": 0.5531
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about Tom Brady or his stage name."
+    },
+    {
+      "id": 79340,
+      "claim": "The Washington Monument is constructed from marble, granite, and bluestone gneiss.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Washington_Monument"
+      ],
+      "retrieved": [
+        {
+          "title": "Coins_of_the_Swiss_franc",
+          "sent_id": 4,
+          "text": "The 5, 10, and 20 centimes coins show a head of Liberty in profile, designed by Karl Schwenzer (1879).",
+          "score": 0.5522
+        },
+        {
+          "title": "Ares",
+          "sent_id": 4,
+          "text": "An association with Ares endows places, objects, and other deities with a savage, dangerous, or militarized quality.",
+          "score": 0.551
+        },
+        {
+          "title": "Ares",
+          "sent_id": 0,
+          "text": "Ares (; Ancient Greek: \u1f0c\u03c1\u03b7\u03c2, \u00c1r\u0113s [\u00e1r\u025b\u02d0s]) is the Greek god of war and courage.",
+          "score": 0.5363
+        },
+        {
+          "title": "Borax",
+          "sent_id": 4,
+          "text": "It is a white crystalline solid that dissolves in water to make a basic solution due to the tetraborate anion.",
+          "score": 0.5304
+        },
+        {
+          "title": "Borax",
+          "sent_id": 1,
+          "text": "Borax mineral is a crystalline borate mineral that occurs in only a few places worldwide in quantities that enable it to be mined economically.",
+          "score": 0.5261
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: None of the provided evidence mentions the construction materials of the Washington Monument."
+    },
+    {
+      "id": 88624,
+      "claim": "Ashley Graham was on a magazine cover in 2005.",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [],
+      "retrieved": [
+        {
+          "title": "Carlos_Santana",
+          "sent_id": 4,
+          "text": "In 2015, Rolling Stone magazine listed Santana at No.",
+          "score": 0.6054
+        },
+        {
+          "title": "Adam_Lambert",
+          "sent_id": 2,
+          "text": "Lambert rose to fame in 2009 after finishing as runner-up on the eighth season of American Idol.",
+          "score": 0.5617
+        },
+        {
+          "title": "Blank_Space",
+          "sent_id": 13,
+          "text": "The song was covered by several rock musicians.",
+          "score": 0.5566
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 17,
+          "text": "Buffy was part of a wave of television series from the late 1990s and early 2000s that featured strong female characters, alongside Charmed, Xena: Warrior Princess, La Femme Nikita, Dark Angel, and Alias.",
+          "score": 0.5418
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 4,
+          "text": "The series follows Buffy Summers (Sarah Michelle Gellar), the latest in a succession of young women known as \"Vampire Slayers\".",
+          "score": 0.539
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: None of the provided evidence mentions Ashley Graham or any magazine cover from 2005."
+    },
+    {
+      "id": 101462,
+      "claim": "The Invisible Man was a horror film.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "The_Invisible_Man_-LRB-film-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 3,
+          "text": "While the plot of the film is fictional, the writers based it on some accounts of real situations surrounding Edgar Allan Poe's mysterious death.",
+          "score": 0.5911
+        },
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 8,
+          "text": "The film received mixed reviews from critics, who praised the visual effects and score by Lucas Vidal, but criticized the performances and plot twists.",
+          "score": 0.5865
+        },
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 0,
+          "text": "The Raven is a 2012 American crime thriller film directed by James McTeigue, produced by Marc D.",
+          "score": 0.5784
+        },
+        {
+          "title": "The_Raven_-LRB-2012_film-RRB-",
+          "sent_id": 6,
+          "text": "Its title derives from Poe's 1845 poem \"The Raven\", in a similar manner to the earlier unrelated 1935 and 1963 films.",
+          "score": 0.5751
+        },
+        {
+          "title": "Brindavanam_-LRB-2010_film-RRB-",
+          "sent_id": 11,
+          "text": "The film released on 14 October 2010 and was a critical and commercial success.",
+          "score": 0.5749
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence provided is about a film called \"The Raven\" from 2012 and does not mention \"The Invisible Man\" or its genre."
+    },
+    {
+      "id": 101715,
+      "claim": "Carlos Santana was ignored by critics in the nineties.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Carlos_Santana"
+      ],
+      "retrieved": [
+        {
+          "title": "Carlos_Santana",
+          "sent_id": 4,
+          "text": "In 2015, Rolling Stone magazine listed Santana at No.",
+          "score": 0.7292
+        },
+        {
+          "title": "Carlos_Santana",
+          "sent_id": 1,
+          "text": "Born and raised in Mexico where he developed his musical background, he rose to fame in the late 1960s and early 1970s in the United States with Santana, which pioneered a fusion of rock and roll and Latin American jazz.",
+          "score": 0.6668
+        },
+        {
+          "title": "Carlos_Santana",
+          "sent_id": 0,
+          "text": "Carlos Humberto Santana Barrag\u00e1n (Spanish: [\u02c8ka\u027elos um\u02c8be\u027eto san\u02c8tana \u03b2ara\u02c8\u0263an] ; born July 20, 1947) is a Mexican and American guitarist, best known as a founding member of the rock band Santana.",
+          "score": 0.6337
+        },
+        {
+          "title": "Carlos_Santana",
+          "sent_id": 3,
+          "text": "He experienced a resurgence of popularity and critical acclaim in the late 1990s.",
+          "score": 0.6015
+        },
+        {
+          "title": "Blank_Space",
+          "sent_id": 7,
+          "text": "Music critics praised the production and Swift's songwriting; some picked it as 1989's highlight.",
+          "score": 0.5697
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about critics' opinions of Carlos Santana in the nineties."
+    },
+    {
+      "id": 103994,
+      "claim": "Guillermo del Toro is an essayist.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Guillermo_del_Toro"
+      ],
+      "retrieved": [
+        {
+          "title": "Stomp_the_Yard",
+          "sent_id": 3,
+          "text": "The film's script was written by Robert Adetuyi, working from an original draft by Gregory Ramon Anderson.",
+          "score": 0.5794
+        },
+        {
+          "title": "Neil_Gaiman",
+          "sent_id": 0,
+          "text": "Neil Richard MacKinnon Gaiman (; born Neil Richard Gaiman; 10 November 1960) is an English author of short fiction, novels, comic books, audio theatre, and screenplays.",
+          "score": 0.5545
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 4,
+          "text": "Having expressed an interest in comics and science fiction, Vadim was hired to direct Barbarella after producer Dino De Laurentiis purchased the film rights to the comic series.",
+          "score": 0.5505
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 6,
+          "text": "A friend of Vadim's, Terry Southern, wrote the initial screenplay, which changed considerably during filming and led to seven other writers being credited in the final release, including Vadim and Forest, the latter of whom also worked on the film's production design.",
+          "score": 0.5445
+        },
+        {
+          "title": "Neil_Gaiman",
+          "sent_id": 3,
+          "text": "Gaiman's awards include Hugo, Nebula, and Bram Stoker awards and Newbery and Carnegie medals.",
+          "score": 0.5424
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention Guillermo del Toro or provide any information about him being an essayist."
+    },
+    {
+      "id": 125317,
+      "claim": "The Wonder Years was in a genre.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "SUPPORTS",
+      "correct": true,
+      "gold_titles": [
+        "Comedy-drama",
+        "The_Wonder_Years"
+      ],
+      "retrieved": [
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 13,
+          "text": "As of recent years, many critics and fans consider The Wonder Years to be a classic with tremendous impact on the industry over the years, inspiring many other shows and how they are structured.",
+          "score": 0.7569
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 0,
+          "text": "The Wonder Years is an American coming-of-age comedy-drama television series created by Neal Marlens and Carol Black.",
+          "score": 0.7545
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 11,
+          "text": "In 2016, Rolling Stone ranked The Wonder Years number 63 on its list of 100 Greatest TV Shows of All Time.",
+          "score": 0.6959
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 6,
+          "text": "After six episodes, The Wonder Years won a Primetime Emmy Award for Outstanding Comedy Series at the 40th Primetime Emmy Awards in 1988.",
+          "score": 0.6817
+        },
+        {
+          "title": "Blank_Space",
+          "sent_id": 8,
+          "text": "The song earned three nominations at the 58th Grammy Awards, including two general categories: Record of the Year and Song of the Year.",
+          "score": 0.5871
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: SUPPORTS\nREASON: The evidence identifies The Wonder Years as a comedy-drama television series, which confirms it belongs to a genre."
+    },
+    {
+      "id": 132077,
+      "claim": "The State of Palestine claims the West Bank and is contested.",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [],
+      "retrieved": [
+        {
+          "title": "Serbia",
+          "sent_id": 2,
+          "text": "Serbia also claims to share a border with Albania through the disputed territory of Kosovo.",
+          "score": 0.6031
+        },
+        {
+          "title": "Serbia",
+          "sent_id": 12,
+          "text": "In 2008, representatives of the Assembly of Kosovo unilaterally declared independence, with mixed responses from the international community while Serbia continues to claim it as part of its own sovereign territory.",
+          "score": 0.5977
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 23,
+          "text": "Bulgaria is a member state of the European Union, including the Schengen Area and the eurozone, NATO, and various regional suborganizations such as the Bucharest Nine.",
+          "score": 0.5958
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 3,
+          "text": "The sovereign state shares its only land border with Northern Ireland, which is part of the United Kingdom.",
+          "score": 0.5755
+        },
+        {
+          "title": "Serbia",
+          "sent_id": 14,
+          "text": "It is a unitary parliamentary constitutional republic, member of the UN, Council of Europe, OSCE, PfP, BSEC, CEFTA, and is acceding to the WTO.",
+          "score": 0.5625
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about the State of Palestine's claims or the contested status of the West Bank."
+    },
+    {
+      "id": 138849,
+      "claim": "Harris Jayaraj is an American film composer.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Harris_Jayaraj"
+      ],
+      "retrieved": [
+        {
+          "title": "Brindavanam_-LRB-2010_film-RRB-",
+          "sent_id": 4,
+          "text": "The film was produced by Dil Raju's Sri Venkateswara Creations, and the music was composed by S.",
+          "score": 0.7073
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 5,
+          "text": "The soundtrack was composed by S.",
+          "score": 0.6782
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 6,
+          "text": "Thaman, which also marks his second collaboration with Sreenu Vaitla.",
+          "score": 0.6356
+        },
+        {
+          "title": "The_Monster_-LRB-song-RRB-",
+          "sent_id": 1,
+          "text": "The song was written by Bebe Rexha, Eminem, Rihanna, Aalias, Jon Bellion, Maki Athanasiou, and Frequency, with the latter also handling production.",
+          "score": 0.6329
+        },
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 0,
+          "text": "Rian Craig Johnson (born December 17, 1973) is an American filmmaker.",
+          "score": 0.6287
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about Harris Jayaraj's nationality or profession as a film composer."
+    },
+    {
+      "id": 143872,
+      "claim": "The Greek language is spoken only outside of Cyprus.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Greek_language"
+      ],
+      "retrieved": [
+        {
+          "title": "Albania",
+          "sent_id": 1,
+          "text": "It is located in the Balkans, on the Adriatic and Ionian Seas within the Mediterranean Sea, and shares land borders with Montenegro to the northwest, Kosovo to the northeast, North Macedonia to the east and Greece to the south.",
+          "score": 0.6575
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 0,
+          "text": "Bulgaria, officially the Republic of Bulgaria, is a country in Southeastern Europe.",
+          "score": 0.6106
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 2,
+          "text": "Bulgaria is bordered by Greece and Turkey to the south, Serbia and North Macedonia to the west, and Romania across the Danube river to the north.",
+          "score": 0.5913
+        },
+        {
+          "title": "Serbia",
+          "sent_id": 1,
+          "text": "Located in the Balkans, it is bordered by Hungary to the north, Romania to the northeast, Bulgaria to the southeast, North Macedonia to the south, Croatia to the northwest, Bosnia and Herzegovina to the west, and Montenegro to the southwest.",
+          "score": 0.5909
+        },
+        {
+          "title": "Albania",
+          "sent_id": 0,
+          "text": "Albania, officially the Republic of Albania, is a country in Southeast Europe.",
+          "score": 0.5873
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence provided does not mention the Greek language or its usage in any of the countries listed."
+    },
+    {
+      "id": 144819,
+      "claim": "Fist of Legend is a remake of a film starring Jackie Chan.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Fist_of_Legend"
+      ],
+      "retrieved": [
+        {
+          "title": "Brindavanam_-LRB-2010_film-RRB-",
+          "sent_id": 12,
+          "text": "The film was remade in six other languages: as Love Master (2012) in Odia, Brindavana (2013) in Kannada, Khoka 420 (2013) in Indian Bengali, Buk Fatey To Mukh Foteyna (2012) in Bangladeshi Bengali, Vrundavan (2016) in Marathi, and Hum Hai Jodi No 1 (2016) in Bhojpuri.",
+          "score": 0.6075
+        },
+        {
+          "title": "Stomp_the_Yard",
+          "sent_id": 4,
+          "text": "The film was originally titled Steppin', but to avoid confusion over the 2006 film Step Up, the title was changed.",
+          "score": 0.5854
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 15,
+          "text": "The film became a commercial success at the box office, collecting a distributor's share of \u20b948.5 crore.",
+          "score": 0.571
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 11,
+          "text": "The film follows Rama Rao, an aspiring IPS officer who is rejected from the service due to his father's ties with a notorious gangster.",
+          "score": 0.5683
+        },
+        {
+          "title": "Brick_-LRB-film-RRB-",
+          "sent_id": 4,
+          "text": "The film draws heavily in plot, characterization, and dialogue from hardboiled classics, especially those by Dashiell Hammett.",
+          "score": 0.5635
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention Jackie Chan or any film related to Fist of Legend, making it impossible to determine if it is a remake of a Jackie Chan film."
+    },
+    {
+      "id": 164053,
+      "claim": "The Saturn Award for Best Fantasy Film is presented by Dylan Moran.",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [],
+      "retrieved": [
+        {
+          "title": "Neil_Gaiman",
+          "sent_id": 3,
+          "text": "Gaiman's awards include Hugo, Nebula, and Bram Stoker awards and Newbery and Carnegie medals.",
+          "score": 0.6405
+        },
+        {
+          "title": "Stephen_Moyer",
+          "sent_id": 0,
+          "text": "Stephen John Emery (born 11 October 1969), known professionally as Stephen Moyer, is an English actor and film director.",
+          "score": 0.6183
+        },
+        {
+          "title": "Brick_-LRB-film-RRB-",
+          "sent_id": 6,
+          "text": "The film won the Special Jury Prize for Originality of Vision at the 2005 Sundance Film Festival, and received positive reviews from critics.",
+          "score": 0.6104
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 14,
+          "text": "Despite being mostly ignored in above-the-line categories by the Emmys, the series was nominated for the American Film Institute Award for Drama Series of the Year, Gellar was nominated for the Golden Globe Award for Best Actress \u2013 Television Series Drama for her performance in the show and the series was nominated five times for Television Critics Association Awards, winning in 2003 for the Television Critics Association Heritage Award.",
+          "score": 0.6018
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 4,
+          "text": "Having expressed an interest in comics and science fiction, Vadim was hired to direct Barbarella after producer Dino De Laurentiis purchased the film rights to the comic series.",
+          "score": 0.5985
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: None of the provided evidence mentions Dylan Moran or the Saturn Award for Best Fantasy Film."
+    },
+    {
+      "id": 166907,
+      "claim": "Johanna Braddy starred in a game show tv series in 2015.",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [],
+      "retrieved": [
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 6,
+          "text": "He created the murder mystery series Poker Face for Peacock starring Natasha Lyonne.",
+          "score": 0.6352
+        },
+        {
+          "title": "The_Wonder_Years",
+          "sent_id": 0,
+          "text": "The Wonder Years is an American coming-of-age comedy-drama television series created by Neal Marlens and Carol Black.",
+          "score": 0.6218
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 4,
+          "text": "The series follows Buffy Summers (Sarah Michelle Gellar), the latest in a succession of young women known as \"Vampire Slayers\".",
+          "score": 0.6027
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 17,
+          "text": "Buffy was part of a wave of television series from the late 1990s and early 2000s that featured strong female characters, alongside Charmed, Xena: Warrior Princess, La Femme Nikita, Dark Angel, and Alias.",
+          "score": 0.586
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 0,
+          "text": "Buffy the Vampire Slayer is an American supernatural horror drama television series created by Joss Whedon.",
+          "score": 0.5847
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: None of the provided evidence mentions Johanna Braddy, a game show, or any television series from 2015."
+    },
+    {
+      "id": 166935,
+      "claim": "Baadshah was dubbed into at least three other languages in 2002.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Baadshah_-LRB-2013_film-RRB-",
+        "Brindavanam_-LRB-2010_film-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 0,
+          "text": "Baadshah (transl.",
+          "score": 0.7596
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 13,
+          "text": "Baadshah was released worldwide on 5 April 2013 and was premiered at the 2014 Osaka Asian Film Festival in Japan.",
+          "score": 0.7391
+        },
+        {
+          "title": "Brindavanam_-LRB-2010_film-RRB-",
+          "sent_id": 12,
+          "text": "The film was remade in six other languages: as Love Master (2012) in Odia, Brindavana (2013) in Kannada, Khoka 420 (2013) in Indian Bengali, Buk Fatey To Mukh Foteyna (2012) in Bangladeshi Bengali, Vrundavan (2016) in Marathi, and Hum Hai Jodi No 1 (2016) in Bhojpuri.",
+          "score": 0.7043
+        },
+        {
+          "title": "Morris_-LRB-cartoonist-RRB-",
+          "sent_id": 2,
+          "text": "It was a best-selling series for more than 50 years, published internationally and translated into 23 languages.",
+          "score": 0.633
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 12,
+          "text": "After his brother is tragically killed in a bomb blast orchestrated by the same gangster, Rama Rao adopts the identity of Baadshah and infiltrates the criminal underworld to seek justice and dismantle the gangster's empire from within.",
+          "score": 0.5946
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about the languages in which Baadshah was dubbed in 2002, as the release year for the film is stated as 2013."
+    },
+    {
+      "id": 184069,
+      "claim": "Kenneth Lonergan is a person who directs movies.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Kenneth_Lonergan",
+        "Manchester_by_the_Sea_-LRB-film-RRB-",
+        "You_Can_Count_On_Me"
+      ],
+      "retrieved": [
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 7,
+          "text": "Johnson is known for his longstanding collaboration with actor Joseph Gordon-Levitt, who has appeared in all of his feature films to date in varying capacity.",
+          "score": 0.6251
+        },
+        {
+          "title": "Stephen_Moyer",
+          "sent_id": 0,
+          "text": "Stephen John Emery (born 11 October 1969), known professionally as Stephen Moyer, is an English actor and film director.",
+          "score": 0.6137
+        },
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 0,
+          "text": "Rian Craig Johnson (born December 17, 1973) is an American filmmaker.",
+          "score": 0.6108
+        },
+        {
+          "title": "Baadshah_-LRB-2013_film-RRB-",
+          "sent_id": 7,
+          "text": "The cinematography and editing were handled by K.",
+          "score": 0.6074
+        },
+        {
+          "title": "Brick_-LRB-film-RRB-",
+          "sent_id": 0,
+          "text": "Brick is a 2005 American neo-noir mystery thriller film written, edited, and directed by Rian Johnson in his directorial debut, starring Joseph Gordon-Levitt.",
+          "score": 0.5953
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about Kenneth Lonergan or his directing career."
+    },
+    {
+      "id": 186979,
+      "claim": "Bermuda Triangle is also referred to as the Devil's Triangle.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "SUPPORTS",
+      "correct": true,
+      "gold_titles": [
+        "Bermuda_Triangle"
+      ],
+      "retrieved": [
+        {
+          "title": "Bermuda_Triangle",
+          "sent_id": 0,
+          "text": "The Bermuda Triangle, also known as the Devil's Triangle, is a loosely defined region in the North Atlantic Ocean, roughly bounded by Florida, Bermuda, and Puerto Rico.",
+          "score": 0.9138
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 4,
+          "text": "It is otherwise surrounded by the Atlantic Ocean, with the Celtic Sea to the south, St George's Channel to the south-east and the Irish Sea to the east.",
+          "score": 0.5803
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 3,
+          "text": "The sovereign state shares its only land border with Northern Ireland, which is part of the United Kingdom.",
+          "score": 0.5576
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 14,
+          "text": "The state had no formal relations with Northern Ireland for most of the 20th century, but the 1980s and 1990s saw the British and Irish governments working with Northern Irish parties to resolve the conflict that had become known as the Troubles.",
+          "score": 0.546
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 0,
+          "text": "Bulgaria, officially the Republic of Bulgaria, is a country in Southeastern Europe.",
+          "score": 0.5457
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: SUPPORTS\nREASON: The evidence directly states that the Bermuda Triangle is also known as the Devil's Triangle."
+    },
+    {
+      "id": 188978,
+      "claim": "William Cohen is illiterate.",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [],
+      "retrieved": [
+        {
+          "title": "Morris_-LRB-cartoonist-RRB-",
+          "sent_id": 4,
+          "text": "Morris's pen name is an Anglicized version of Maurice.",
+          "score": 0.5204
+        },
+        {
+          "title": "Neil_Gaiman",
+          "sent_id": 0,
+          "text": "Neil Richard MacKinnon Gaiman (; born Neil Richard Gaiman; 10 November 1960) is an English author of short fiction, novels, comic books, audio theatre, and screenplays.",
+          "score": 0.5184
+        },
+        {
+          "title": "Robert_Louis_Stevenson",
+          "sent_id": 0,
+          "text": "Robert Louis Stevenson (born Robert Lewis Balfour Stevenson; 13 November 1850 \u2013 3 December 1894) was a Scottish novelist, essayist, poet and travel writer.",
+          "score": 0.5047
+        },
+        {
+          "title": "Robert_Louis_Stevenson",
+          "sent_id": 2,
+          "text": "Born and educated in Edinburgh, Stevenson suffered from serious bronchial trouble for much of his life but managed to write prolifically and travel widely despite his poor health.",
+          "score": 0.4991
+        },
+        {
+          "title": "Morris_-LRB-cartoonist-RRB-",
+          "sent_id": 0,
+          "text": "Maurice De Bevere (Dutch: [mo\u02d0\u02c8riz d\u0259 \u02c8be\u02d0v\u0259r\u0259]; French: [m\u0254\u0281is d\u0259 b\u0259v\u025b\u0281, mo\u0281-]; 1 December 1923 \u2013 16 July 2001), better known as Morris, was a Belgian comics artist, illustrator, and the creator of Lucky Luke, a best-selling comic series about a gunslinger in the American Wild West.",
+          "score": 0.4818
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about William Cohen's literacy level."
+    },
+    {
+      "id": 208912,
+      "claim": "The Monster is only a song by Tupac.",
+      "gold_label": "REFUTES",
+      "predicted_label": "REFUTES",
+      "correct": true,
+      "gold_titles": [
+        "The_Monster_-LRB-song-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "The_Monster_-LRB-song-RRB-",
+          "sent_id": 0,
+          "text": "\"The Monster\" is a song by American rapper Eminem from his album The Marshall Mathers LP 2 (2013) featuring a guest appearance from Barbadian singer Rihanna.",
+          "score": 0.7656
+        },
+        {
+          "title": "The_Monster_-LRB-song-RRB-",
+          "sent_id": 2,
+          "text": "Released on October 29, 2013, as the fourth single from the album, \"The Monster\" marks the fourth collaboration between Eminem and Rihanna, following \"Love the Way You Lie\" (2010), its sequel \"Love the Way You Lie (Part II)\" (2010), and \"Numb\" (2012), and is a hip-hop and pop song, with lyrics that describe Eminem pondering the negative effects of his fame while Rihanna comes to grips with her inner demons.",
+          "score": 0.6763
+        },
+        {
+          "title": "The_Monster_-LRB-song-RRB-",
+          "sent_id": 4,
+          "text": "\"The Monster\" has successfully charted worldwide, topping the charts in twelve countries including Australia, Canada, France, Ireland, New Zealand, Russia, Switzerland, the United Kingdom and the United States' Billboard Hot 100.",
+          "score": 0.6477
+        },
+        {
+          "title": "The_Monster_-LRB-song-RRB-",
+          "sent_id": 1,
+          "text": "The song was written by Bebe Rexha, Eminem, Rihanna, Aalias, Jon Bellion, Maki Athanasiou, and Frequency, with the latter also handling production.",
+          "score": 0.6013
+        },
+        {
+          "title": "Blank_Space",
+          "sent_id": 3,
+          "text": "It is an electropop track with a minimal arrangement consisting of synthesizers, hip-hop-influenced beats, and layered vocals.",
+          "score": 0.5853
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: REFUTES\nREASON: The evidence clearly states that \"The Monster\" is a song by Eminem, not Tupac."
+    },
+    {
+      "id": 211774,
+      "claim": "Brick (film) was written by an American writer, producer, director, and voice actor.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Brick_-LRB-film-RRB-",
+        "Rian_Johnson"
+      ],
+      "retrieved": [
+        {
+          "title": "Brick_-LRB-film-RRB-",
+          "sent_id": 0,
+          "text": "Brick is a 2005 American neo-noir mystery thriller film written, edited, and directed by Rian Johnson in his directorial debut, starring Joseph Gordon-Levitt.",
+          "score": 0.7163
+        },
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 1,
+          "text": "He made his directorial debut with the neo-noir mystery film Brick (2005), which received positive reviews and grossed nearly $4 million on a $450,000 budget.",
+          "score": 0.7051
+        },
+        {
+          "title": "Brick_-LRB-film-RRB-",
+          "sent_id": 1,
+          "text": "Brick was distributed by Focus Features, and opened in New York and Los Angeles on April 7, 2006.",
+          "score": 0.6618
+        },
+        {
+          "title": "Rian_Johnson",
+          "sent_id": 0,
+          "text": "Rian Craig Johnson (born December 17, 1973) is an American filmmaker.",
+          "score": 0.6564
+        },
+        {
+          "title": "Neil_Gaiman",
+          "sent_id": 0,
+          "text": "Neil Richard MacKinnon Gaiman (; born Neil Richard Gaiman; 10 November 1960) is an English author of short fiction, novels, comic books, audio theatre, and screenplays.",
+          "score": 0.6448
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about the writer, producer, director, and voice actor of the film Brick, only confirming that Rian Johnson directed it."
+    },
+    {
+      "id": 221245,
+      "claim": "The Block (album)'s single was released on November 18, 2008.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "The_Block_-LRB-album-RRB-"
+      ],
+      "retrieved": [
+        {
+          "title": "The_Block_-LRB-album-RRB-",
+          "sent_id": 0,
+          "text": "The Block is the sixth studio album by New Kids on the Block.",
+          "score": 0.7624
+        },
+        {
+          "title": "The_Block_-LRB-album-RRB-",
+          "sent_id": 6,
+          "text": "The second official single titled \"Single\" featuring Ne-Yo was released on August 12, 2008.",
+          "score": 0.7596
+        },
+        {
+          "title": "The_Block_-LRB-album-RRB-",
+          "sent_id": 5,
+          "text": "The first official single from the album is \"Summertime\" and the song was released on May 13, 2008.",
+          "score": 0.758
+        },
+        {
+          "title": "The_Block_-LRB-album-RRB-",
+          "sent_id": 8,
+          "text": "The single was the album's most successful single in Europe and Canada, peaking at number 31 and reaching the number-one position on the CHUM Chart in Toronto on February 21, 2009, after twelve weeks on the chart.",
+          "score": 0.7198
+        },
+        {
+          "title": "The_Block_-LRB-album-RRB-",
+          "sent_id": 1,
+          "text": "The album was released on September 2, 2008, along with a deluxe edition that included four bonus tracks.",
+          "score": 0.7073
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about a specific single release date for November 18, 2008."
+    },
+    {
+      "id": 222650,
+      "claim": "A United Kingdom was directed by Amma Asante.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "SUPPORTS",
+      "correct": true,
+      "gold_titles": [
+        "A_United_Kingdom"
+      ],
+      "retrieved": [
+        {
+          "title": "A_United_Kingdom",
+          "sent_id": 0,
+          "text": "A United Kingdom is a 2016 biographical romantic drama film directed by Amma Asante and written by Guy Hibbert, based on the true-life romance of Seretse Khama, heir to the throne of the Bangwato Tribe in Serowe \u2013 one of many tribes found in then Bechuanaland Protectorate \u2013 with his wife Ruth Williams Khama.",
+          "score": 0.8411
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 8,
+          "text": "The film was particularly popular in the United Kingdom, where it was the year's second-highest-grossing film.",
+          "score": 0.6282
+        },
+        {
+          "title": "Stephen_Moyer",
+          "sent_id": 0,
+          "text": "Stephen John Emery (born 11 October 1969), known professionally as Stephen Moyer, is an English actor and film director.",
+          "score": 0.5877
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 3,
+          "text": "The sovereign state shares its only land border with Northern Ireland, which is part of the United Kingdom.",
+          "score": 0.5625
+        },
+        {
+          "title": "Brindavanam_-LRB-2010_film-RRB-",
+          "sent_id": 11,
+          "text": "The film released on 14 October 2010 and was a critical and commercial success.",
+          "score": 0.5624
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: SUPPORTS\nREASON: The evidence states that \"A United Kingdom\" is a film directed by Amma Asante, directly supporting the claim."
+    },
+    {
+      "id": 223669,
+      "claim": "Ludwig van Beethoven was born in St. Petersburg.",
+      "gold_label": "REFUTES",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Bonn",
+        "Ludwig_van_Beethoven",
+        "Saint_Petersburg"
+      ],
+      "retrieved": [
+        {
+          "title": "Bonn",
+          "sent_id": 15,
+          "text": "Birthplace of composer Ludwig van Beethoven, a center of Rhenish carnival, and its geography by the Middle Rhine make it an important tourist destination.",
+          "score": 0.7553
+        },
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 6,
+          "text": "In Russia, Saint Petersburg is historically and culturally associated with the birth of the Russian Empire and Russia's entry into modern history as a European great power.",
+          "score": 0.7027
+        },
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 0,
+          "text": "Saint Petersburg, formerly known as Petrograd (\u041f\u0435\u0442\u0440\u043e\u0433\u0440\u0430\u0434) and later Leningrad (\u041b\u0435\u043d\u0438\u043d\u0433\u0440\u0430\u0434), is the second-largest city in Russia, after Moscow, the nation's capital.",
+          "score": 0.6887
+        },
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 3,
+          "text": "Saint Petersburg is the fourth-most populous city in Europe, the most populous city on the Baltic Sea, and the world's northernmost city of more than 1 million residents.",
+          "score": 0.6774
+        },
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 5,
+          "text": "The city was founded by Tsar Peter the Great on 27 May 1703 on the site of a captured Swedish fortress, and was named after the apostle Saint Peter.",
+          "score": 0.6395
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about Beethoven's place of birth, only about St. Petersburg's history and significance."
+    },
+    {
+      "id": 500184,
+      "claim": "Oscar the los Hoya was named Fighter of the Year",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Oscar_De_La_Hoya"
+      ],
+      "retrieved": [
+        {
+          "title": "Oscar_De_La_Hoya",
+          "sent_id": 5,
+          "text": "De La Hoya was named The Ring magazine Fighter of the Year in 1995, and was its top-rated fighter in the world, pound for pound, in 1997 and 1998.",
+          "score": 0.7951
+        },
+        {
+          "title": "Oscar_De_La_Hoya",
+          "sent_id": 0,
+          "text": "Oscar De La Hoya ( DAY l\u0259 HOY-\u0259, Spanish: [\u02c8oska\u027e \u00f0e la \u02c8o\u029da]; born February 4, 1973) is a Mexican-American boxing promoter and former professional boxer who competed from 1992 to 2008.",
+          "score": 0.7558
+        },
+        {
+          "title": "Oscar_De_La_Hoya",
+          "sent_id": 2,
+          "text": "De La Hoya was nicknamed \"The Golden Boy of Boxing\" by the media when he represented the United States at the 1992 Summer Olympics where, shortly after having graduated from James A.",
+          "score": 0.6955
+        },
+        {
+          "title": "Oscar_De_La_Hoya",
+          "sent_id": 6,
+          "text": "De La Hoya generated approximately $700 million in pay-per-view income, making him the top pay-per-view earner before being surpassed by Floyd Mayweather Jr. and Manny Pacquiao.",
+          "score": 0.6796
+        },
+        {
+          "title": "Oscar_De_La_Hoya",
+          "sent_id": 11,
+          "text": "De La Hoya has held dual American and Mexican citizenship since 2002, when the Consulate General of Mexico in Los Angeles granted him Mexican citizenship, reflecting his heritage.",
+          "score": 0.6343
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence mentions that Oscar De La Hoya was named The Ring magazine Fighter of the Year in 1995, but it does not explicitly state that he was named Fighter of the Year in general or by another organization."
+    },
+    {
+      "id": 500247,
+      "claim": "In the End was a trail on Hybrid Theory",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "In_the_End"
+      ],
+      "retrieved": [
+        {
+          "title": "Carlos_Santana",
+          "sent_id": 0,
+          "text": "Carlos Humberto Santana Barrag\u00e1n (Spanish: [\u02c8ka\u027elos um\u02c8be\u027eto san\u02c8tana \u03b2ara\u02c8\u0263an] ; born July 20, 1947) is a Mexican and American guitarist, best known as a founding member of the rock band Santana.",
+          "score": 0.4847
+        },
+        {
+          "title": "Barbarella_-LRB-film-RRB-",
+          "sent_id": 6,
+          "text": "A friend of Vadim's, Terry Southern, wrote the initial screenplay, which changed considerably during filming and led to seven other writers being credited in the final release, including Vadim and Forest, the latter of whom also worked on the film's production design.",
+          "score": 0.4836
+        },
+        {
+          "title": "Mars_-LRB-mythology-RRB-",
+          "sent_id": 6,
+          "text": "Augustus shifted the focus of Mars's cult to within the pomerium (Rome's ritual boundary), and built a temple to Mars Ultor as a key religious feature of his new forum.",
+          "score": 0.4735
+        },
+        {
+          "title": "Battle_of_the_Trebia",
+          "sent_id": 4,
+          "text": "The leading Carthaginian general, Hannibal, responded by leading a large army out of Iberia (modern Spain and Portugal), through Gaul, across the Alps and into Cisalpine Gaul (in northern Italy).",
+          "score": 0.4715
+        },
+        {
+          "title": "Shawn_Carlson",
+          "sent_id": 0,
+          "text": "Shawn Carlson (born 1960) is an American physicist, science writer, and a STEM educator.",
+          "score": 0.4715
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention the album \"In the End\" or the Hybrid Theory album, providing no information to support or refute the claim."
+    },
+    {
+      "id": 500395,
+      "claim": "The Battle of the Trebia occurred on the left bunker near the Trebbia River",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Battle_of_the_Trebia"
+      ],
+      "retrieved": [
+        {
+          "title": "Battle_of_the_Trebia",
+          "sent_id": 0,
+          "text": "The Battle of the Trebia (or Trebbia) was the first major battle of the Second Punic War, fought between the Carthaginian forces of Hannibal and a Roman army under Sempronius Longus on 22 or 23 December 218 BC.",
+          "score": 0.805
+        },
+        {
+          "title": "Battle_of_the_Trebia",
+          "sent_id": 2,
+          "text": "The battle took place on the flood plain of the west bank of the lower Trebia River, not far from the settlement of Placentia (modern Piacenza), and resulted in a heavy defeat for the Romans.",
+          "score": 0.7735
+        },
+        {
+          "title": "Battle_of_the_Trebia",
+          "sent_id": 15,
+          "text": "The following spring, it moved south into Roman Italy and gained another victory at the Battle of Lake Trasimene.",
+          "score": 0.6163
+        },
+        {
+          "title": "Battle_of_the_Trebia",
+          "sent_id": 16,
+          "text": "In 216 BC Hannibal marched to southern Italy and inflicted the disastrous defeat of the Battle of Cannae on the Romans, the last of what modern historians describe as the three great military calamities suffered by the Romans in the first three years of the war.",
+          "score": 0.6145
+        },
+        {
+          "title": "Battle_of_the_Trebia",
+          "sent_id": 5,
+          "text": "The Romans went on the attack against the reduced force which had survived the rigours of the march, and Publius Scipio personally led the cavalry and light infantry of the army he commanded against the Carthaginian cavalry at the Battle of Ticinus.",
+          "score": 0.6015
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about the location of the battle in relation to bunkers or specify the exact left or right side of the river."
+    },
+    {
+      "id": 500453,
+      "claim": "Muscarinic acetylcholine receptors are known as cellphone receptors",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Muscarinic_acetylcholine_receptor"
+      ],
+      "retrieved": [
+        {
+          "title": "Muscarinic_acetylcholine_receptor",
+          "sent_id": 0,
+          "text": "Muscarinic acetylcholine receptors (mAChRs) are acetylcholine receptors that form G protein-coupled receptor complexes in the cell membranes of certain neurons and other cells.",
+          "score": 0.8358
+        },
+        {
+          "title": "Muscarinic_acetylcholine_receptor",
+          "sent_id": 4,
+          "text": "Their counterparts are nicotinic acetylcholine receptors (nAChRs), receptor ion channels that are also important in the autonomic nervous system.",
+          "score": 0.7984
+        },
+        {
+          "title": "Muscarinic_acetylcholine_receptor",
+          "sent_id": 3,
+          "text": "Muscarinic receptors are so named because they are more sensitive to muscarine than to nicotine.",
+          "score": 0.7965
+        },
+        {
+          "title": "Muscarinic_acetylcholine_receptor",
+          "sent_id": 1,
+          "text": "They play several roles, including acting as the main end-receptor stimulated by acetylcholine released from postganglionic fibers.",
+          "score": 0.6826
+        },
+        {
+          "title": "Muscarinic_acetylcholine_receptor",
+          "sent_id": 5,
+          "text": "Many drugs and other substances (for example pilocarpine and scopolamine) manipulate these two distinct receptors by acting as selective agonists or antagonists.",
+          "score": 0.679
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention cellphones or any connection to them, thus it neither supports nor refutes the claim."
+    },
+    {
+      "id": 500503,
+      "claim": "Mercedes Benz is partly of a company from Germany",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "SUPPORTS",
+      "correct": false,
+      "gold_titles": [
+        "Mercedes-Benz"
+      ],
+      "retrieved": [
+        {
+          "title": "Mercedes-Benz",
+          "sent_id": 0,
+          "text": "Mercedes-Benz (German pronunciation: [m\u025b\u0281\u02cctse\u02d0d\u0259s \u02c8b\u025bnts, -d\u025bs -] ), commonly referred to simply as Mercedes and occasionally as Benz, is a German luxury automotive brand that was founded in 1926.",
+          "score": 0.8314
+        },
+        {
+          "title": "Mercedes-Benz",
+          "sent_id": 1,
+          "text": "Mercedes-Benz AG (a subsidiary of the Mercedes-Benz Group, established in 2019) is based in Stuttgart, Baden-W\u00fcrttemberg, Germany.",
+          "score": 0.8193
+        },
+        {
+          "title": "Mercedes-Benz",
+          "sent_id": 2,
+          "text": "Mercedes-Benz AG manufactures luxury vehicles and light commercial vehicles, all branded under the Mercedes-Benz name.",
+          "score": 0.8038
+        },
+        {
+          "title": "Mercedes-Benz",
+          "sent_id": 3,
+          "text": "From November 2019 onwards, the production of Mercedes-Benz-branded heavy commercial vehicles (trucks and buses) has been managed by Daimler Truck, which separated from the Mercedes-Benz Group to form an independent entity at the end of 2021.",
+          "score": 0.7281
+        },
+        {
+          "title": "Mercedes-Benz",
+          "sent_id": 4,
+          "text": "In 2018, Mercedes-Benz became the world's largest premium vehicle brand, with a sales volume of 2.31 million passenger cars.",
+          "score": 0.7168
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: SUPPORTS\nREASON: The evidence clearly states that Mercedes-Benz is a German luxury automotive brand and that Mercedes-Benz AG is based in Stuttgart, Germany."
+    },
+    {
+      "id": 500652,
+      "claim": "Ares is a church figure of Greek mythology",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "REFUTES",
+      "correct": false,
+      "gold_titles": [
+        "Ares",
+        "Enyo",
+        "List_of_Greek_mythological_figures",
+        "Mars_-LRB-mythology-RRB-",
+        "Twelve_Olympians"
+      ],
+      "retrieved": [
+        {
+          "title": "Ares",
+          "sent_id": 0,
+          "text": "Ares (; Ancient Greek: \u1f0c\u03c1\u03b7\u03c2, \u00c1r\u0113s [\u00e1r\u025b\u02d0s]) is the Greek god of war and courage.",
+          "score": 0.8742
+        },
+        {
+          "title": "Ares",
+          "sent_id": 4,
+          "text": "An association with Ares endows places, objects, and other deities with a savage, dangerous, or militarized quality.",
+          "score": 0.821
+        },
+        {
+          "title": "Ares",
+          "sent_id": 15,
+          "text": "Ares's nearest counterpart in Roman religion is Mars, who was given a more important and dignified place in ancient Roman religion as ancestral protector of the Roman people and state.",
+          "score": 0.8025
+        },
+        {
+          "title": "Ares",
+          "sent_id": 10,
+          "text": "Although there are many literary allusions to Ares's love affairs and children, he has a limited role in Greek mythology.",
+          "score": 0.7933
+        },
+        {
+          "title": "Ares",
+          "sent_id": 5,
+          "text": "Although Ares's name shows his origins as Mycenaean, his reputation for savagery was thought by some to reflect his likely origins as a Thracian deity.",
+          "score": 0.7755
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: REFUTES\nREASON: Ares is described as a god of war and courage in Greek mythology, not a church figure."
+    },
+    {
+      "id": 500686,
+      "claim": "American Potash and Chemical Company started by producing sodium borate.",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Borax"
+      ],
+      "retrieved": [
+        {
+          "title": "Borax",
+          "sent_id": 0,
+          "text": "Borax (also referred to as sodium borate, tincal and tincar ) is a salt (ionic compound) normally encountered as a hydrated borate of sodium, with the chemical formula Na2H20B4O17.",
+          "score": 0.738
+        },
+        {
+          "title": "Borax",
+          "sent_id": 1,
+          "text": "Borax mineral is a crystalline borate mineral that occurs in only a few places worldwide in quantities that enable it to be mined economically.",
+          "score": 0.6805
+        },
+        {
+          "title": "Borax",
+          "sent_id": 7,
+          "text": "The terms tincal and tincar refer to the naturally occurring borax historically mined from dry lake beds in various parts of Asia.",
+          "score": 0.6557
+        },
+        {
+          "title": "Borax",
+          "sent_id": 3,
+          "text": "The anhydrous form of borax can also be obtained from the decahydrate or other hydrates by heating and then grinding the resulting glasslike solid into a powder.",
+          "score": 0.648
+        },
+        {
+          "title": "Borax",
+          "sent_id": 5,
+          "text": "Borax is commonly available in powder or granular form and has many industrial and household uses, including as a pesticide, as a metal soldering flux, as a component of glass, enamel, and pottery glazes, for tanning of skins and hides, for artificial aging of wood, as a preservative against wood fungus, as a food additive, and as a pharmaceutic alkalizer.",
+          "score": 0.631
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence provided does not mention American Potash and Chemical Company or its founding activities."
+    },
+    {
+      "id": 500828,
+      "claim": "The Hanford Site hosts the LIGO Hanford Observatory which detects gravitational tides",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Hanford_Site",
+        "LIGO"
+      ],
+      "retrieved": [
+        {
+          "title": "Bermuda_Triangle",
+          "sent_id": 0,
+          "text": "The Bermuda Triangle, also known as the Devil's Triangle, is a loosely defined region in the North Atlantic Ocean, roughly bounded by Florida, Bermuda, and Puerto Rico.",
+          "score": 0.5252
+        },
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 15,
+          "text": "It is also home to the National Library of Russia and a planned location for the Supreme Court of Russia, as well as home to the headquarters of the Russian Navy, and the Leningrad Military District of the Russian Armed Forces.",
+          "score": 0.5144
+        },
+        {
+          "title": "Saint_Petersburg",
+          "sent_id": 17,
+          "text": "Saint Petersburg is home to the Hermitage (one of the largest art museums in the world), and the Lakhta Center (the tallest skyscraper in Europe), and was one of the host cities of the 2018 FIFA World Cup and the UEFA Euro 2020.",
+          "score": 0.5141
+        },
+        {
+          "title": "Bermuda_Triangle",
+          "sent_id": 2,
+          "text": "However, extensive investigations by reputable sources, including the U.S. federal government and scientific organizations, have found no evidence of unusual activity, attributing reported incidents to natural phenomena, human error, and misinterpretation.",
+          "score": 0.5111
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 4,
+          "text": "It is otherwise surrounded by the Atlantic Ocean, with the Celtic Sea to the south, St George's Channel to the south-east and the Irish Sea to the east.",
+          "score": 0.5087
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention the Hanford Site or LIGO Hanford Observatory, making it impossible to determine if the claim is supported or refuted."
+    },
+    {
+      "id": 500832,
+      "claim": "Aestheticism has as subjects fine art documentaries and music",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Aestheticism"
+      ],
+      "retrieved": [
+        {
+          "title": "Aestheticism",
+          "sent_id": 0,
+          "text": "Aestheticism (also known as the aesthetic movement) was an art movement in the late 19th century that valued the appearance of literature, music, fonts, and the arts over their functions.",
+          "score": 0.7973
+        },
+        {
+          "title": "Aestheticism",
+          "sent_id": 1,
+          "text": "According to Aestheticism, art should be produced to be beautiful, rather than to teach a lesson, create a parallel, or perform another didactic purpose, a sentiment expressed in the slogan \"art for art's sake\".",
+          "score": 0.7205
+        },
+        {
+          "title": "Aestheticism",
+          "sent_id": 4,
+          "text": "Aestheticism challenged the values of mainstream Victorian culture, as many Victorians believed that literature and art fulfilled important ethical roles.",
+          "score": 0.7022
+        },
+        {
+          "title": "Aestheticism",
+          "sent_id": 2,
+          "text": "Aestheticism flourished, in the 1870s and 1880s, gaining prominence and the support of notable writers, such as Walter Pater and Oscar Wilde.",
+          "score": 0.6889
+        },
+        {
+          "title": "Aestheticism",
+          "sent_id": 5,
+          "text": "Writing in The Guardian, Fiona MacCarthy states that \"the aesthetic movement stood, in stark and sometimes shocking contrast, to the crass materialism of Britain, in the 19th century.\" Aestheticism was named by the critic Walter Hamilton in The Aesthetic Movement in England (1882).",
+          "score": 0.6696
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not mention documentaries or music as subjects of Aestheticism, focusing instead on the movement's emphasis on art for its own sake and its opposition to didacticism."
+    },
+    {
+      "id": 500854,
+      "claim": "Coins of the Swiss franc can be used just outside of Switzerland",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Coins_of_the_Swiss_franc"
+      ],
+      "retrieved": [
+        {
+          "title": "Coins_of_the_Swiss_franc",
+          "sent_id": 0,
+          "text": "The coins of the Swiss franc are the official coins used in Switzerland and Liechtenstein.",
+          "score": 0.89
+        },
+        {
+          "title": "Coins_of_the_Swiss_franc",
+          "sent_id": 2,
+          "text": "There are coins in denominations of 5 centimes, 10 centimes, 20 centimes, 1\u20442 franc (50 centimes), 1 franc, 2 francs, and 5 francs.",
+          "score": 0.7101
+        },
+        {
+          "title": "Coins_of_the_Swiss_franc",
+          "sent_id": 3,
+          "text": "All coins have the legend of either Helvetia or Conf\u0153deratio Helvetica, the Latin name of the Swiss Confederation, along with the year number.",
+          "score": 0.681
+        },
+        {
+          "title": "Coins_of_the_Swiss_franc",
+          "sent_id": 5,
+          "text": "The 1\u20442, 1, and 2 francs coins show a standing figure of the national personification Helvetia, designed by Albert Walch (1860).",
+          "score": 0.6653
+        },
+        {
+          "title": "Coins_of_the_Swiss_franc",
+          "sent_id": 6,
+          "text": "The 5 francs coin on the obverse shows a portrait of an \"alpine herdsman\" (Alphirte), designed by Paul Burkhard (1922), and on the reverse the federal coat of arms; additionally it has the inscription Dominus Providebit embossed on the edge.",
+          "score": 0.66
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about the usage of Swiss franc coins outside of Switzerland."
+    },
+    {
+      "id": 500924,
+      "claim": "Andrew Moray led an uprising against profession in 1297",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "SUPPORTS",
+      "correct": false,
+      "gold_titles": [
+        "Andrew_Moray"
+      ],
+      "retrieved": [
+        {
+          "title": "Andrew_Moray",
+          "sent_id": 0,
+          "text": "Andrew Moray (Anglo-Norman: Andreu de Moray; Latin: Andreas de Moravia), also known as Andrew de Moray, Andrew of Moray, or Andrew Murray, was a Scots esquire, who rose to prominence during the First Scottish War of Independence.",
+          "score": 0.7262
+        },
+        {
+          "title": "Andrew_Moray",
+          "sent_id": 1,
+          "text": "He initially raised a small band of supporters at Avoch Castle in early summer 1297 to fight King Edward I of England and had soon successfully regained control of the north for the absent Scots king, John Balliol.",
+          "score": 0.6675
+        },
+        {
+          "title": "Andrew_Moray",
+          "sent_id": 2,
+          "text": "Moray subsequently merged his army with that of William Wallace, and on 11 September 1297 jointly led the combined army to victory at the Battle of Stirling Bridge.",
+          "score": 0.6474
+        },
+        {
+          "title": "Albania",
+          "sent_id": 10,
+          "text": "In the 15th century, Albania became a center of resistance against Ottoman expansion under the leadership of Gjergj Kastrioti Skanderbeg, whose military campaigns repelled Ottoman advances for over two decades.",
+          "score": 0.5515
+        },
+        {
+          "title": "Albania",
+          "sent_id": 9,
+          "text": "During the Middle Ages, several Albanian principalities emerged, most notably the Principality of Arbanon, Kingdom of Albania, Principality of Albania and Albania Veneta.",
+          "score": 0.5351
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: SUPPORTS\nREASON: The evidence confirms that Andrew Moray led an uprising against the English in 1297 as part of the First Scottish War of Independence."
+    },
+    {
+      "id": 500972,
+      "claim": "Margaret Thatcher was the most superior politician within the Conservative Party in the United Kingdom",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Leader_of_the_Conservative_Party_-LRB-UK-RRB-",
+        "Margaret_Thatcher"
+      ],
+      "retrieved": [
+        {
+          "title": "Bulgaria",
+          "sent_id": 18,
+          "text": "The ruling Communist Party gave up its monopoly on power after the revolutions of 1989 and allowed multiparty elections.",
+          "score": 0.5935
+        },
+        {
+          "title": "Albania",
+          "sent_id": 14,
+          "text": "Governed by a constitution prioritising the separation of powers, the country's political structure includes a parliament, a ceremonial president, a functional prime minister and a hierarchy of courts.",
+          "score": 0.5757
+        },
+        {
+          "title": "Aestheticism",
+          "sent_id": 5,
+          "text": "Writing in The Guardian, Fiona MacCarthy states that \"the aesthetic movement stood, in stark and sometimes shocking contrast, to the crass materialism of Britain, in the 19th century.\" Aestheticism was named by the critic Walter Hamilton in The Aesthetic Movement in England (1882).",
+          "score": 0.572
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 23,
+          "text": "After joining the EC, the country's government enacted a series of liberal economic policies that helped to boost economic growth between 1995 and 2007, a time now often referred to as the Celtic Tiger period.",
+          "score": 0.5633
+        },
+        {
+          "title": "Republic_of_Ireland",
+          "sent_id": 14,
+          "text": "The state had no formal relations with Northern Ireland for most of the 20th century, but the 1980s and 1990s saw the British and Irish governments working with Northern Irish parties to resolve the conflict that had become known as the Troubles.",
+          "score": 0.5535
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence provided does not discuss Margaret Thatcher or her political standing within the Conservative Party in the United Kingdom."
+    },
+    {
+      "id": 500976,
+      "claim": "Buffy the Vampire Slayer had more than one co-managerial producer",
+      "gold_label": "SUPPORTS",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": false,
+      "gold_titles": [
+        "Buffy_the_Vampire_Slayer"
+      ],
+      "retrieved": [
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 0,
+          "text": "Buffy the Vampire Slayer is an American supernatural horror drama television series created by Joss Whedon.",
+          "score": 0.7039
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 2,
+          "text": "Whedon served as executive producer and showrunner of the series under his production company Mutant Enemy Productions.",
+          "score": 0.6815
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 4,
+          "text": "The series follows Buffy Summers (Sarah Michelle Gellar), the latest in a succession of young women known as \"Vampire Slayers\".",
+          "score": 0.6753
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 17,
+          "text": "Buffy was part of a wave of television series from the late 1990s and early 2000s that featured strong female characters, alongside Charmed, Xena: Warrior Princess, La Femme Nikita, Dark Angel, and Alias.",
+          "score": 0.6702
+        },
+        {
+          "title": "Buffy_the_Vampire_Slayer",
+          "sent_id": 15,
+          "text": "The success of Buffy has led to hundreds of tie-in products, including novels, comics and video games.",
+          "score": 0.6416
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide information about co-managerial producers of Buffy the Vampire Slayer."
+    },
+    {
+      "id": 501070,
+      "claim": "Stephen Moyer worked with Ron Perlman as his commander in Prince Valiant",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Stephen_Moyer"
+      ],
+      "retrieved": [
+        {
+          "title": "Stephen_Moyer",
+          "sent_id": 0,
+          "text": "Stephen John Emery (born 11 October 1969), known professionally as Stephen Moyer, is an English actor and film director.",
+          "score": 0.6614
+        },
+        {
+          "title": "Morris_-LRB-cartoonist-RRB-",
+          "sent_id": 0,
+          "text": "Maurice De Bevere (Dutch: [mo\u02d0\u02c8riz d\u0259 \u02c8be\u02d0v\u0259r\u0259]; French: [m\u0254\u0281is d\u0259 b\u0259v\u025b\u0281, mo\u0281-]; 1 December 1923 \u2013 16 July 2001), better known as Morris, was a Belgian comics artist, illustrator, and the creator of Lucky Luke, a best-selling comic series about a gunslinger in the American Wild West.",
+          "score": 0.5514
+        },
+        {
+          "title": "A_United_Kingdom",
+          "sent_id": 1,
+          "text": "David Oyelowo and Rosamund Pike portray Seretse and Ruth, respectively.",
+          "score": 0.5426
+        },
+        {
+          "title": "Andrew_Moray",
+          "sent_id": 2,
+          "text": "Moray subsequently merged his army with that of William Wallace, and on 11 September 1297 jointly led the combined army to victory at the Battle of Stirling Bridge.",
+          "score": 0.5323
+        },
+        {
+          "title": "Morris_-LRB-cartoonist-RRB-",
+          "sent_id": 3,
+          "text": "He collaborated for two decades with French writer Ren\u00e9 Goscinny on the series.",
+          "score": 0.5291
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about Stephen Moyer's role in Prince Valiant or his interactions with Ron Perlman."
+    },
+    {
+      "id": 501098,
+      "claim": "In the country Czech Republic Blank Space is on a superior 10 list",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Blank_Space"
+      ],
+      "retrieved": [
+        {
+          "title": "Serbia",
+          "sent_id": 0,
+          "text": "Serbia, officially the Republic of Serbia, is a landlocked country in Southeastern and Central Europe.",
+          "score": 0.6284
+        },
+        {
+          "title": "Blank_Space",
+          "sent_id": 12,
+          "text": "Swift included \"Blank Space\" in the set lists for three of her world tours: the 1989 World Tour (2015), Reputation Stadium Tour (2018), and the Eras Tour (2023\u20132024).",
+          "score": 0.6274
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 3,
+          "text": "It covers a territory of 110,994 square kilometres (42,855 sq mi), making it the tenth largest within the European Union and the sixteenth-largest country in Europe by area.",
+          "score": 0.6264
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 0,
+          "text": "Bulgaria, officially the Republic of Bulgaria, is a country in Southeastern Europe.",
+          "score": 0.6115
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 23,
+          "text": "Bulgaria is a member state of the European Union, including the Schengen Area and the eurozone, NATO, and various regional suborganizations such as the Bucharest Nine.",
+          "score": 0.6004
+        }
+      ],
+      "evidence_title_hit": true,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: The evidence does not provide any information about the Czech Republic or any \"superior 10 list\" related to the song \"Blank Space.\""
+    },
+    {
+      "id": 501115,
+      "claim": "Colin Kaepernick is a person who plays soccer",
+      "gold_label": "NOT ENOUGH INFO",
+      "predicted_label": "NOT ENOUGH INFO",
+      "correct": true,
+      "gold_titles": [
+        "Colin_Kaepernick"
+      ],
+      "retrieved": [
+        {
+          "title": "Bonn",
+          "sent_id": 0,
+          "text": "Bonn (German pronunciation: [b\u0254n] ), officially the Federal City of Bonn (German: Bundesstadt Bonn), is a federal city in the German state of North Rhine-Westphalia, located on the banks of the Rhine.",
+          "score": 0.5822
+        },
+        {
+          "title": "Chumlee",
+          "sent_id": 2,
+          "text": "Chumlee is often portrayed on the show as the comic foil, but he often appraises items in his areas of expertise, including pinball machines, sports memorabilia, sneakers, toys, and video games.",
+          "score": 0.5728
+        },
+        {
+          "title": "Bulgaria",
+          "sent_id": 23,
+          "text": "Bulgaria is a member state of the European Union, including the Schengen Area and the eurozone, NATO, and various regional suborganizations such as the Bucharest Nine.",
+          "score": 0.5661
+        },
+        {
+          "title": "Coins_of_the_Swiss_franc",
+          "sent_id": 2,
+          "text": "There are coins in denominations of 5 centimes, 10 centimes, 20 centimes, 1\u20442 franc (50 centimes), 1 franc, 2 francs, and 5 francs.",
+          "score": 0.5617
+        },
+        {
+          "title": "Shawn_Carlson",
+          "sent_id": 0,
+          "text": "Shawn Carlson (born 1960) is an American physicist, science writer, and a STEM educator.",
+          "score": 0.5601
+        }
+      ],
+      "evidence_title_hit": false,
+      "raw_model_response": "VERDICT: NOT ENOUGH INFO\nREASON: None of the provided evidence mentions Colin Kaepernick or any information related to him playing soccer."
+    }
+  ]
+}

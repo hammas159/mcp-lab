@@ -1,0 +1,4 @@
+# Local cache only (claim sample, fetched wiki pages, embedding cache) -- fully
+# regenerable by re-running run_eval.py with the same --seed; not a deliverable.
+data/
+__pycache__/
