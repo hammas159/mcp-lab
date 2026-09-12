@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>BFCL Tool-Calling Accuracy</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, Arial, sans-serif; margin: 2rem; color: #1a1a1a; }
+    h1 { font-size: 1.4rem; }
+    .meta { color: #555; font-size: 0.85rem; margin-bottom: 1.5rem; }
+    table { border-collapse: collapse; width: 100%; max-width: 900px; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem 0.75rem; text-align: right; }
+    th, td:first-child { text-align: left; }
+    thead th { background: #f4f4f4; }
+    tr:nth-child(1) td.rank-1 { font-weight: bold; }
+    .best { background: #eaffea; }
+    .worst { background: #ffeaea; }
+  </style>
+</head>
+<body>
+  <h1>BFCL Tool-Calling Accuracy Across the Local Ollama Fleet</h1>
+  <div class="meta">
+    Source: {{ meta.get("source", "n/a") }}<br />
+    Sample sizes: {{ meta.get("categories", {}) }} (seed={{ meta.get("seed", "n/a") }})<br />
+    Run window: {{ meta.get("started_utc", "n/a") }} &rarr; {{ meta.get("finished_utc", "n/a") }}
+  </div>
+
+  {% if rows %}
+  <table>
+    <thead>
+      <tr>
+        <th>Model</th>
+        {% for cat in categories %}<th>{{ cat }}</th>{% endfor %}
+        <th>Overall</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr class="{% if loop.first %}best{% elif loop.last %}worst{% endif %}">
+        <td>{{ row.model }}</td>
+        {% for cat in categories %}
+          {% set c = row.by_category.get(cat) %}
+          <td>{% if c %}{{ "%.1f"|format(c.accuracy * 100) }}% ({{ c.correct }}/{{ c.n }}){% else %}-{% endif %}</td>
+        {% endfor %}
+        <td><strong>{{ "%.1f"|format(row.overall_accuracy * 100) }}%</strong> ({{ row.overall_n }} cases)</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No results.json found yet -- run <code>run_eval.py</code> first.</p>
+  {% endif %}
+</body>
+</html>
