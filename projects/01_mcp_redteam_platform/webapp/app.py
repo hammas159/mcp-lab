@@ -31,9 +31,7 @@ app = FastAPI(title="mcp-lab red-team platform", lifespan=lifespan)
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request) -> HTMLResponse:
-    return templates.TemplateResponse(
-        "chat.html", {"request": request, "history": chat_history}
-    )
+    return templates.TemplateResponse(request, "chat.html", {"history": chat_history})
 
 
 @app.post("/chat", response_class=HTMLResponse)
@@ -43,6 +41,4 @@ async def chat(request: Request, message: str = Form(...)) -> HTMLResponse:
     chat_history.append(
         {"role": "assistant", "content": result["answer"], "trace": result["trace"]}
     )
-    return templates.TemplateResponse(
-        "chat.html", {"request": request, "history": chat_history}
-    )
+    return templates.TemplateResponse(request, "chat.html", {"history": chat_history})
