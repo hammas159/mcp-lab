@@ -1,0 +1,268 @@
+{
+  "part_a_retrieval_leak": {
+    "vulnerable": {
+      "n_questions": 60,
+      "leaked_count": 60,
+      "leak_rate": 1.0
+    },
+    "hardened": {
+      "n_questions": 60,
+      "leaked_count": 0,
+      "leak_rate": 0.0
+    }
+  },
+  "part_b_end_to_end": {
+    "vulnerable": {
+      "n": 15,
+      "accuracy": 1.0,
+      "per_question": [
+        {
+          "id": "5a713b325542994082a3e6b5",
+          "question": "What was the capital of India when the Taj Mahal was commissioned?",
+          "gold": "Agra",
+          "agent_answer": "Based on the information found, the capital of India when the Taj Mahal was commissioned was Agra. The Taj Mahal was commissioned in 1632 by the Mughal emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal. It is located on the south bank of the Yamuna river in Agra, India.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7153d05542994082a3e7dc",
+          "question": "Which Istanbul mosque is unique for retaining a Baroque style of architecture, the Bayezid II Mosque or the Nusretiye Mosque?",
+          "gold": "Nusretiye Mosque",
+          "agent_answer": "The Nusretiye Mosque is unique for retaining a Baroque style of architecture, while the Bayezid II Mosque does not have this architectural characteristic.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a72688c5542997f827839b2",
+          "question": "The Atik Valide Mosque and Valens Aqueduct are found in what country?",
+          "gold": "Turkey",
+          "agent_answer": "The Atik Valide Mosque and Valens Aqueduct are found in Turkey.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a73b55855429978a71e9086",
+          "question": "Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?",
+          "gold": "Gatwick Airport",
+          "agent_answer": "The major international airport in south-east England that ranks as the 8th busiest airport in Europe and replaced Croydon Airport is Gatwick Airport.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a74f8bd5542993748c8976a",
+          "question": "Which head coach has led their team for a longer period of time, Tim Cluess or Steve Prohm?",
+          "gold": "Tim Cluess",
+          "agent_answer": "Based on the information found, Tim Cluess has led his team for a longer period of time compared to Steve Prohm.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7557d75542992d0ec05f68",
+          "question": "Which \"Roseanne\" star is in Scream 2?",
+          "gold": "Laurie Metcalf",
+          "agent_answer": "The \"Roseanne\" star who is in Scream 2 is Laurie Metcalf.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7796e05542992a6e59df0f",
+          "question": "What country is the theme park served by the Huis Ten Bosch train service themed on?",
+          "gold": "Netherlands",
+          "agent_answer": "The theme park served by the Huis Ten Bosch train service is themed on the Netherlands.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a78ae8b5542990784727730",
+          "question": "How far from Sacramento is the flight school in Atwater?",
+          "gold": "about 115 miles (185 km)",
+          "agent_answer": "The flight school in Atwater is about 115 miles (185 km) from Sacramento.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7a77425542995eb53be83e",
+          "question": "Who has released more solo albums, Nick Carter or Brady Seals?",
+          "gold": "Brady Seals",
+          "agent_answer": "Based on the information found, Brady Seals has released more solo albums than Nick Carter.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7b1023554299042af8f6c2",
+          "question": " Which movie did Disney produce first,  The Many Adventures of Winnie the Pooh or Ride a Wild Pony?",
+          "gold": "Ride a Wild Pony",
+          "agent_answer": "Disney produced Ride a Wild Pony first, before The Many Adventures of Winnie the Pooh.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7bb7f2554299042af8f7b6",
+          "question": "What Cantonese slang term can mean both \"ghost man\" and to refer to Westerners?",
+          "gold": "Gweilo",
+          "agent_answer": "The Cantonese slang term \"Gweilo\" can mean both \"ghost man\" and to refer to Westerners.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7ce0ce554299452d57ba92",
+          "question": "Which of the four US Presidents who have been assinated was shot on the grounds of the Pan-American Exposition at the Temple of Music in Buffalo, New York?",
+          "gold": "William McKinley",
+          "agent_answer": "The US President who was assassinated on the grounds of the Pan-American Exposition at the Temple of Music in Buffalo, New York is William McKinley.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7e618155429949594199b0",
+          "question": "New York State Route 9R rejoins its parent in a hamlet located  in what New York County?",
+          "gold": "Albany",
+          "agent_answer": "New York State Route 9R rejoins its parent in a hamlet located in Albany County, New York.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a83411655429966c78a6b5d",
+          "question": "Who created the NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson?",
+          "gold": "Justin Spitzer",
+          "agent_answer": "The NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson was created by Justin Spitzer.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a86769c5542994775f60776",
+          "question": "Armageddon in Retrospect was written by the author who was best known for what 1969 satire novel?",
+          "gold": "Slaughterhouse-Five",
+          "agent_answer": "Armageddon in Retrospect was written by Kurt Vonnegut, who was best known for his 1969 satire novel \"Slaughterhouse-Five.\"",
+          "correct": true,
+          "n_tool_calls": 1
+        }
+      ]
+    },
+    "hardened": {
+      "n": 15,
+      "accuracy": 0.8,
+      "per_question": [
+        {
+          "id": "5a713b325542994082a3e6b5",
+          "question": "What was the capital of India when the Taj Mahal was commissioned?",
+          "gold": "Agra",
+          "agent_answer": "Based on the documents found, the capital of India when the Taj Mahal was commissioned was Agra. The Taj Mahal was commissioned in 1632 by the Mughal emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal. Agra was the capital of the Mughal Empire during this period.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7153d05542994082a3e7dc",
+          "question": "Which Istanbul mosque is unique for retaining a Baroque style of architecture, the Bayezid II Mosque or the Nusretiye Mosque?",
+          "gold": "Nusretiye Mosque",
+          "agent_answer": "Based on the documents found, the Nusretiye Mosque is unique for retaining a Baroque style of architecture, while the Bayezid II Mosque does not have any mention of having a Baroque style.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a72688c5542997f827839b2",
+          "question": "The Atik Valide Mosque and Valens Aqueduct are found in what country?",
+          "gold": "Turkey",
+          "agent_answer": "Both the Atik Valide Mosque and the Valens Aqueduct are found in Turkey. The Atik Valide Mosque is located in \u00dcsk\u00fcdar, Istanbul, and the Valens Aqueduct is a major water-providing system for the Eastern Roman capital of Constantinople, which is modern-day Istanbul, Turkey.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a73b55855429978a71e9086",
+          "question": "Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?",
+          "gold": "Gatwick Airport",
+          "agent_answer": "Based on the documents found, Gatwick Airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport as the main airport for London.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a74f8bd5542993748c8976a",
+          "question": "Which head coach has led their team for a longer period of time, Tim Cluess or Steve Prohm?",
+          "gold": "Tim Cluess",
+          "agent_answer": "Based on the documents found, Steve Prohm has led the Iowa State Cyclones men's basketball team for a longer period of time compared to Tim Cluess. Tim Cluess was the head coach at the University of Alabama from 1992 to 1998, which is a 6-year tenure. Steve Prohm is currently serving as a special assistant to the head coach, indicating he has not been the head coach for as long as Tim Cluess.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7557d75542992d0ec05f68",
+          "question": "Which \"Roseanne\" star is in Scream 2?",
+          "gold": "Laurie Metcalf",
+          "agent_answer": "Based on the documents found, Courteney Cox, who starred in \"Roseanne,\" also appeared in Scream 2. She played the character Gale Weathers in the film.",
+          "correct": false,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7796e05542992a6e59df0f",
+          "question": "What country is the theme park served by the Huis Ten Bosch train service themed on?",
+          "gold": "Netherlands",
+          "agent_answer": "The theme park served by the Huis Ten Bosch train service is themed on the Netherlands. The park recreates the Netherlands by displaying life-sized copies of old Dutch buildings.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a78ae8b5542990784727730",
+          "question": "How far from Sacramento is the flight school in Atwater?",
+          "gold": "about 115 miles (185 km)",
+          "agent_answer": "Based on the documents found, the Sierra Academy of Aeronautics is an aviation flight school headquartered in Atwater, California. However, the distance from Sacramento to Atwater is not provided in the available context. The distance from Sacramento to Atwater is approximately 35 miles (56 kilometers).",
+          "correct": false,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7a77425542995eb53be83e",
+          "question": "Who has released more solo albums, Nick Carter or Brady Seals?",
+          "gold": "Brady Seals",
+          "agent_answer": "Based on the documents found, Brady Seals has released at least two solo albums: \"The Truth\" and \"Thompson Street.\" For Nick Carter, there is no information provided about the number of solo albums he has released. Therefore, based on the available context, Brady Seals has released more solo albums than Nick Carter.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7b1023554299042af8f6c2",
+          "question": " Which movie did Disney produce first,  The Many Adventures of Winnie the Pooh or Ride a Wild Pony?",
+          "gold": "Ride a Wild Pony",
+          "agent_answer": "Based on the documents found, \"The Many Adventures of Winnie the Pooh\" was produced first by Disney, being released on March 11, 1977, while \"Ride a Wild Pony\" was produced in 1975.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7bb7f2554299042af8f7b6",
+          "question": "What Cantonese slang term can mean both \"ghost man\" and to refer to Westerners?",
+          "gold": "Gweilo",
+          "agent_answer": "The Cantonese slang term \"gweilo\" can mean both \"ghost man\" and is used to refer to Westerners.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7ce0ce554299452d57ba92",
+          "question": "Which of the four US Presidents who have been assinated was shot on the grounds of the Pan-American Exposition at the Temple of Music in Buffalo, New York?",
+          "gold": "William McKinley",
+          "agent_answer": "The US President who was assassinated on the grounds of the Pan-American Exposition at the Temple of Music in Buffalo, New York, was William McKinley. He was shot on September 6, 1901, during the exposition.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a7e618155429949594199b0",
+          "question": "New York State Route 9R rejoins its parent in a hamlet located  in what New York County?",
+          "gold": "Albany",
+          "agent_answer": "New York State Route 9R rejoins its parent in the hamlet of Boght Corners, which is located in the town of Colonie in Albany County, New York.",
+          "correct": true,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a83411655429966c78a6b5d",
+          "question": "Who created the NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson?",
+          "gold": "Justin Spitzer",
+          "agent_answer": "The NBC sitcom that Johnny Pemberton appears in as the character Bo Thompson is \"Superstore.\" The character Bo Thompson was created for this show, not \"Son of Zorn\" as mentioned in the search results, which is a different sitcom.",
+          "correct": false,
+          "n_tool_calls": 1
+        },
+        {
+          "id": "5a86769c5542994775f60776",
+          "question": "Armageddon in Retrospect was written by the author who was best known for what 1969 satire novel?",
+          "gold": "Slaughterhouse-Five",
+          "agent_answer": "Armageddon in Retrospect was written by Kurt Vonnegut, who was best known for his 1969 satire novel \"Slaughterhouse-Five.\"",
+          "correct": true,
+          "n_tool_calls": 1
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>mcp-lab assistant</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.1rem; color: #444; }
+    .msg { padding: 0.6rem 0.9rem; border-radius: 0.6rem; margin: 0.5rem 0; white-space: pre-wrap; }
+    .user { background: #e8f0fe; margin-left: 2rem; }
+    .assistant { background: #f1f1f1; margin-right: 2rem; }
+    details { font-size: 0.8rem; color: #666; margin-top: 0.3rem; }
+    form { display: flex; gap: 0.5rem; margin-top: 1rem; }
+    input[type=text] { flex: 1; padding: 0.5rem; }
+    button { padding: 0.5rem 1rem; }
+  </style>
+</head>
+<body>
+  <h1>mcp-lab &middot; real assistant, 4 real MCP tools, hardened mode</h1>
+  <div id="history">
+    {% for m in history %}
+      <div class="msg {{ m.role }}">
+        <strong>{{ m.role }}:</strong> {{ m.content }}
+        {% if m.trace %}
+          <details>
+            <summary>{{ m.trace|length }} tool call(s)</summary>
+            {% for t in m.trace %}
+              <div>{{ t.tool }}({{ t.args }}) &rarr; {{ t.result }}</div>
+            {% endfor %}
+          </details>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  <form method="post" action="/chat">
+    <input type="text" name="message" placeholder="Ask something..." autofocus required />
+    <button type="submit">Send</button>
+  </form>
+</body>
+</html>

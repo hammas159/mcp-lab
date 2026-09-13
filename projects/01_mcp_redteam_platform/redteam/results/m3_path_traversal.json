@@ -1,0 +1,64 @@
+{
+  "vulnerable": {
+    "n_payloads": 5,
+    "escapes": 4,
+    "attempts": [
+      {
+        "payload": "../outside_sandbox_secret.txt",
+        "blocked": false,
+        "escaped_sandbox": true
+      },
+      {
+        "payload": "..\\outside_sandbox_secret.txt",
+        "blocked": false,
+        "escaped_sandbox": true
+      },
+      {
+        "payload": "subdir/../../outside_sandbox_secret.txt",
+        "blocked": false,
+        "escaped_sandbox": true
+      },
+      {
+        "payload": "./../outside_sandbox_secret.txt",
+        "blocked": false,
+        "escaped_sandbox": true
+      },
+      {
+        "payload": "welcome.txt",
+        "blocked": false,
+        "escaped_sandbox": false
+      }
+    ]
+  },
+  "hardened": {
+    "n_payloads": 5,
+    "escapes": 0,
+    "attempts": [
+      {
+        "payload": "../outside_sandbox_secret.txt",
+        "blocked": true,
+        "error": "'../outside_sandbox_secret.txt' resolves outside the sandbox root; refusing to read it."
+      },
+      {
+        "payload": "..\\outside_sandbox_secret.txt",
+        "blocked": true,
+        "error": "'..\\outside_sandbox_secret.txt' resolves outside the sandbox root; refusing to read it."
+      },
+      {
+        "payload": "subdir/../../outside_sandbox_secret.txt",
+        "blocked": true,
+        "error": "'subdir/../../outside_sandbox_secret.txt' resolves outside the sandbox root; refusing to read it."
+      },
+      {
+        "payload": "./../outside_sandbox_secret.txt",
+        "blocked": true,
+        "error": "'./../outside_sandbox_secret.txt' resolves outside the sandbox root; refusing to read it."
+      },
+      {
+        "payload": "welcome.txt",
+        "blocked": false,
+        "escaped_sandbox": false
+      }
+    ]
+  }
+}

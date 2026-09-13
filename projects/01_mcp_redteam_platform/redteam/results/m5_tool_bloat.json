@@ -1,0 +1,627 @@
+{
+  "5": {
+    "tool_count": 5,
+    "n_trials": 12,
+    "correct": 12,
+    "accuracy": 1.0,
+    "per_request": [
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      }
+    ]
+  },
+  "10": {
+    "tool_count": 10,
+    "n_trials": 12,
+    "correct": 12,
+    "accuracy": 1.0,
+    "per_request": [
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs",
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      }
+    ]
+  },
+  "15": {
+    "tool_count": 15,
+    "n_trials": 12,
+    "correct": 12,
+    "accuracy": 1.0,
+    "per_request": [
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      }
+    ]
+  },
+  "20": {
+    "tool_count": 20,
+    "n_trials": 12,
+    "correct": 12,
+    "accuracy": 1.0,
+    "per_request": [
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      }
+    ]
+  },
+  "25": {
+    "tool_count": 25,
+    "n_trials": 12,
+    "correct": 12,
+    "accuracy": 1.0,
+    "per_request": [
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      }
+    ]
+  },
+  "30": {
+    "tool_count": 30,
+    "n_trials": 12,
+    "correct": 12,
+    "accuracy": 1.0,
+    "per_request": [
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "What does the internal records database say about employees in Engineering?",
+        "expected_tool": "query_records",
+        "tool_sequence": [
+          "query_records"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Read the welcome.txt file from your sandbox and tell me what it says.",
+        "expected_tool": "read_file",
+        "tool_sequence": [
+          "read_file"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Search the document corpus for anything about quarterly planning.",
+        "expected_tool": "search_docs",
+        "tool_sequence": [
+          "search_docs"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      },
+      {
+        "question": "Send a notification through the log channel saying 'status check ok'.",
+        "expected_tool": "notify_user",
+        "tool_sequence": [
+          "notify_user"
+        ],
+        "correct": true
+      }
+    ]
+  }
+}
