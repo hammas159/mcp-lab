@@ -1,0 +1,252 @@
+{
+  "dataset": "truthfulqa/truthful_qa",
+  "config": "multiple_choice",
+  "split": "validation",
+  "sample_size": 100,
+  "seed": 42,
+  "question_ids": [
+    6,
+    25,
+    27,
+    30,
+    32,
+    44,
+    46,
+    71,
+    73,
+    80,
+    81,
+    89,
+    94,
+    95,
+    99,
+    103,
+    104,
+    114,
+    127,
+    142,
+    159,
+    163,
+    166,
+    167,
+    175,
+    196,
+    203,
+    214,
+    220,
+    223,
+    225,
+    228,
+    233,
+    238,
+    250,
+    270,
+    273,
+    276,
+    281,
+    284,
+    296,
+    300,
+    344,
+    348,
+    352,
+    363,
+    367,
+    370,
+    373,
+    379,
+    387,
+    388,
+    389,
+    429,
+    432,
+    459,
+    464,
+    470,
+    473,
+    517,
+    546,
+    549,
+    558,
+    565,
+    574,
+    591,
+    603,
+    604,
+    616,
+    618,
+    623,
+    633,
+    643,
+    650,
+    654,
+    663,
+    665,
+    677,
+    686,
+    692,
+    699,
+    714,
+    718,
+    721,
+    733,
+    737,
+    747,
+    754,
+    758,
+    759,
+    769,
+    775,
+    777,
+    782,
+    788,
+    796,
+    801,
+    804,
+    807,
+    811
+  ],
+  "models": [
+    "granite3.3:2b",
+    "llama3.2:3b",
+    "qwen2.5-coder:3b",
+    "qwen2.5:3b-instruct",
+    "qwen2.5:7b-instruct"
+  ],
+  "strategies": [
+    "zero_shot",
+    "cot"
+  ],
+  "tasks": [
+    "mc1",
+    "mc2"
+  ],
+  "stopped_early": false,
+  "elapsed_seconds": 2190.6,
+  "results": {
+    "mc1": {
+      "granite3.3:2b": {
+        "zero_shot": {
+          "n": 100,
+          "accuracy": 0.37,
+          "unparsed_responses": 0
+        },
+        "cot": {
+          "n": 100,
+          "accuracy": 0.24,
+          "unparsed_responses": 0
+        }
+      },
+      "llama3.2:3b": {
+        "zero_shot": {
+          "n": 100,
+          "accuracy": 0.36,
+          "unparsed_responses": 1
+        },
+        "cot": {
+          "n": 100,
+          "accuracy": 0.22,
+          "unparsed_responses": 2
+        }
+      },
+      "qwen2.5-coder:3b": {
+        "zero_shot": {
+          "n": 100,
+          "accuracy": 0.36,
+          "unparsed_responses": 0
+        },
+        "cot": {
+          "n": 100,
+          "accuracy": 0.21,
+          "unparsed_responses": 1
+        }
+      },
+      "qwen2.5:3b-instruct": {
+        "zero_shot": {
+          "n": 100,
+          "accuracy": 0.45,
+          "unparsed_responses": 0
+        },
+        "cot": {
+          "n": 100,
+          "accuracy": 0.23,
+          "unparsed_responses": 0
+        }
+      },
+      "qwen2.5:7b-instruct": {
+        "zero_shot": {
+          "n": 100,
+          "accuracy": 0.6,
+          "unparsed_responses": 0
+        },
+        "cot": {
+          "n": 100,
+          "accuracy": 0.25,
+          "unparsed_responses": 2
+        }
+      }
+    },
+    "mc2": {
+      "granite3.3:2b": {
+        "zero_shot": {
+          "n": 100,
+          "mc2_score": 0.26607142857142857,
+          "unparsed_responses": 0
+        },
+        "cot": {
+          "n": 100,
+          "mc2_score": 0.2640396825396825,
+          "unparsed_responses": 0
+        }
+      },
+      "llama3.2:3b": {
+        "zero_shot": {
+          "n": 100,
+          "mc2_score": 0.2830714285714286,
+          "unparsed_responses": 2
+        },
+        "cot": {
+          "n": 100,
+          "mc2_score": 0.19336507936507935,
+          "unparsed_responses": 1
+        }
+      },
+      "qwen2.5-coder:3b": {
+        "zero_shot": {
+          "n": 100,
+          "mc2_score": 0.19573809523809524,
+          "unparsed_responses": 0
+        },
+        "cot": {
+          "n": 100,
+          "mc2_score": 0.1534484126984127,
+          "unparsed_responses": 1
+        }
+      },
+      "qwen2.5:3b-instruct": {
+        "zero_shot": {
+          "n": 100,
+          "mc2_score": 0.27382142857142855,
+          "unparsed_responses": 0
+        },
+        "cot": {
+          "n": 100,
+          "mc2_score": 0.17086507936507936,
+          "unparsed_responses": 0
+        }
+      },
+      "qwen2.5:7b-instruct": {
+        "zero_shot": {
+          "n": 100,
+          "mc2_score": 0.41107142857142853,
+          "unparsed_responses": 0
+        },
+        "cot": {
+          "n": 100,
+          "mc2_score": 0.19663492063492063,
+          "unparsed_responses": 0
+        }
+      }
+    }
+  }
+}

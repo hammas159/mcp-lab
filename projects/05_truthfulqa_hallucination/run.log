@@ -1,0 +1,185 @@
+warning: `VIRTUAL_ENV=d:\github\rag-forge\.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+Evaluating models: ['granite3.3:2b', 'llama3.2:3b', 'qwen2.5-coder:3b', 'qwen2.5:3b-instruct', 'qwen2.5:7b-instruct']
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Resuming from existing checkpoint at D:\github\mcp-lab\projects\05_truthfulqa_hallucination\results.json
+[resume] skipping already-complete model=granite3.3:2b task=mc1 strategy=zero_shot (n=100)
+[resume] skipping already-complete model=granite3.3:2b task=mc1 strategy=cot (n=100)
+[resume] skipping already-complete model=granite3.3:2b task=mc2 strategy=zero_shot (n=100)
+[resume] skipping already-complete model=granite3.3:2b task=mc2 strategy=cot (n=100)
+[resume] skipping already-complete model=llama3.2:3b task=mc1 strategy=zero_shot (n=100)
+[resume] skipping already-complete model=llama3.2:3b task=mc1 strategy=cot (n=100)
+[resume] skipping already-complete model=llama3.2:3b task=mc2 strategy=zero_shot (n=100)
+[resume] skipping already-complete model=llama3.2:3b task=mc2 strategy=cot (n=100)
+[resume] skipping already-complete model=qwen2.5-coder:3b task=mc1 strategy=zero_shot (n=100)
+[25/2000] elapsed=86s model=qwen2.5-coder:3b task=mc1 strategy=cot
+[50/2000] elapsed=182s model=qwen2.5-coder:3b task=mc1 strategy=cot
+[75/2000] elapsed=264s model=qwen2.5-coder:3b task=mc1 strategy=cot
+[100/2000] elapsed=343s model=qwen2.5-coder:3b task=mc1 strategy=cot
+[125/2000] elapsed=350s model=qwen2.5-coder:3b task=mc2 strategy=zero_shot
+[150/2000] elapsed=357s model=qwen2.5-coder:3b task=mc2 strategy=zero_shot
+[175/2000] elapsed=361s model=qwen2.5-coder:3b task=mc2 strategy=zero_shot
+[200/2000] elapsed=368s model=qwen2.5-coder:3b task=mc2 strategy=zero_shot
+[225/2000] elapsed=473s model=qwen2.5-coder:3b task=mc2 strategy=cot
+[250/2000] elapsed=574s model=qwen2.5-coder:3b task=mc2 strategy=cot
+[275/2000] elapsed=644s model=qwen2.5-coder:3b task=mc2 strategy=cot
+[300/2000] elapsed=693s model=qwen2.5-coder:3b task=mc2 strategy=cot
+[325/2000] elapsed=725s model=qwen2.5:3b-instruct task=mc1 strategy=zero_shot
+[350/2000] elapsed=727s model=qwen2.5:3b-instruct task=mc1 strategy=zero_shot
+[375/2000] elapsed=729s model=qwen2.5:3b-instruct task=mc1 strategy=zero_shot
+[400/2000] elapsed=731s model=qwen2.5:3b-instruct task=mc1 strategy=zero_shot
+[425/2000] elapsed=767s model=qwen2.5:3b-instruct task=mc1 strategy=cot
+[450/2000] elapsed=803s model=qwen2.5:3b-instruct task=mc1 strategy=cot
+[475/2000] elapsed=840s model=qwen2.5:3b-instruct task=mc1 strategy=cot
+[500/2000] elapsed=877s model=qwen2.5:3b-instruct task=mc1 strategy=cot
+[525/2000] elapsed=880s model=qwen2.5:3b-instruct task=mc2 strategy=zero_shot
+[550/2000] elapsed=883s model=qwen2.5:3b-instruct task=mc2 strategy=zero_shot
+[575/2000] elapsed=885s model=qwen2.5:3b-instruct task=mc2 strategy=zero_shot
+[600/2000] elapsed=888s model=qwen2.5:3b-instruct task=mc2 strategy=zero_shot
+[625/2000] elapsed=938s model=qwen2.5:3b-instruct task=mc2 strategy=cot
+[650/2000] elapsed=988s model=qwen2.5:3b-instruct task=mc2 strategy=cot
+[675/2000] elapsed=1037s model=qwen2.5:3b-instruct task=mc2 strategy=cot
+[700/2000] elapsed=1086s model=qwen2.5:3b-instruct task=mc2 strategy=cot
+[725/2000] elapsed=1146s model=qwen2.5:7b-instruct task=mc1 strategy=zero_shot
+[750/2000] elapsed=1149s model=qwen2.5:7b-instruct task=mc1 strategy=zero_shot
+[775/2000] elapsed=1152s model=qwen2.5:7b-instruct task=mc1 strategy=zero_shot
+[800/2000] elapsed=1154s model=qwen2.5:7b-instruct task=mc1 strategy=zero_shot
+[825/2000] elapsed=1223s model=qwen2.5:7b-instruct task=mc1 strategy=cot
+[850/2000] elapsed=1300s model=qwen2.5:7b-instruct task=mc1 strategy=cot
+[875/2000] elapsed=1377s model=qwen2.5:7b-instruct task=mc1 strategy=cot
+[900/2000] elapsed=1459s model=qwen2.5:7b-instruct task=mc1 strategy=cot
+[925/2000] elapsed=1494s model=qwen2.5:7b-instruct task=mc2 strategy=zero_shot
+[950/2000] elapsed=1514s model=qwen2.5:7b-instruct task=mc2 strategy=zero_shot
+[975/2000] elapsed=1560s model=qwen2.5:7b-instruct task=mc2 strategy=zero_shot
+[1000/2000] elapsed=1594s model=qwen2.5:7b-instruct task=mc2 strategy=zero_shot
+[1025/2000] elapsed=1759s model=qwen2.5:7b-instruct task=mc2 strategy=cot
+[1050/2000] elapsed=1914s model=qwen2.5:7b-instruct task=mc2 strategy=cot
+[1075/2000] elapsed=2054s model=qwen2.5:7b-instruct task=mc2 strategy=cot
+[1100/2000] elapsed=2191s model=qwen2.5:7b-instruct task=mc2 strategy=cot
+
+Wrote D:\github\mcp-lab\projects\05_truthfulqa_hallucination\results.json
+{
+  "mc1": {
+    "granite3.3:2b": {
+      "zero_shot": {
+        "n": 100,
+        "accuracy": 0.37,
+        "unparsed_responses": 0
+      },
+      "cot": {
+        "n": 100,
+        "accuracy": 0.24,
+        "unparsed_responses": 0
+      }
+    },
+    "llama3.2:3b": {
+      "zero_shot": {
+        "n": 100,
+        "accuracy": 0.36,
+        "unparsed_responses": 1
+      },
+      "cot": {
+        "n": 100,
+        "accuracy": 0.22,
+        "unparsed_responses": 2
+      }
+    },
+    "qwen2.5-coder:3b": {
+      "zero_shot": {
+        "n": 100,
+        "accuracy": 0.36,
+        "unparsed_responses": 0
+      },
+      "cot": {
+        "n": 100,
+        "accuracy": 0.21,
+        "unparsed_responses": 1
+      }
+    },
+    "qwen2.5:3b-instruct": {
+      "zero_shot": {
+        "n": 100,
+        "accuracy": 0.45,
+        "unparsed_responses": 0
+      },
+      "cot": {
+        "n": 100,
+        "accuracy": 0.23,
+        "unparsed_responses": 0
+      }
+    },
+    "qwen2.5:7b-instruct": {
+      "zero_shot": {
+        "n": 100,
+        "accuracy": 0.6,
+        "unparsed_responses": 0
+      },
+      "cot": {
+        "n": 100,
+        "accuracy": 0.25,
+        "unparsed_responses": 2
+      }
+    }
+  },
+  "mc2": {
+    "granite3.3:2b": {
+      "zero_shot": {
+        "n": 100,
+        "mc2_score": 0.26607142857142857,
+        "unparsed_responses": 0
+      },
+      "cot": {
+        "n": 100,
+        "mc2_score": 0.2640396825396825,
+        "unparsed_responses": 0
+      }
+    },
+    "llama3.2:3b": {
+      "zero_shot": {
+        "n": 100,
+        "mc2_score": 0.2830714285714286,
+        "unparsed_responses": 2
+      },
+      "cot": {
+        "n": 100,
+        "mc2_score": 0.19336507936507935,
+        "unparsed_responses": 1
+      }
+    },
+    "qwen2.5-coder:3b": {
+      "zero_shot": {
+        "n": 100,
+        "mc2_score": 0.19573809523809524,
+        "unparsed_responses": 0
+      },
+      "cot": {
+        "n": 100,
+        "mc2_score": 0.1534484126984127,
+        "unparsed_responses": 1
+      }
+    },
+    "qwen2.5:3b-instruct": {
+      "zero_shot": {
+        "n": 100,
+        "mc2_score": 0.27382142857142855,
+        "unparsed_responses": 0
+      },
+      "cot": {
+        "n": 100,
+        "mc2_score": 0.17086507936507936,
+        "unparsed_responses": 0
+      }
+    },
+    "qwen2.5:7b-instruct": {
+      "zero_shot": {
+        "n": 100,
+        "mc2_score": 0.41107142857142853,
+        "unparsed_responses": 0
+      },
+      "cot": {
+        "n": 100,
+        "mc2_score": 0.19663492063492063,
+        "unparsed_responses": 0
+      }
+    }
+  }
+}
