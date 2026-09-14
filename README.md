@@ -1,11 +1,32 @@
-# mcp-lab — six agentic-AI projects on real benchmarks (MCP · LangChain · Ollama · FastAPI)
+<h1 align="center">mcp-lab</h1>
+<p align="center"><i>Six agentic-AI projects on real benchmarks, running entirely on local models</i></p>
+
+<p align="center">
+  <a href="#the-six-projects">The six projects</a> &middot;
+  <a href="docs/FINDINGS.md">Findings</a> &middot;
+  <a href="docs/ARCHITECTURE.md">Architecture</a> &middot;
+  <a href="docs/PROBLEMS.md">Problems hit</a> &middot;
+  <a href="docs/LIMITATIONS.md">Limitations</a> &middot;
+  <a href="docs/FUTURE.md">Future work</a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.11%2B-blue" alt="python">
+  <img src="https://img.shields.io/badge/projects-6-brightgreen" alt="projects">
+  <img src="https://img.shields.io/badge/inference-local%20(Ollama)-success" alt="local">
+  <img src="https://img.shields.io/badge/API%20keys-none-informational" alt="no api keys">
+  <img src="https://img.shields.io/badge/benchmarks-HotpotQA%20%C2%B7%20BFCL%20%C2%B7%20SWE--bench%20%C2%B7%20TruthfulQA%20%C2%B7%20FEVER-orange" alt="benchmarks">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="license"></a>
+</p>
+
+---
 
 Six self-contained projects, each built on a **real published benchmark** with **real
-measured numbers**, running entirely on **local models** — no API keys, no paid
-inference, no synthetic data standing in for a dataset.
+measured numbers**, running entirely on **local models** - no API keys, no paid inference,
+no synthetic data standing in for a dataset.
 
-Every project is built around a finding, not a feature. Several of those findings are
-negative, and they are reported as they came out.
+Every project is built around a finding, not a feature. **Several of those findings are
+negative**, and they are reported as they came out.
 
 ---
 
@@ -13,32 +34,34 @@ negative, and they are reported as they came out.
 
 | # | Project | Benchmark | Headline finding |
 |---|---|---|---|
-| **01** | [MCP Red-Team Platform](projects/01_mcp_redteam_platform) | self-built, 5 audit modules | A prompt-injection payload that scores **0%** in one delivery vector reaches **100%** in another — the same attack, moved |
-| **02** | [Multi-Hop RAG Audit](projects/02_hotpotqa_multihop_rag) | HotpotQA | Retrieval finds the gold facts **83.6%** of the time, yet answer exact-match is **0.20**. The bottleneck is not retrieval |
-| **03** | [Tool-Calling Accuracy](projects/03_bfcl_tool_calling) | BFCL v4 | **87.9% → 64.3%** across the local fleet, 700 real calls. Parallel multi-tool calls are where small models collapse |
-| **04** | [SWE-bench Coding Agent](projects/04_swebench_coding_agent) | SWE-bench Lite | Both patches were rejected by `git apply` — **malformed diff syntax, not wrong logic.** The model could reason; it could not format |
-| **05** | [Hallucination Rate](projects/05_truthfulqa_hallucination) | TruthfulQA | **Chain-of-thought made every single model worse.** The 7B dropped **60% → 25%**, a 35-point loss |
-| **06** | [Fact-Verification Agent](projects/06_fever_fact_verification) | FEVER | **38.3%** on three-way verification with live Wikipedia retrieval |
+| **01** | [MCP Red-Team Platform](projects/01_mcp_redteam_platform) | self-built, 5 audit modules | The same injection payload scores **0% in one delivery vector and 100% in another** |
+| **02** | [Multi-Hop RAG Audit](projects/02_hotpotqa_multihop_rag) | HotpotQA | Retrieval finds the gold facts **83.6%** of the time, yet answer exact-match is **0.20** |
+| **03** | [Tool-Calling Accuracy](projects/03_bfcl_tool_calling) | BFCL v4 | **87.9% &rarr; 64.3%** across the fleet, 700 real calls, zero errors |
+| **04** | [SWE-bench Coding Agent](projects/04_swebench_coding_agent) | SWE-bench Lite | Both patches rejected by `git apply` - **malformed diff syntax, not wrong logic** |
+| **05** | [Hallucination Rate](projects/05_truthfulqa_hallucination) | TruthfulQA | **Chain-of-thought made every model worse.** The 7B lost **35 points** |
+| **06** | [Fact-Verification Agent](projects/06_fever_fact_verification) | FEVER | **38.3%** three-way verification against **live** Wikipedia |
 
-Each project has its own README with the full method, the complete results, and an
-honest account of what broke while building it.
+Each project has its own README with the full method, complete results, and an honest
+account of what broke while building it.
+
+&#128202; **[All six findings, with the tables &rarr;](docs/FINDINGS.md)**
 
 ---
 
-## The finding worth reading first
+## The one worth reading first
 
-**Project 05: chain-of-thought prompting made all five models worse on TruthfulQA.**
+**Chain-of-thought prompting made all five models worse on TruthfulQA.**
 
-| Model | zero-shot | chain-of-thought | Δ |
+| Model | zero-shot | chain-of-thought | &Delta; |
 |---|---:|---:|---:|
-| qwen2.5:7b-instruct | **60%** | 25% | **−35 pts** |
-| qwen2.5:3b-instruct | 45% | 23% | −22 pts |
-| granite3.3:2b | 37% | 24% | −13 pts |
-| llama3.2:3b | 36% | 22% | −14 pts |
-| qwen2.5-coder:3b | 36% | 21% | −15 pts |
+| qwen2.5:7b-instruct | **60%** | 25% | **-35 pts** |
+| qwen2.5:3b-instruct | 45% | 23% | -22 pts |
+| granite3.3:2b | 37% | 24% | -13 pts |
+| llama3.2:3b | 36% | 22% | -14 pts |
+| qwen2.5-coder:3b | 36% | 21% | -15 pts |
 
-Not one model improved. CoT is near-universally recommended, and on this benchmark it is
-actively harmful — the reasoning gives the model room to talk itself into the plausible
+**Not one model improved.** CoT is near-universally recommended, and on this benchmark it is
+actively harmful - the reasoning gives the model room to talk itself into the plausible
 misconception that TruthfulQA is built to elicit.
 
 ---
@@ -47,66 +70,31 @@ misconception that TruthfulQA is built to elicit.
 
 ```mermaid
 flowchart LR
-    subgraph L["Local only — no API keys"]
-        O["Ollama fleet<br/>2B / 3B / 7B<br/>+ nomic-embed"]
-    end
+    O["Ollama fleet<br/>2B / 3B / 7B<br/>+ nomic-embed"] --> P1["01 red-team"]
+    O --> P2["02 multi-hop RAG"]
+    O --> P3["03 tool calling"]
+    O --> P4["04 coding agent"]
+    O --> P5["05 hallucination"]
+    O --> P6["06 fact verification"]
 
-    subgraph D["Real published benchmarks"]
-        B1["HotpotQA"]
-        B2["BFCL v4"]
-        B3["SWE-bench Lite"]
-        B4["TruthfulQA"]
-        B5["FEVER"]
-    end
+    B1["HotpotQA"] --> P2
+    B2["BFCL v4"] --> P3
+    B3["SWE-bench Lite"] --> P4
+    B4["TruthfulQA"] --> P5
+    B5["FEVER"] --> P6
 
-    O --> P1["01 · MCP red-team<br/>attack surface"]
-    O --> P2["02 · multi-hop RAG"]
-    O --> P3["03 · tool calling"]
-    O --> P4["04 · coding agent"]
-    O --> P5["05 · hallucination"]
-    O --> P6["06 · fact verification"]
-
-    B1 --> P2
-    B2 --> P3
-    B3 --> P4
-    B4 --> P5
-    B5 --> P6
-
-    P1 --> R["Measured results<br/>results.json per project"]
+    P1 --> R["results.json<br/>per project"]
     P2 --> R
     P3 --> R
     P4 --> R
     P5 --> R
     P6 --> R
 
-    style R fill:#2563eb,color:#fff
     style O fill:#16a34a,color:#fff
+    style R fill:#2563eb,color:#fff
 ```
 
----
-
-## What is shared, and what is not
-
-Each project has **its own virtual environment**. That is deliberate, not disorganised:
-project 01 pins `mcp<2` because `mcp>=2` renamed `FastMCP` to `MCPServer`, and forcing
-one environment across all six would mean pinning every project to the oldest
-constraint any of them has.
-
-Project 06 deliberately does **not** use LangChain — it calls Ollama's `/api/embeddings`
-and `/api/chat` over HTTP directly, because going through a framework wrapper for two
-endpoints was more code, not less. Each README says which libraries it actually imports.
-
----
-
-## Status
-
-✅ All six built, tested and committed. Every number in every README came from running
-the code.
-
-🔴 **Pending: 3B vs 14B comparison.** These results use a fleet topping out at 7B.
-`qwen2.5-coder:14b` is downloading; when it lands, each project gains a comparison row
-rather than being rewritten. Project **04** matters most — its patches failed on *diff
-formatting*, and whether a larger model fixes that is a real open question.
+&#128295; **[Why each project has its own venv, and what is deliberately not shared &rarr;](docs/ARCHITECTURE.md)**
 
 ---
 
@@ -122,22 +110,57 @@ pytest -q
 Each project directory is self-contained: its own `pyproject.toml`, its own venv, its own
 tests, its own `results.json`.
 
-## Requirements
+### Requirements
 
-- [Ollama](https://ollama.com) running locally with at least one chat model pulled
+- [Ollama](https://ollama.com) running locally, with at least one chat model pulled
 - Python 3.11+
-- Project 04 additionally needs **Docker** (it runs real repos in a real sandbox)
+- Project 04 additionally needs **Docker** - it runs real repositories in a real sandbox
+
+<!-- screenshot placeholder - see docs/SCREENSHOTS.md
+![red-team audit](docs/images/01-redteam-audit.png)
+-->
+
+---
+
+## Status
+
+&#9989; All six built, tested and committed. **Every number in every README came from
+running the code.**
+
+&#128308; **Pending: a larger-model comparison.** These results use a fleet topping out at
+7B. When a 14B model is available, each project gains a **comparison row** rather than being
+rewritten. Project **04** matters most - its patches failed on *diff formatting*, and
+whether a larger model fixes that is a real open question.
+
+---
+
+## Also worth reading
+
+| | |
+|---|---|
+| &#128202; **[Findings](docs/FINDINGS.md)** | All six results with their tables |
+| &#128295; **[Architecture](docs/ARCHITECTURE.md)** | Per-project venvs, what is shared, what is not |
+| &#128736; **[Problems hit](docs/PROBLEMS.md)** | MCP 1.x vs 2.x, a template crash, 10,000 wasted embeddings |
+| &#9888; **[Limitations](docs/LIMITATIONS.md)** | Sample sizes, single seeds, what these numbers do not show |
+| &#128640; **[Future work](docs/FUTURE.md)** | Larger models, bigger samples, the comparisons worth running |
+| &#128247; **[Screenshots](docs/SCREENSHOTS.md)** | How to capture and reference UI screenshots |
 
 ## Stack
 
-`Model Context Protocol (MCP)` · `LangChain` + `langchain-ollama` · `Ollama` ·
-`FastAPI` + `Jinja2` · `httpx` · `Hugging Face datasets` · `Pydantic` · `Docker` ·
-`pytest` · `uv`
+`Model Context Protocol (MCP)` &middot; `LangChain` + `langchain-ollama` &middot; `Ollama`
+&middot; `FastAPI` + `Jinja2` &middot; `httpx` &middot; `Hugging Face datasets` &middot;
+`Pydantic` &middot; `Docker` &middot; `pytest` &middot; `uv`
 
 ## Keywords
 
-agentic AI · LLM agents · Model Context Protocol · MCP server · tool calling ·
-function calling · BFCL · HotpotQA · multi-hop RAG · SWE-bench · TruthfulQA · FEVER ·
-hallucination detection · prompt injection · red teaming · LLM security ·
-retrieval-augmented generation · citation faithfulness · local LLM · Ollama · Qwen2.5 ·
-chain-of-thought · LLM evaluation · benchmark reproducibility · fact verification
+agentic AI &middot; LLM agents &middot; Model Context Protocol &middot; MCP server &middot;
+tool calling &middot; function calling &middot; BFCL &middot; HotpotQA &middot;
+multi-hop RAG &middot; SWE-bench &middot; TruthfulQA &middot; FEVER &middot;
+hallucination detection &middot; prompt injection &middot; red teaming &middot;
+LLM security &middot; retrieval-augmented generation &middot; citation faithfulness
+&middot; local LLM &middot; Ollama &middot; Qwen2.5 &middot; chain-of-thought &middot;
+LLM evaluation &middot; benchmark reproducibility &middot; fact verification
+
+## Licence
+
+MIT - see [LICENSE](LICENSE).

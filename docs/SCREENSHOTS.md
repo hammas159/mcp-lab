@@ -13,9 +13,9 @@ uvicorn webapp.app:app --reload        # or: streamlit run ui/app.py
 Open the page, screenshot it, and save as **PNG** into `docs/` using this naming:
 
 ```
-docs/01-redteam-chat.png
-docs/01-redteam-audit.png
-docs/03-bfcl-results.png
+docs/images/01-redteam-chat.png
+docs/images/01-redteam-audit.png
+docs/images/03-bfcl-results.png
 ```
 
 Keep each under ~300 KB (PNG, resize to 1600px wide). Large binaries bloat every future
@@ -26,7 +26,7 @@ clone of the repo permanently.
 In the project README, directly under the headline paragraph:
 
 ```markdown
-![Red-team audit results](../../docs/01-redteam-audit.png)
+![Red-team audit results](../docs/images/01-redteam-audit.png)
 ```
 
 ## Social preview
