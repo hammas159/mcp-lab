@@ -207,3 +207,39 @@ deliberately ambiguous requests, both left as follow-up.
   occasion during this build, including this project's own dependency
   install once. Nothing here was lost permanently, but it's why some runs in
   the build history needed a restart or a rerun.
+
+
+---
+
+## How it works
+
+```mermaid
+flowchart TD
+    U["browser<br/>FastAPI + Jinja2 chat UI"] --> A["LangChain agent loop<br/>langchain-ollama"]
+    A --> M["Ollama<br/>local chat model"]
+    A --> T["load_mcp_tools()<br/>over real MCP stdio"]
+    T --> S["MCP server<br/>4 tools"]
+    S --> T1["read_file"]
+    S --> T2["search_docs"]
+    S --> T3["run_calc"]
+    S --> T4["list_dir"]
+    S --> H{"hardened=True?"}
+    H -->|"no"| V["vulnerable baseline"]
+    H -->|"yes"| P["path confinement,<br/>input filtering"]
+    V --> R["5 red-team modules<br/>M1-M5"]
+    P --> R
+    R --> O["before/after<br/>attack success rates"]
+
+    style V fill:#dc2626,color:#fff
+    style P fill:#16a34a,color:#fff
+    style O fill:#2563eb,color:#fff
+```
+
+The `hardened` flag is what makes this a measurement rather than a demo: the same audit
+runs against the same tools twice, and the difference is the mitigation's actual effect.
+
+## Keywords
+
+MCP · Model Context Protocol · prompt injection · indirect prompt injection · red teaming ·
+LLM security · agent security · tool poisoning · path traversal · sandbox escape ·
+LangChain · Ollama · FastAPI · local LLM · AI safety · adversarial testing

@@ -194,3 +194,32 @@ splitter here; FEVER's official evidence-sufficiency scoring (would need FEVER's
 snapshot text to be meaningful, which is exactly the corpus this project couldn't
 feasibly stream — see above); trying a larger top-k or a rerank step to raise the 57.4%
 evidence recall, which is the clearest lever on overall accuracy given the analysis above.
+
+
+---
+
+## How it works
+
+```mermaid
+flowchart TD
+    D["FEVER validation split<br/>label-stratified, seed 42"] --> S["60 claims<br/>20 per label"]
+    S --> W["live Wikipedia<br/>MediaWiki API"]
+    W --> E["embedding similarity<br/>nomic-embed via /api/embeddings"]
+    E --> C["top evidence sentences"]
+    C --> L["Ollama chat model<br/>/api/chat"]
+    L --> V["verdict:<br/>SUPPORTS / REFUTES / NOT ENOUGH INFO"]
+    V --> G{"score against<br/>FEVER gold labels"}
+    G --> R["38.3% accuracy"]
+
+    style R fill:#f59e0b,color:#fff
+```
+
+Evidence comes from **live Wikipedia**, not a frozen dump, so retrieval quality is a real
+variable rather than a fixed corpus - and the README says what that costs in
+reproducibility.
+
+## Keywords
+
+FEVER · fact verification · fact checking · claim verification · evidence retrieval ·
+Wikipedia · MediaWiki API · natural language inference · NLI · embedding retrieval ·
+nomic-embed · Ollama · FastAPI · local LLM · misinformation · LLM evaluation

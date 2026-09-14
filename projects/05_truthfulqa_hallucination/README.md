@@ -103,3 +103,33 @@ out of the right answer.
   `/api/generate`** (no per-token log-probabilities for arbitrary option
   text) — documented as a heuristic stand-in rather than silently presenting
   an approximation as the real published metric.
+
+
+---
+
+## How it works
+
+```mermaid
+flowchart TD
+    Q["TruthfulQA<br/>100 questions per cell"] --> S1["zero-shot prompt"]
+    Q --> S2["chain-of-thought prompt"]
+    S1 --> M["every chat model<br/>in the local fleet"]
+    S2 --> M
+    M --> P["parse the selected option"]
+    P --> E1["MC1 accuracy<br/>single best answer"]
+    P --> E2["MC2 score<br/>heuristic approximation"]
+    E1 --> C{"compare<br/>zero-shot vs CoT"}
+    E2 --> C
+    C --> F["CoT LOST for all 5 models<br/>7B: 60% to 25%"]
+
+    style F fill:#dc2626,color:#fff
+```
+
+Both strategies run on identical questions with identical parsing, so the gap is
+attributable to the prompt and nothing else.
+
+## Keywords
+
+TruthfulQA · hallucination · misconception · chain-of-thought · CoT prompting ·
+prompt engineering · LLM evaluation · truthfulness · model comparison · Ollama ·
+Qwen2.5 · local LLM · benchmark · negative result · prompting strategy

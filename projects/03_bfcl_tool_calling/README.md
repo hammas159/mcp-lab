@@ -196,3 +196,37 @@ out at 73.3% even for the best model outside qwen2.5:7b-instruct.
 - No retry/temperature-sampling variance analysis (everything run at
   `temperature=0`, single sample per case, matching the brief's ask for a
   clearly documented single real run rather than statistical estimation).
+
+
+---
+
+## How it works
+
+```mermaid
+flowchart TD
+    D["BFCL v4 test cases<br/>140 per model"] --> C1["simple_python (40)"]
+    D --> C2["multiple (40)"]
+    D --> C3["parallel (30)"]
+    D --> C4["parallel_multiple (30)"]
+    C1 --> M["each model in the fleet<br/>via /api/chat"]
+    C2 --> M
+    C3 --> M
+    C4 --> M
+    M --> P["parse the tool call<br/>name + arguments"]
+    P --> S{"AST match<br/>against expected?"}
+    S -->|"yes"| OK["correct"]
+    S -->|"no"| F["record the failure reason"]
+    OK --> R["per-model, per-category<br/>accuracy table"]
+    F --> R
+
+    style R fill:#2563eb,color:#fff
+```
+
+Every model sees identical cases, so the table compares models rather than prompts.
+700 real calls, zero request errors.
+
+## Keywords
+
+BFCL · Berkeley Function Calling Leaderboard · tool calling · function calling ·
+agent evaluation · LLM benchmarking · structured output · JSON mode · parallel tool use ·
+Ollama · Qwen2.5 · Llama 3.2 · Granite · local LLM · model comparison

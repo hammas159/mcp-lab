@@ -156,3 +156,33 @@ skipped automatically when Docker isn't reachable.
 ```
 uv run pytest tests/test_04_swebench.py -v -m "not live"
 ```
+
+
+---
+
+## How it works
+
+```mermaid
+flowchart TD
+    I["SWE-bench Lite instance<br/>repo + issue + gold test_patch"] --> G["git clone at base_commit"]
+    G --> D["Docker sandbox"]
+    D --> E["pip install -e ."]
+    E --> T["apply gold test_patch"]
+    T --> R["retrieve candidate files"]
+    R --> L["Ollama model<br/>generate a patch"]
+    L --> A{"git apply<br/>model patch"}
+    A -->|"rejected"| X["FAILED<br/>malformed diff syntax"]
+    A -->|"applied"| V["run the tests"]
+
+    style X fill:#dc2626,color:#fff
+```
+
+The pipeline ran end to end for both instances - real checkout, real install, real gold
+test patch applied cleanly. **`git apply` rejected the model's own diffs**: the failure
+is diff *formatting*, not reasoning about the code. That distinction is the finding.
+
+## Keywords
+
+SWE-bench · SWE-bench Lite · coding agent · automated program repair · patch generation ·
+unified diff · git apply · Docker sandbox · code retrieval · LLM agents · Ollama ·
+local LLM · software engineering agents · benchmark evaluation

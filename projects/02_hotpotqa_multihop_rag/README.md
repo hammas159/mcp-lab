@@ -179,3 +179,36 @@ list that quietly hides most of what the model was actually given.
 - The sample is 50 of 7,405 validation examples; metrics are informative
   at this scale but would tighten with a larger run (e.g. n=200+) if more
   time/compute were available.
+
+
+---
+
+## How it works
+
+```mermaid
+flowchart TD
+    Q["HotpotQA question<br/>+ gold supporting facts"] --> H1["hop 1 retrieval<br/>embedding similarity"]
+    H1 --> C1["context set A"]
+    C1 --> H2["hop 2 retrieval<br/>query reformulated"]
+    H2 --> C2["context set B"]
+    C2 --> LLM["Ollama chat model<br/>answer + claimed citations"]
+    LLM --> A1["answer<br/>EM / F1 vs gold"]
+    LLM --> A2["claimed citations"]
+    A2 --> X1{"vs GOLD facts<br/>is it right?"}
+    A2 --> X2{"vs FED context<br/>is it honest?"}
+    X1 --> R["precision 0.81 / recall 0.406"]
+    X2 --> R2["precision 0.95 / recall 0.135<br/>6% fabricated a citation"]
+
+    style R2 fill:#dc2626,color:#fff
+```
+
+Scoring citations **twice** - once against the gold facts and once against what was
+actually fed to the model - separates "cited the wrong thing" from "cited something it
+was never shown", which a single number cannot do.
+
+## Keywords
+
+HotpotQA · multi-hop reasoning · retrieval-augmented generation · RAG evaluation ·
+citation faithfulness · attribution · hallucinated citations · grounding ·
+embedding retrieval · LangChain · Ollama · local LLM · question answering ·
+LLM evaluation · faithfulness metrics
