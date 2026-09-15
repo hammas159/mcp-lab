@@ -12,3 +12,6 @@ wheels/
 # Scratch clones of external repos (re-creatable via repo_checkout.py --
 # not source we authored, and includes full git history)
 projects/04_swebench_coding_agent/workdirs/
+
+# stray execution logs (they leak local absolute paths)
+*.log
