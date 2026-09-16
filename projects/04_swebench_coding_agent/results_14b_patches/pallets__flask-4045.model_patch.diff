@@ -1,0 +1,15 @@
+diff --git a/src/flask/app.py b/src/flask/app.py
+index 1234567..89abcdef 100644
+--- a/src/flask/app.py
++++ b/src/flask/app.py
+@@ -1234,6 +1234,10 @@ class Flask(Scaffold):
+         if endpoint is None:
+             endpoint = _endpoint_from_view_func(view_func)  # type: ignore
+         defaults = self.url_defaults
++        if '.' in endpoint:
++            raise ValueError(f"Blueprint name '{self.name}' contains a dot, which is not allowed.")
++        if '.' in rule:
++            raise ValueError(f"Rule '{rule}' contains a dot, which is not allowed.")
+         if "defaults" in options:
+             defaults = dict(defaults, **options.pop("defaults"))
+         self.add_url_rule(

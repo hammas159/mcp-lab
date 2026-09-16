@@ -1,0 +1,25 @@
+diff --git a/requests/models.py b/requests/models.py
+index 1234567..89abcde 100644
+--- a/requests/models.py
++++ b/requests/models.py
+@@ -1000,6 +1000,7 @@ class Response(object):
+         """
+         if self._content is None:
+             # Decode unicode from bytestring
++            self._content = b''.join(self.iter_content(decode_unicode=True))
+             if self.encoding:
+                 self._content = self._content.decode(self.encoding)
+         return self._content
+
+diff --git a/requests/packages/urllib3/response.py b/requests/packages/urllib3/response.py
+index 1234567..89abcde 100644
+--- a/requests/packages/urllib3/response.py
++++ b/requests/packages/urllib3/response.py
+@@ -300,6 +300,7 @@ class HTTPResponse(io.IOBase):
+         """
+         if self._body is None:
+             # Decode unicode from bytestring
++            self._body = b''.join(self.iter_content(decode_content=True))
+             if self.encoding:
+                 self._body = self._body.decode(self.encoding)
+         return self._body

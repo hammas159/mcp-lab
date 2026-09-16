@@ -1,0 +1,18 @@
+{
+  "pallets__flask-4045": {
+    "instance_id": "pallets__flask-4045",
+    "patch_chars": 686,
+    "applies": false,
+    "diff_is_malformed": false,
+    "failure_mode": "wrong_line_numbers",
+    "git_apply_stderr": "error: patch failed: src/flask/app.py:1234\nerror: src/flask/app.py: patch does not apply"
+  },
+  "psf__requests-3362": {
+    "instance_id": "psf__requests-3362",
+    "patch_chars": 1029,
+    "applies": false,
+    "diff_is_malformed": false,
+    "failure_mode": "wrong_line_numbers",
+    "git_apply_stderr": "error: patch failed: requests/models.py:1000\nerror: requests/models.py: patch does not apply\nerror: patch failed: requests/packages/urllib3/response.py:300\nerror: requests/packages/urllib3/response.py: patch does not apply"
+  }
+}

@@ -87,6 +87,56 @@ file in the first place (requests case). Neither failure is a pipeline bug;
 both are real properties of this model + this retrieval method, which is
 exactly what an eval harness like this is supposed to surface.
 
+---
+
+### 2026-09-16 · `qwen2.5-coder:14b` — the failure mode changed, the outcome did not
+
+Re-run with a model **4.8x larger**. Both patches still fail, but for a
+*different reason*, and the difference is the result:
+
+| instance | `qwen2.5-coder:3b` | `qwen2.5-coder:14b` |
+|---|---|---|
+| `pallets__flask-4045` | `patch fragment without header at line 15` | `patch failed: src/flask/app.py:1234` |
+| `psf__requests-3362` | `corrupt patch at line 11` | `patch failed: requests/models.py:1000` |
+
+**The 3B emitted diffs `git` could not parse. The 14B emits diffs that parse
+perfectly and point at coordinates that do not exist.**
+
+The flask case is exact. The 14B's hunk header claims its context sits at
+`src/flask/app.py:1234`. The context lines it quotes are real — they appear
+verbatim in the file — but at **line 1042**. Line 1234 is docstring prose
+about teardown functions. The file is 2076 lines long, so 1234 is a plausible
+number; it is simply not the right one. Both patches also carry the same
+`index 1234567..89abcdef` placeholder hashes the 3B invented.
+
+So scaling the model fixed the **syntax** and not the **grounding**. On flask it
+found the right code and invented its address — which is neither of the two
+hypotheses this project started with. (The requests case is less clean: as the
+3B analysis below notes, retrieval there also surfaced a vendored file, so its
+failure is not purely a coordinate problem.)
+
+That is arguably the worse failure. A corrupt diff is rejected loudly by any
+parser. A well-formed diff with fabricated line numbers passes every syntactic
+check and fails only against the real repository.
+
+⚠️ **This comparison covers `git apply` only.** The Docker sandbox could not be
+built during the re-run — `pip` inside the container failed to download
+`pygments` (*"This is an issue with network connectivity, not pip"*) because a
+concurrent model download was saturating the link. So **there is no
+FAIL_TO_PASS/PASS_TO_PASS verdict for the 14B**, and none is claimed. A patch
+that does not apply cannot be tested anyway, but the sandwiched question — *would
+it have fixed the bug?* — is unanswered. Reproduce with `python apply_check.py`,
+which needs no network and no Docker.
+
+## Input
+
+![input](docs/images/input.png)
+
+## Output
+
+![output](docs/images/output.png)
+
+
 ## Bugs found and fixed while building this (all real, all in this repo's history)
 
 - **Ollama's default 4096-token context window silently truncating/thrashing

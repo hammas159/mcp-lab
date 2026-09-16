@@ -6,6 +6,7 @@ No API keys, no external LLM calls: Ollama only, local.
 
 from __future__ import annotations
 
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -13,7 +14,9 @@ from pathlib import Path
 import httpx
 
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
-MODEL = "qwen2.5-coder:3b"
+# Overridable so the 3B baseline and a larger model can both be reproduced from the
+# same code. The default stays on the model the committed baseline was measured with.
+MODEL = os.environ.get("MCP_LAB_CODE_MODEL", "qwen2.5-coder:3b")
 
 SYSTEM_PROMPT = """You are an expert software engineer fixing a real bug in an open-source \
 Python project. You will be given the GitHub issue text and the full contents of the \
