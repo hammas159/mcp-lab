@@ -111,8 +111,7 @@
     "llama3.2:3b",
     "qwen2.5-coder:3b",
     "qwen2.5:3b-instruct",
-    "qwen2.5:7b-instruct",
-    "qwen2.5-coder:14b"
+    "qwen2.5:7b-instruct"
   ],
   "strategies": [
     "zero_shot",
@@ -123,7 +122,7 @@
     "mc2"
   ],
   "stopped_early": false,
-  "elapsed_seconds": 1563.2,
+  "elapsed_seconds": 2190.6,
   "results": {
     "mc1": {
       "granite3.3:2b": {
@@ -184,18 +183,6 @@
           "n": 100,
           "accuracy": 0.25,
           "unparsed_responses": 2
-        }
-      },
-      "qwen2.5-coder:14b": {
-        "zero_shot": {
-          "n": 100,
-          "accuracy": 0.56,
-          "unparsed_responses": 0
-        },
-        "cot": {
-          "n": 100,
-          "accuracy": 0.23,
-          "unparsed_responses": 3
         }
       }
     },
@@ -258,18 +245,6 @@
           "n": 100,
           "mc2_score": 0.19663492063492063,
           "unparsed_responses": 0
-        }
-      },
-      "qwen2.5-coder:14b": {
-        "zero_shot": {
-          "n": 100,
-          "mc2_score": 0.5246428571428572,
-          "unparsed_responses": 0
-        },
-        "cot": {
-          "n": 100,
-          "mc2_score": 0.19762698412698412,
-          "unparsed_responses": 1
         }
       }
     }

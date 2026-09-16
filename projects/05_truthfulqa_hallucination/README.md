@@ -43,10 +43,13 @@ config, `validation` split (its only split, 817 rows total).
   multi-sample self-consistency vote.
 - Every chat-capable model in the local fleet: `granite3.3:2b`,
   `llama3.2:3b`, `qwen2.5-coder:3b`, `qwen2.5:3b-instruct`,
-  `qwen2.5:7b-instruct` (`nomic-embed-text` excluded — embedding-only).
+  `qwen2.5:7b-instruct`, and **`qwen2.5-coder:14b` (added 2026-09-16)**
+  (`nomic-embed-text` excluded — embedding-only).
 
-**2,000 real Ollama calls** (100 questions × 5 models × 2 strategies × 2
-tasks), 2,190.6s wall time, run to completion (`stopped_early: false`).
+**2,400 real Ollama calls** (100 questions × 6 models × 2 strategies × 2
+tasks). The original 5-model run took 2,190.6s; the 14B added 400 calls to
+the same fixed sample (n=100, seed=42, identical `question_ids`), resumed
+rather than re-run, and is kept alongside `results_baseline_5models.json`.
 
 ## Real measured results
 
@@ -55,6 +58,7 @@ tasks), 2,190.6s wall time, run to completion (`stopped_early: false`).
 | Model | zero_shot | cot | Δ |
 |---|---:|---:|---:|
 | qwen2.5:7b-instruct | **60%** | 25% | **-35 pts** |
+| **qwen2.5-coder:14b** | **56%** | 23% | **-33 pts** |
 | qwen2.5:3b-instruct | 45% | 23% | -22 pts |
 | granite3.3:2b | 37% | 24% | -13 pts |
 | llama3.2:3b | 36% | 22% | -14 pts |
@@ -64,7 +68,8 @@ tasks), 2,190.6s wall time, run to completion (`stopped_early: false`).
 
 | Model | zero_shot | cot | Δ |
 |---|---:|---:|---:|
-| qwen2.5:7b-instruct | **0.411** | 0.197 | **-0.214** |
+| **qwen2.5-coder:14b** | **0.525** | 0.198 | **-0.327** |
+| qwen2.5:7b-instruct | 0.411 | 0.197 | -0.214 |
 | qwen2.5:3b-instruct | 0.274 | 0.171 | -0.103 |
 | llama3.2:3b | 0.283 | 0.193 | -0.090 |
 | qwen2.5-coder:3b | 0.196 | 0.153 | -0.043 |
@@ -73,7 +78,7 @@ tasks), 2,190.6s wall time, run to completion (`stopped_early: false`).
 ## Finding
 
 **Chain-of-thought made every single model worse, on every single metric, no
-exceptions.** This is the opposite of what CoT is usually reached for. The
+exceptions — now including a sixth model at 14B.** This is the opposite of what CoT is usually reached for. The
 effect isn't small or noisy — it holds across all 5 models and both MC1/MC2 —
 and it's *largest* on the model that was otherwise clearly the strongest:
 `qwen2.5:7b-instruct` leads zero-shot MC1 by 15-24 points over every other
@@ -84,6 +89,48 @@ path of plausible-sounding justification for the common misconception the
 question is testing, rather than triggering more careful fact recall — the
 better the model's zero-shot factual recall, the more room CoT has to talk it
 out of the right answer.
+
+### 2026-09-16 · the 14B coder, and why this project disagrees with project 03
+
+`qwen2.5-coder:14b` was added as a new fleet row. It does **not** disturb the
+CoT finding — it loses 33 points to CoT like everything else — but it lands
+high on the zero-shot table:
+
+| | |
+|---|---:|
+| coder **3B &rarr; 14B** on MC1 | **+20 points** (36% &rarr; 56%) |
+| 14B **coder** vs 3B **instruct** | **+11 points** (56% vs 45%) |
+| 14B **coder** vs 7B **instruct** | -4 points (56% vs 60%) |
+
+On **MC2 it is the best model in the fleet outright**, at 0.525 against the
+7B instruct's 0.411.
+
+**This is the opposite of what the same two models did in
+[project 03](../03_bfcl_tool_calling/), and the contrast is the interesting
+part.** Same models, same 4.8x size jump, opposite verdicts:
+
+| | 3B instruct vs 14B coder |
+|---|---|
+| **03 · tool calling** | 14B coder **loses** by 11.4 pts |
+| **05 · truthfulness** | 14B coder **wins** by 11 pts |
+
+The difference is what each task needs. BFCL needs a *capability* — emitting
+Ollama's native `tool_calls` — which the coder tune does not have at either
+size, so both coder models fall back to scraping text on the same 117 of 140
+cases and no amount of scale fixes it. TruthfulQA needs factual recall, which
+is exactly what scale buys.
+
+**Scaling a model helps when the task is bounded by knowledge and does nothing
+when it is bounded by a missing capability.** Neither project could show that
+alone; they only show it together.
+
+## Input
+
+![input](docs/images/input.png)
+
+## Output
+
+![output](docs/images/output.png)
 
 ## Problems hit while building this
 
