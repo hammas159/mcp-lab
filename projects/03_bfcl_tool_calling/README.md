@@ -73,12 +73,11 @@ All five report `"tools"` in their advertised Ollama capabilities.
 
 ## Real measured results
 
-Full run: 5 models x 140 cases = 700 real Ollama calls, wall time 1544.1s
-(~25.7 min), 0 request errors/timeouts. Per-model wall time: `granite3.3:2b`
-88.2s, `llama3.2:3b` 213.4s, `qwen2.5-coder:3b` 217.1s, `qwen2.5:3b-instruct`
-334.4s, `qwen2.5:7b-instruct` 691.0s (biggest model, slowest per call).
-Raw per-case data (including every prediction and every failure reason) is in
-`results.json`.
+Full run **(2026-09-16, 6 models)**: 6 models x 140 cases = 840 real Ollama
+calls, wall time 1380.0s (~23 min), 0 request errors/timeouts.
+`qwen2.5-coder:14b` alone took 697.1s -- half the total. Raw per-case data
+(including every prediction and every failure reason) is in `results.json`;
+the previous 5-model run is kept at `results_baseline_5models.json`.
 
 | Model | simple_python (40) | multiple (40) | parallel (30) | parallel_multiple (30) | **Overall (140)** |
 |---|---:|---:|---:|---:|---:|
@@ -86,9 +85,46 @@ Raw per-case data (including every prediction and every failure reason) is in
 | **qwen2.5:3b-instruct** | 92.5% (37/40) | 87.5% (35/40) | 83.3% (25/30) | 73.3% (22/30) | **85.0% (119/140)** |
 | **llama3.2:3b** | 77.5% (31/40) | 75.0% (30/40) | 73.3% (22/30) | 60.0% (18/30) | **72.1% (101/140)** |
 | **granite3.3:2b** | 70.0% (28/40) | 65.0% (26/40) | 63.3% (19/30) | 56.7% (17/30) | **64.3% (90/140)** |
+| **qwen2.5-coder:14b** | 90.0% (36/40) | 90.0% (36/40) | 30.0% (9/30) | 73.3% (22/30) | **73.6% (103/140)** |
 | **qwen2.5-coder:3b** | 87.5% (35/40) | 75.0% (30/40) | 0.0% (0/30) | 0.0% (0/30) | **46.4% (65/140)** |
 
-### The real finding
+### 2026-09-16 · the 14B coder: scaling helps, and the tune still decides
+
+`qwen2.5-coder:14b` was added as a **new fleet row**, not a replacement.
+
+| | |
+|---|---:|
+| coder **3B &rarr; 14B** (4.8x parameters) | **+27.1 points** (46.4% &rarr; 73.6%) |
+| 14B **coder** vs 3B **instruct** | **-11.4 points** (73.6% vs 85.0%) |
+| 14B **coder** vs 7B **instruct** | **-14.3 points** (73.6% vs 87.9%) |
+
+Scaling the coder tune helps a great deal — and **a 3B instruct model still
+beats a 14B coder model at tool calling by 11.4 points, at a fifth of the
+size.** On this task the tune matters more than the parameter count.
+
+**Why, precisely.** This project records whether each case used Ollama's
+native `tool_calls` field or the best-effort fallback text parser:
+
+| Model | cases needing the fallback parser |
+|---|---:|
+| `qwen2.5:7b-instruct` | 0 / 140 |
+| `qwen2.5:3b-instruct` | 0 / 140 |
+| `llama3.2:3b` | 0 / 140 |
+| `granite3.3:2b` | 0 / 140 |
+| `qwen2.5-coder:3b` | **117 / 140** |
+| `qwen2.5-coder:14b` | **117 / 140** |
+
+**The 14B coder does not support native tool-calling either — the same 117
+cases, exactly.** Scaling the model 4.8x did not add the capability; it only
+made the model better at the text format the fallback parser has to scrape.
+That is why `parallel` remains its worst category at 30.0%, where the failures
+read `call count mismatch: predicted 0 vs expected 2` — nothing to scrape.
+
+The gain is real and concentrated: `parallel_multiple` went 0.0% &rarr; 73.3%,
+tying the best model in the fleet. But a capability the tune does not have is
+not something size buys back.
+
+### The original 5-model finding
 
 **`qwen2.5:7b-instruct` is the most accurate tool-caller in the fleet at
 87.9% overall, beating the next-best model (`qwen2.5:3b-instruct`, 85.0%) by
@@ -111,6 +147,14 @@ Every category also gets harder for every model in roughly the same order:
 to choose the right function among several *and* emit several calls
 (`parallel_multiple`) is the hardest combination for all five models, capping
 out at 73.3% even for the best model outside qwen2.5:7b-instruct.
+
+## Input
+
+![input](docs/images/input.png)
+
+## Output
+
+![output](docs/images/output.png)
 
 ## Problems hit while building this
 
