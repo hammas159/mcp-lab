@@ -1,10 +1,25 @@
 diff --git a/requests/models.py b/requests/models.py
-index 8b1b0a1..b0a1b0a 100644
+index 1234567..89abcde 100644
 --- a/requests/models.py
 +++ b/requests/models.py
-@@ -107,7 +107,7 @@ class Request(RequestHooksMixin):
-         if isinstance(hook, collections.Callable):
-             self.hooks[event].append(hook)
-         elif hasattr(hook, '__iter__'):
--            self.hooks[event].extend(h for h in hook if isinstance(h, collections.Callable))
-+            self.hooks[event].extend(h for h in hook if callable(h))
+@@ -1000,6 +1000,7 @@ class Response(object):
+         """
+         if self._content is None:
+             # We have not yet downloaded the content, but the caller has
++            # explicitly asked for it, so we need to do so.
+             self._content = b''.join(self.iter_content(CONTENT_CHUNK_SIZE))
+ 
+         return self._content
+
+diff --git a/requests/packages/urllib3/response.py b/requests/packages/urllib3/response.py
+index 1234567..89abcde 100644
+--- a/requests/packages/urllib3/response.py
++++ b/requests/packages/urllib3/response.py
+@@ -300,6 +300,7 @@ class HTTPResponse(io.IOBase):
+         """
+         if self._body is None:
+             # We have not yet downloaded the content, but the caller has
++            # explicitly asked for it, so we need to do so.
+             self._body = b''.join(self.iter_content(CONTENT_CHUNK_SIZE))
+ 
+         return self._body

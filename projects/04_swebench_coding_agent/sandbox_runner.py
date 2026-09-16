@@ -147,14 +147,26 @@ def run_instance(
     }
 
     # Step 1: apply the official test patch + install the package.
+    #
+    # pip's defaults give up quickly on a slow link, and when it does the whole
+    # run is recorded as `setup_failed` -- which looks like a result and is not
+    # one. A 2026-09-16 run lost both instances this way while a large model
+    # download was saturating the connection ("This is an issue with network
+    # connectivity, not pip"). These settings make the sandbox wait rather than
+    # manufacture a false negative.
+    pip_net = (
+        "PIP_RETRIES=10 PIP_TIMEOUT=120 PIP_DEFAULT_TIMEOUT=120 "
+        "PIP_DISABLE_PIP_VERSION_CHECK=1"
+    )
     setup_script = (
         "set -e\n"
         "git config --global --add safe.directory /workspace\n"
         "git apply --whitespace=fix _test.diff\n"
-        f"pip install -e . -q {install_extra}\n"
-        "pip install pytest -q\n"
+        f"{pip_net} pip install -e . -q {install_extra}\n"
+        f"{pip_net} pip install pytest -q\n"
     )
-    setup = _docker_run(eval_dir, setup_script, timeout=timeout)
+    # Setup is the only step that touches the network, so it gets the most room.
+    setup = _docker_run(eval_dir, setup_script, timeout=max(timeout, 1800))
     result["setup"] = {
         "exit_code": setup.returncode,
         "stdout_tail": setup.stdout[-3000:],

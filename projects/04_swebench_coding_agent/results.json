@@ -3,12 +3,12 @@
     "instance_id": "pallets__flask-4045",
     "repo": "pallets/flask",
     "base_commit": "d8c37f43724cd9fb0870f77877b7c4c7e38a19e0",
-    "model": "qwen2.5-coder:3b",
+    "model": "qwen2.5-coder:14b",
     "retrieved_files": [
       "src/flask/app.py",
       "src/flask/blueprints.py"
     ],
-    "model_patch_chars": 1899,
+    "model_patch_chars": 517,
     "model_patch_empty": false,
     "docker_run": {
       "instance_id": "pallets__flask-4045",
@@ -79,9 +79,9 @@
         "stdout_tail": ""
       },
       "patch_apply": {
-        "exit_code": 128,
+        "exit_code": 1,
         "stdout": "",
-        "stderr": "error: patch fragment without header at line 15: @@ -10,6 +11,7 @@\n"
+        "stderr": "error: patch failed: src/flask/app.py:1234\nerror: src/flask/app.py: patch does not apply\n"
       },
       "outcome": "patch_did_not_apply"
     }
@@ -90,12 +90,12 @@
     "instance_id": "psf__requests-3362",
     "repo": "psf/requests",
     "base_commit": "36453b95b13079296776d11b09cab2567ea3e703",
-    "model": "qwen2.5-coder:3b",
+    "model": "qwen2.5-coder:14b",
     "retrieved_files": [
       "requests/models.py",
       "requests/packages/urllib3/response.py"
     ],
-    "model_patch_chars": 488,
+    "model_patch_chars": 1015,
     "model_patch_empty": false,
     "docker_run": {
       "instance_id": "psf__requests-3362",
@@ -190,9 +190,9 @@
         "stdout_tail": ""
       },
       "patch_apply": {
-        "exit_code": 128,
+        "exit_code": 1,
         "stdout": "",
-        "stderr": "error: corrupt patch at line 11\n"
+        "stderr": "error: patch failed: requests/models.py:1000\nerror: requests/models.py: patch does not apply\nerror: patch failed: requests/packages/urllib3/response.py:300\nerror: requests/packages/urllib3/response.py: patch does not apply\n"
       },
       "outcome": "patch_did_not_apply"
     }

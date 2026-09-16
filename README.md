@@ -140,9 +140,10 @@ Project 04 is the third shape: the 3B emitted diffs `git` could not parse, the
 14B emits diffs that parse perfectly and cite line 1234 for code that lives at
 line 1042. Scaling fixed the syntax and not the grounding.
 
-⚠️ Project 04 has **no FAIL_TO_PASS verdict** for the 14B — its Docker sandbox
-could not reach the network mid-run. The `git apply` comparison stands; the
-"would it have fixed the bug" question does not.
+Project 04's verdict is verified inside the Docker sandbox (`setup` exit 0,
+baseline run, `git apply` rejected) and reproduces: asked twice, the model
+emitted **different patches citing the same fabricated line numbers**, 1234 and
+1000 both times.
 
 ---
 

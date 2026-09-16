@@ -119,14 +119,29 @@ That is arguably the worse failure. A corrupt diff is rejected loudly by any
 parser. A well-formed diff with fabricated line numbers passes every syntactic
 check and fails only against the real repository.
 
-⚠️ **This comparison covers `git apply` only.** The Docker sandbox could not be
-built during the re-run — `pip` inside the container failed to download
-`pygments` (*"This is an issue with network connectivity, not pip"*) because a
-concurrent model download was saturating the link. So **there is no
-FAIL_TO_PASS/PASS_TO_PASS verdict for the 14B**, and none is claimed. A patch
-that does not apply cannot be tested anyway, but the sandwiched question — *would
-it have fixed the bug?* — is unanswered. Reproduce with `python apply_check.py`,
-which needs no network and no Docker.
+**Verified inside the sandbox, and reproducible.** The full Docker pipeline ran
+to completion for both instances: `setup` exit 0 (test patch applied, `pip
+install -e .` succeeded), baseline tests ran, then `git apply` of the model's
+patch was rejected with exit 1 — `error: patch failed: src/flask/app.py:1234`.
+`outcome: patch_did_not_apply`, the same verdict class as the 3B, reached for a
+different reason.
+
+The reproducibility is the striking part. The model was asked twice, on separate
+runs, and produced **different patches** — 686 chars, then 517 — that cite **the
+same fabricated line numbers**: `app.py:1234` and `models.py:1000` both times.
+It is not drawing a random wrong number; it reaches for the same round
+placeholder.
+
+ℹ️ An earlier attempt recorded `setup_failed` on both instances because `pip`
+inside the container could not reach the network (*"This is an issue with
+network connectivity, not pip"*) while a large model download saturated the
+link. That is an infrastructure failure, not a model result, and was never
+reported as one. `sandbox_runner.py` now gives pip 10 retries and a 120s
+timeout, and the setup step 30 minutes, so a slow link makes the sandbox wait
+rather than manufacture a false negative.
+
+`python apply_check.py` reproduces the apply-level comparison alone, without
+Docker or the network.
 
 ## Input
 
