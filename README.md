@@ -118,6 +118,34 @@ tests, its own `results.json`.
 
 ---
 
+## 2026-09-16 · `qwen2.5-coder:14b` added to three projects
+
+A 14B coder model was run against projects 03, 04 and 05. The three results
+only mean something together.
+
+| Project | 3B &rarr; 14B | vs a **3B instruct** |
+|---|---|---|
+| **03** tool calling | +27.1 pts | **loses by 11.4** |
+| **05** truthfulness | +20 pts | **wins by 11** |
+| **04** SWE-bench patches | failure mode changed, still fails | — |
+
+**Scale helps when the task is bounded by knowledge, and does nothing when it
+is bounded by a capability the tune lacks.** In 03 both coder models fall back
+to scraping text on exactly the same 117 of 140 cases, because neither emits
+Ollama's native `tool_calls` — 4.8x the parameters cannot add a capability. In
+05, where the task is factual recall, the same jump is worth 20 points and the
+14B tops the MC2 table outright.
+
+Project 04 is the third shape: the 3B emitted diffs `git` could not parse, the
+14B emits diffs that parse perfectly and cite line 1234 for code that lives at
+line 1042. Scaling fixed the syntax and not the grounding.
+
+⚠️ Project 04 has **no FAIL_TO_PASS verdict** for the 14B — its Docker sandbox
+could not reach the network mid-run. The `git apply` comparison stands; the
+"would it have fixed the bug" question does not.
+
+---
+
 ## Input / Output
 
 Project 05, the result that survives being checked hardest.
