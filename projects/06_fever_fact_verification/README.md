@@ -6,8 +6,7 @@ verdict from a local Ollama chat model, and score against FEVER's real published
 No API keys, no external LLM calls, no synthetic data anywhere in the pipeline.
 
 Libraries this code actually imports: `datasets` (Hugging Face, to load FEVER), `httpx`
-(Ollama's REST API and the MediaWiki API), `fastapi` + `jinja2` (the optional results
-viewer), `uvicorn` (to serve it), `pytest` (tests). It does **not** use `langchain-core` /
+(Ollama's REST API and the MediaWiki API), `pytest` (tests). It does **not** use `langchain-core` /
 `langchain-ollama` — Ollama's `/api/embeddings` and `/api/chat` endpoints are called
 directly over HTTP, which was simpler than going through a framework wrapper for two
 endpoints.
@@ -177,7 +176,6 @@ actively catching the contradiction.
 uv run python projects/06_fever_fact_verification/run_eval.py --n-per-label 20 --seed 42
 uv run pytest tests/test_06_fever.py -m "not live"   # pure-Python tests, no server needed
 uv run pytest tests/test_06_fever.py -m "live"       # needs a running local Ollama
-uv run python projects/06_fever_fact_verification/app.py  # results viewer at :8000
 ```
 
 ## What's finished vs. left for follow-up

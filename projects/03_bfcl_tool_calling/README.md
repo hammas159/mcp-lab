@@ -179,11 +179,6 @@ out at 73.3% even for the best model outside qwen2.5:7b-instruct.
    plus 2 tests marked `@pytest.mark.live` that hit the real network/Ollama
    server end-to-end.
 4. This README with real numbers and an honest problems section.
-5. Nice-to-have: a minimal FastAPI + Jinja2 page (`app.py` +
-   `templates/index.html`) that reads `results.json` and renders a
-   per-model/per-category accuracy table. Run with
-   `uv run python projects/03_bfcl_tool_calling/app.py` (serves on
-   `http://127.0.0.1:8003`).
 
 **Left for follow-up (not attempted, out of scope for this pass):**
 - BFCL's `live_*` categories (real user-contributed prompts, same AST scoring

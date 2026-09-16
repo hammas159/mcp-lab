@@ -116,9 +116,24 @@ tests, its own `results.json`.
 - Python 3.11+
 - Project 04 additionally needs **Docker** - it runs real repositories in a real sandbox
 
-<!-- screenshot placeholder - see docs/SCREENSHOTS.md
-![red-team audit](docs/images/01-redteam-audit.png)
--->
+---
+
+## Input / Output
+
+Project 05, the result that survives being checked hardest.
+
+![input](docs/images/input.png)
+
+![output](docs/images/output.png)
+
+*Five models, one hundred questions, same sample, same seed. Chain of thought lowered
+accuracy for every one of them, and lowered it most for the model that was best without
+it — qwen2.5:7b-instruct fell 35 points, from clearly the strongest in the fleet to
+level with a 2B.*
+
+*TruthfulQA is built so that the plausible answer is the wrong one, and reasoning aloud
+is a procedure for arriving at plausible answers. This is a result about that benchmark,
+not a general argument against chain of thought.*
 
 ---
 
