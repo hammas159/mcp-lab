@@ -143,6 +143,18 @@ rather than manufacture a false negative.
 `python apply_check.py` reproduces the apply-level comparison alone, without
 Docker or the network.
 
+**Where each run lives.** Unlike projects 03 and 05, this pipeline writes one
+record per instance rather than one per model, so `results.json` holds the
+*most recent* run only — currently the 14B. The 3B run it is compared against
+is kept beside it:
+
+| file | run |
+|---|---|
+| `results.json` | `qwen2.5-coder:14b`, full Docker verdict |
+| `results_baseline_coder-3b.json` | `qwen2.5-coder:3b`, the original finding |
+| `results_apply_check.json` | apply-only comparison, no Docker |
+| `results_14b_setupfailed_partial.json` | the network-failed attempt, kept as evidence |
+
 ## Input
 
 ![input](docs/images/input.png)
