@@ -1,4 +1,4 @@
-<h1 align="center">mcp-lab</h1>
+<h1 align="center">mcp-lab (MCP · LangChain · Ollama · FastAPI)</h1>
 <p align="center"><i>Six agentic-AI projects on real benchmarks, running entirely on local models</i></p>
 
 <p align="center">
